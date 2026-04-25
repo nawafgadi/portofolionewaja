@@ -95,12 +95,9 @@ window.addEventListener('scroll', () => {
 });
 
 // Python Backend API Configuration
-// Ganti URL ini dengan URL backend Python Anda setelah deploy
-// Contoh: Heroku, Railway, PythonAnywhere, VPS
-const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
-// const PYTHON_API_URL = 'https://nawaf-ai-bot.herokuapp.com/api'; // Production
+const PYTHON_API_URL = 'http://localhost:5000/api';
 
-// AI Chat Widget - Professional Version with Python Backend Support
+// AI Chat Widget - ERA AI
 (function() {
     const chatToggle = document.getElementById('chat-toggle');
     const chatPanel = document.getElementById('chat-panel');
@@ -112,12 +109,10 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
     const chatSuggestions = document.getElementById('chat-suggestions');
     const STORAGE_KEY = 'nawaf_chat_history';
     
-    // Use Python backend if available, otherwise fallback to local
     let usePythonAPI = false;
-
     let isOpen = false;
 
-    // Create notification badge
+    // Notification badge
     const badge = document.createElement('div');
     badge.className = 'chat-notification hidden';
     badge.textContent = '1';
@@ -153,13 +148,8 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
         chatMessages.appendChild(msgDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        if (save) {
-            saveMessage(text, sender);
-        }
-
-        if (sender === 'bot' && !isOpen) {
-            badge.classList.remove('hidden');
-        }
+        if (save) saveMessage(text, sender);
+        if (sender === 'bot' && !isOpen) badge.classList.remove('hidden');
     }
 
     function saveMessage(text, sender) {
@@ -171,7 +161,6 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
     function loadHistory() {
         const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
         if (history.length === 0) return false;
-
         history.forEach(function(msg) {
             const msgDiv = document.createElement('div');
             msgDiv.className = 'chat-message ' + msg.sender;
@@ -192,17 +181,13 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
         localStorage.removeItem(STORAGE_KEY);
         chatMessages.innerHTML = '';
         showWelcome();
-        
-        // Also clear server history if using Python API
         if (usePythonAPI) {
             fetch(PYTHON_API_URL + '/clear', { method: 'POST' })
                 .catch(function(e) { console.log('Clear server history failed', e); });
         }
     }
 
-    if (chatClear) {
-        chatClear.addEventListener('click', clearChat);
-    }
+    if (chatClear) chatClear.addEventListener('click', clearChat);
 
     function showWelcome() {
         const hour = new Date().getHours();
@@ -212,16 +197,13 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
         else if (hour < 18) greeting = 'Selamat sore';
         else greeting = 'Selamat malam';
 
-        addMessage(greeting + '! Saya asisten AI Nawaf. Ada yang bisa saya bantu tentang portofolio atau layanan? 😊', 'bot');
+        addMessage(greeting + '! Saya ERA AI, asisten virtual yang dibuat oleh Nawaf Gadi Alfatih. Ada yang bisa saya bantu? 😊', 'bot');
     }
 
-    // Load history or show welcome
     const hasHistory = loadHistory();
     if (!hasHistory) {
         const lastSeen = localStorage.getItem('nawaf_chat_seen');
-        if (!lastSeen) {
-            setTimeout(function() { badge.classList.remove('hidden'); }, 3000);
-        }
+        if (!lastSeen) setTimeout(function() { badge.classList.remove('hidden'); }, 3000);
     }
 
     function showTyping() {
@@ -239,32 +221,24 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
     }
 
     function smartDelay(text) {
-        const base = 800;
-        const perChar = 30;
-        return Math.min(base + text.length * perChar, 3500);
+        return Math.min(800 + text.length * 30, 3500);
     }
 
-    // Check if Python API is available
     function checkPythonAPI() {
-        return fetch(PYTHON_API_URL + '/health', { 
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        })
-        .then(function(res) { return res.ok; })
-        .catch(function() { return false; });
+        return fetch(PYTHON_API_URL + '/health', { method: 'GET' })
+            .then(function(res) { return res.ok; })
+            .catch(function() { return false; });
     }
 
-    // Send message to Python API
     function sendToPythonAPI(text) {
         return fetch(PYTHON_API_URL + '/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: text })
-        })
-        .then(function(res) { return res.json(); });
+        }).then(function(res) { return res.json(); });
     }
 
-    // Local fallback response database
+    // ERA AI Response Database
     const responseDB = [
         {
             keywords: ['tentang','nawaf','siapa','profile','profil','biodata','diri','orang'],
@@ -278,16 +252,14 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
             keywords: ['project','proyek','karya','portofolio','web','aplikasi','apps','website','hasil kerja'],
             responses: [
                 'Nawaf telah mengerjakan berbagai project menarik:\n\n• Web Tiket - Sistem pemesanan tiket online\n• Bank Sampah - Manajemen sampah digital\n• Ucapan Idulfitri - Web greeting interaktif\n• E-Cashier, Pertanian, Bank Awan - UI/UX Design\n• Prediksi Stunting - Aplikasi prediksi kesehatan\n\nSemua project menunjukkan komitmen pada kualitas! ⭐',
-                'Beberapa project unggulan Nawaf:\n🎫 Web Tiket\n♻️ Bank Sampah\n🌙 Ucapan Idulfitri\n💳 E-Cashier (UI/UX)\n🌾 Pertanian (UI/UX)\n☁️ Bank Awan (UI/UX)\n📊 Prediksi Stunting\n\nIngin lihat detailnya? Cek bagian Work! 🔍',
-                'Nawaf sudah membangun 20+ project! Dari web development sampai UI/UX design, semua dikerjakan dengan dedikasi tinggi. Project favoritnya? Web Tiket dan Bank Sampah! 🏆'
+                'Beberapa project unggulan Nawaf:\n🎫 Web Tiket\n♻️ Bank Sampah\n🌙 Ucapan Idulfitri\n💳 E-Cashier (UI/UX)\n🌾 Pertanian (UI/UX)\n☁️ Bank Awan (UI/UX)\n📊 Prediksi Stunting\n\nIngin lihat detailnya? Cek bagian Work! 🔍'
             ]
         },
         {
             keywords: ['skill','keahlian','bisa','teknologi','tech','stack','bahasa pemrograman','framework','tool','tools'],
             responses: [
                 'Skill teknologi Nawaf:\n\n🎨 UI/UX Design\n💻 Frontend Development\n⚡ JavaScript & React\n📄 HTML & CSS\n📱 Kotlin (Android)\n🐍 Python\n🎨 Figma & Canva\n\nDan masih terus belajar! 📚',
-                'Tech stack yang dikuasai Nawaf:\n• Frontend: HTML, CSS, JavaScript, React\n• Mobile: Kotlin, Android Studio\n• Backend: Laravel, Python\n• Design: Figma, Canva\n• Lainnya: Git, problem solving\n\nVersatile banget kan? 😎',
-                'Nawaf mahir di:\n🌐 Web Development\n📱 Android Development\n🎨 UI/UX Design\n🔧 IT Support\n\nTools: VS Code, Android Studio, Figma, Git, Laravel'
+                'Tech stack yang dikuasai Nawaf:\n• Frontend: HTML, CSS, JavaScript, React\n• Mobile: Kotlin, Android Studio\n• Backend: Laravel, Python\n• Design: Figma, Canva\n• Lainnya: Git, problem solving\n\nVersatile banget kan? 😎'
             ]
         },
         {
@@ -364,8 +336,8 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
         {
             keywords: ['halo','hai','hello','hi','hey','selamat'],
             responses: [
-                'Halo! Senang bertemu dengan Anda. Ada yang bisa saya bantu tentang Nawaf? 😊',
-                'Hai! Asisten AI Nawaf siap membantu. Mau tahu apa nih? 🤖',
+                'Hai! Ada yang bisa saya bantu? 😊',
+                'Halo! Saya ERA AI siap membantu. Mau tanya apa nih? 🤖',
                 'Hello! Welcome to Nawaf portfolio. How can I help you today? 🌟'
             ]
         },
@@ -390,6 +362,13 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
             responses: [
                 'Saya bisa bantu jawab tentang:\n• Siapa Nawaf\n• Project yang pernah dibuat\n• Skill & teknologi\n• Cara kontak\n• Informasi lainnya\n\nTanya aja! 🤗',
                 'Butuh bantuan? Coba ketik keyword seperti: tentang, project, skill, kontak, email, atau lokasi. Saya siap bantu! 💪'
+            ]
+        },
+        {
+            keywords: ['dibuat','buat','creator','creator','owner','punya','milik','siapa yang buat'],
+            responses: [
+                'Saya ERA AI, asisten virtual yang dibuat oleh Nawaf Gadi Alfatih. Nawaf adalah developer muda dari Kroya, Cilacap yang fokus pada web dan mobile development. 🤖✨',
+                'ERA AI ini dibuat oleh Nawaf Gadi Alfatih! Beliau adalah siswa RPL dengan passion di bidang IT Support dan software development. 💻'
             ]
         }
     ];
@@ -452,6 +431,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
             { msg: 'Ceritakan tentang Nawaf', label: 'Tentang Nawaf' },
             { msg: 'Project apa yang pernah dibuat?', label: 'Lihat Project' },
             { msg: 'Jam operasional?', label: 'Jam Operasional' }
+        ],
+        creator: [
+            { msg: 'Siapa yang membuat ERA AI?', label: 'Siapa Creator?' },
+            { msg: 'Ceritakan tentang Nawaf', label: 'Tentang Nawaf' },
+            { msg: 'Project apa yang pernah dibuat?', label: 'Lihat Project' }
         ]
     };
 
@@ -466,6 +450,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
 
     function detectContext(input) {
         const lower = input.toLowerCase();
+        if (lower.match(/dibuat|buat|creator|owner|punya|milik|siapa yang buat/)) return 'creator';
         if (lower.match(/nawaf|siapa|tentang|profile/)) return 'about';
         if (lower.match(/project|proyek|karya|web|aplikasi/)) return 'project';
         if (lower.match(/skill|teknologi|bisa|tech/)) return 'skill';
@@ -483,14 +468,12 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
 
         showTyping();
 
-        // Try Python API first if available
         if (usePythonAPI) {
             sendToPythonAPI(text)
                 .then(function(data) {
                     hideTyping();
                     if (data.success) {
                         addMessage(data.message, 'bot');
-                        // Update suggestions from server response
                         if (data.suggestions) {
                             let html = '';
                             for (let i = 0; i < data.suggestions.length; i++) {
@@ -504,7 +487,6 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
                     }
                 })
                 .catch(function() {
-                    // Fallback to local if API fails
                     usePythonAPI = false;
                     const reply = findBestResponse(text);
                     setTimeout(function() {
@@ -516,7 +498,6 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
                     }, smartDelay(reply));
                 });
         } else {
-            // Local processing
             const reply = findBestResponse(text);
             const delay = smartDelay(reply);
             setTimeout(function() {
@@ -541,14 +522,12 @@ const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
         }
     });
 
-    // Auto-focus input when clicking anywhere in chat panel
     chatPanel.addEventListener('click', function(e) {
         if (e.target === chatPanel || e.target.classList.contains('chat-messages')) {
             chatInput.focus();
         }
     });
 
-    // Check for Python API on load
     checkPythonAPI().then(function(available) {
         if (available) {
             usePythonAPI = true;
