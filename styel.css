@@ -639,11 +639,13 @@ body {
     animation: fadeInUp 0.8s ease-out;
 }
 
-/* AI Chat Widget */
+/* ============================================
+   ERA AI CHATBOT - MODERN DESIGN
+   ============================================ */
 .chat-widget {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 25px;
+    right: 25px;
     z-index: 9999;
     font-family: 'Inter', sans-serif;
 }
