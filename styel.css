@@ -752,11 +752,18 @@ body {
     50% { opacity: 0.5; }
 }
 
+.chat-header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.chat-action-btn,
 .chat-close {
     background: none;
     border: none;
     color: var(--white);
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
     transition: var(--transition);
     width: 36px;
@@ -767,8 +774,41 @@ body {
     border-radius: 50%;
 }
 
+.chat-action-btn:hover,
 .chat-close:hover {
     background: rgba(255,255,255,0.2);
+}
+
+.chat-action-btn:active,
+.chat-close:active {
+    transform: scale(0.9);
+}
+
+.chat-notification {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 22px;
+    height: 22px;
+    background: #ef4444;
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: notificationPulse 2s infinite;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+}
+
+@keyframes notificationPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.chat-notification.hidden {
+    display: none;
 }
 
 .chat-messages {
