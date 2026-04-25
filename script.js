@@ -62,8 +62,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form submission (handled by Formspree, no custom JS needed)
-
 // Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
@@ -96,7 +94,13 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// AI Chat Widget - Advanced Version
+// Python Backend API Configuration
+// Ganti URL ini dengan URL backend Python Anda setelah deploy
+// Contoh: Heroku, Railway, PythonAnywhere, VPS
+const PYTHON_API_URL = 'http://localhost:5000/api'; // Local development
+// const PYTHON_API_URL = 'https://nawaf-ai-bot.herokuapp.com/api'; // Production
+
+// AI Chat Widget - Professional Version with Python Backend Support
 (function() {
     const chatToggle = document.getElementById('chat-toggle');
     const chatPanel = document.getElementById('chat-panel');
@@ -107,6 +111,9 @@ window.addEventListener('scroll', () => {
     const chatMessages = document.getElementById('chat-messages');
     const chatSuggestions = document.getElementById('chat-suggestions');
     const STORAGE_KEY = 'nawaf_chat_history';
+    
+    // Use Python backend if available, otherwise fallback to local
+    let usePythonAPI = false;
 
     let isOpen = false;
 
@@ -140,7 +147,7 @@ window.addEventListener('scroll', () => {
         msgDiv.className = 'chat-message ' + sender;
         msgDiv.innerHTML = 
             '<div class="message-content">' +
-                '<p>' + text + '</p>' +
+                '<p>' + text.replace(/\n/g, '<br>') + '</p>' +
                 '<span class="message-time">' + getTime() + '</span>' +
             '</div>';
         chatMessages.appendChild(msgDiv);
@@ -171,7 +178,7 @@ window.addEventListener('scroll', () => {
             const time = new Date(msg.time).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
             msgDiv.innerHTML = 
                 '<div class="message-content">' +
-                    '<p>' + msg.text + '</p>' +
+                    '<p>' + msg.text.replace(/\n/g, '<br>') + '</p>' +
                     '<span class="message-time">' + time + '</span>' +
                 '</div>';
             chatMessages.appendChild(msgDiv);
@@ -185,6 +192,12 @@ window.addEventListener('scroll', () => {
         localStorage.removeItem(STORAGE_KEY);
         chatMessages.innerHTML = '';
         showWelcome();
+        
+        // Also clear server history if using Python API
+        if (usePythonAPI) {
+            fetch(PYTHON_API_URL + '/clear', { method: 'POST' })
+                .catch(function(e) { console.log('Clear server history failed', e); });
+        }
     }
 
     if (chatClear) {
@@ -231,7 +244,27 @@ window.addEventListener('scroll', () => {
         return Math.min(base + text.length * perChar, 3500);
     }
 
-    // Advanced response database
+    // Check if Python API is available
+    function checkPythonAPI() {
+        return fetch(PYTHON_API_URL + '/health', { 
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(function(res) { return res.ok; })
+        .catch(function() { return false; });
+    }
+
+    // Send message to Python API
+    function sendToPythonAPI(text) {
+        return fetch(PYTHON_API_URL + '/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+        })
+        .then(function(res) { return res.json(); });
+    }
+
+    // Local fallback response database
     const responseDB = [
         {
             keywords: ['tentang','nawaf','siapa','profile','profil','biodata','diri','orang'],
@@ -450,17 +483,50 @@ window.addEventListener('scroll', () => {
 
         showTyping();
 
-        const reply = findBestResponse(text);
-        const delay = smartDelay(reply);
-
-        setTimeout(function() {
-            hideTyping();
-            addMessage(reply, 'bot');
-            
-            const context = detectContext(text);
-            updateSuggestions(context);
-            chatSuggestions.style.display = 'flex';
-        }, delay);
+        // Try Python API first if available
+        if (usePythonAPI) {
+            sendToPythonAPI(text)
+                .then(function(data) {
+                    hideTyping();
+                    if (data.success) {
+                        addMessage(data.message, 'bot');
+                        // Update suggestions from server response
+                        if (data.suggestions) {
+                            let html = '';
+                            for (let i = 0; i < data.suggestions.length; i++) {
+                                html += '<button class="suggestion-btn" data-msg="' + data.suggestions[i].msg + '">' + data.suggestions[i].label + '</button>';
+                            }
+                            chatSuggestions.innerHTML = html;
+                            chatSuggestions.style.display = 'flex';
+                        }
+                    } else {
+                        addMessage(data.error || 'Maaf, terjadi kesalahan. Silakan coba lagi.', 'bot');
+                    }
+                })
+                .catch(function() {
+                    // Fallback to local if API fails
+                    usePythonAPI = false;
+                    const reply = findBestResponse(text);
+                    setTimeout(function() {
+                        hideTyping();
+                        addMessage(reply, 'bot');
+                        const context = detectContext(text);
+                        updateSuggestions(context);
+                        chatSuggestions.style.display = 'flex';
+                    }, smartDelay(reply));
+                });
+        } else {
+            // Local processing
+            const reply = findBestResponse(text);
+            const delay = smartDelay(reply);
+            setTimeout(function() {
+                hideTyping();
+                addMessage(reply, 'bot');
+                const context = detectContext(text);
+                updateSuggestions(context);
+                chatSuggestions.style.display = 'flex';
+            }, delay);
+        }
     }
 
     chatSend.addEventListener('click', sendMessage);
@@ -479,6 +545,16 @@ window.addEventListener('scroll', () => {
     chatPanel.addEventListener('click', function(e) {
         if (e.target === chatPanel || e.target.classList.contains('chat-messages')) {
             chatInput.focus();
+        }
+    });
+
+    // Check for Python API on load
+    checkPythonAPI().then(function(available) {
+        if (available) {
+            usePythonAPI = true;
+            console.log('Python API connected!');
+        } else {
+            console.log('Using local fallback responses');
         }
     });
 })();
