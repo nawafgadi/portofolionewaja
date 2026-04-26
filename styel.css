@@ -152,7 +152,12 @@ body {
     color: var(--secondary);
     line-height: 1.8;
 }
-
+contact-description {
+    font-size: 16px;
+    color: var(--secondary);
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
 /* Home Section */
 .home {
     min-height: 100vh;
@@ -389,13 +394,14 @@ body {
 }
 
 .about-skills {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 ke samping */
     gap: 15px;
+    margin-top: 20px;
 }
 
 .skill-tag {
-    padding: 10px 20px;
+    padding: 12px 16px;
     background: var(--white);
     border-radius: 50px;
     font-size: 14px;
@@ -403,6 +409,7 @@ body {
     color: var(--primary);
     box-shadow: var(--shadow);
     transition: var(--transition);
+    text-align: center;
 }
 
 .skill-tag:hover {
@@ -411,71 +418,195 @@ body {
     transform: translateY(-3px);
 }
 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .about-skills {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .about-skills {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Contact Section */
+/* GRID LAYOUT */
 .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 60px;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
     margin-top: 60px;
+    align-items: start;
 }
 
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
+/* LEFT SIDE (INFO) */
+/* CONTACT ITEM FIX */
 .contact-item {
     display: flex;
-    align-items: center;
-    gap: 20px;
+    align-items: center; /* biar sejajar tengah */
+    gap: 15px;
+
+    padding: 18px 20px;
+    border-radius: 16px;
+
+    background: var(--white);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+
+    transition: 0.3s ease;
 }
 
-.contact-item i {
-    font-size: 24px;
-    color: var(--accent);
-    width: 50px;
-    height: 50px;
-    background: rgba(199, 168, 75, 0.1);
-    border-radius: 50%;
+.contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* WRAPPER ICON (biar konsisten walau img atau i) */
+.contact-item .icon {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+
+    background: rgba(199, 168, 75, 0.12);
+    border-radius: 12px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    overflow: hidden;
 }
 
+/* ICON FONT (kalau pakai <i>) */
+.contact-item .icon i {
+    font-size: 20px;
+    color: var(--accent);
+}
+
+/* IMAGE ICON (INI YANG PENTING BUAT KAMU) */
+.contact-item .icon img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+/* TEXT */
 .contact-item h4 {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .contact-item p {
+    font-size: 13px;
     color: var(--secondary);
 }
+/* ========================= */
+/* FORM SIDE */
+/* ========================= */
 
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
+    gap: 18px;
 
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 15px 20px;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    transition: var(--transition);
     background: var(--white);
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow: 
+        0 25px 60px rgba(0,0,0,0.08),
+        0 8px 25px rgba(0,0,0,0.05);
+
+    border: 1px solid rgba(0,0,0,0.04);
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+/* INPUT GROUP (BIAR RAPI 2 KOLOM) */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* INPUT */
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.08);
+
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+
+    background: #fafafa;
+
+    transition: 0.25s ease;
     outline: none;
+}
+
+/* FOCUS */
+.contact-form input:focus,
+.contact-form textarea:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(199, 168, 75, 0.1);
+    background: var(--white);
+
+    box-shadow: 0 0 0 3px rgba(199, 168, 75, 0.15);
+}
+
+/* TEXTAREA */
+.contact-form textarea {
+    resize: none;
+    min-height: 130px;
+}
+
+/* BUTTON */
+.contact-form button {
+    margin-top: 10px;
+
+    padding: 14px;
+    border-radius: 12px;
+
+    background: var(--gradient);
+    color: var(--white);
+
+    font-size: 15px;
+    font-weight: 600;
+
+    border: none;
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    box-shadow: 0 10px 25px rgba(199, 168, 75, 0.25);
+}
+
+.contact-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(199, 168, 75, 0.35);
+}
+
+/* PLACEHOLDER */
+.contact-form ::placeholder {
+    color: #aaa;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Footer */
@@ -683,7 +814,7 @@ body {
 .chat-panel {
     position: absolute;
     bottom: 82px;
-    right: 0;
+    right: 25px;
     width: 400px;
     height: 560px;
     background: var(--white);
