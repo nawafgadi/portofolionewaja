@@ -197,7 +197,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         else if (hour < 18) greeting = 'Selamat sore';
         else greeting = 'Selamat malam';
 
-        addMessage(greeting + '! Saya ERA AI, asisten virtual yang dibuat oleh Nawaf Gadi Alfatih. Ada yang bisa saya bantu? 😊', 'bot');
+        addMessage(greeting + '! Saya ERA AI, asisten virtual yang dibuat oleh Nawaf Gadi Alfatih. Anda bisa bertanya apa saja tentang isi website ini, termasuk lokasi, proyek, skill, dan kontak. 😊', 'bot');
     }
 
     const hasHistory = loadHistory();
@@ -222,6 +222,73 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
 
     function smartDelay(text) {
         return Math.min(800 + text.length * 30, 3500);
+    }
+
+    function createPageKnowledge() {
+        const sections = ['home', 'work', 'about', 'contact'];
+        const knowledge = { pageText: '' };
+
+        sections.forEach(function(id) {
+            const section = document.getElementById(id);
+            if (section) {
+                knowledge[id] = section.innerText.trim().replace(/\s+/g, ' ');
+                knowledge.pageText += ' ' + knowledge[id].toLowerCase();
+            }
+        });
+
+        const projects = [];
+        document.querySelectorAll('.work-item .work-title').forEach(function(el) {
+            const text = el.textContent.trim();
+            if (text) projects.push(text);
+        });
+        if (projects.length) {
+            knowledge.projects = projects.join(', ');
+            knowledge.pageText += ' ' + knowledge.projects.toLowerCase();
+        }
+
+        return knowledge;
+    }
+
+    const pageKnowledge = createPageKnowledge();
+
+    function answerFromPageContent(input) {
+        const lower = input.toLowerCase();
+
+        if (/lokasi|alamat|tempat|kroya|cilacap/.test(lower)) {
+            return 'Berdasarkan website, Nawaf berada di Kroya, Cilacap, Jawa Tengah. Informasi kontak lengkap ada di bagian Contact.';
+        }
+
+        if (/email|e-mail|mail|telepon|phone|whatsapp|wa|kontak|hubungi/.test(lower)) {
+            return 'Kontak Nawaf di website ini: Email: nawaf52626@gmail.com, Telepon: +62 882-3938-6759, Lokasi: Kroya, Cilacap, Jawa Tengah.';
+        }
+
+        if (/skill|keahlian|bisa|javascript|react|html|css|kotlin|python|laravel|android|ui ux|ui\/ux|design|figma|canva/.test(lower)) {
+            return 'Website ini menyebutkan bahwa Nawaf menguasai UI/UX Design, Frontend Development, JavaScript, React, HTML & CSS, Kotlin, Python, Laravel, Figma, dan Canva.';
+        }
+
+        if (/project|proyek|karya|portofolio|web|aplikasi|apps|website|bank sampah|web tiket|idulfitri|ecashier|pertanian|bank awan|pos|luxe/.test(lower)) {
+            return 'Beberapa project Nawaf di website ini: Web Tiket, Bank Sampah, Ucapan Idulfitri, E-Cashier, Pertanian, Bank Awan, aplikasi Prediksi Stunting, POS mobile, dan Luxe mobile.';
+        }
+
+        if (/siapa|tentang|profil|biodata|diri|nawaf|nama/.test(lower)) {
+            return 'Nawaf Gadi Alfatih adalah siswa Rekayasa Perangkat Lunak (RPL) fokus pada pengembangan web dan aplikasi Android, dengan minat dalam IT Support dan problem solving.';
+        }
+
+        // Search text in page content for exact matches
+        const pageText = pageKnowledge.pageText || '';
+        if (pageText.includes(lower)) {
+            if (lower.includes('nawaf')) {
+                return 'Nawaf adalah siswa RPL yang membuat website ini. Detail tentang dirinya ada di bagian About.';
+            }
+            if (lower.includes('contact') || lower.includes('kontak') || lower.includes('email') || lower.includes('telepon')) {
+                return 'Bagian Contact menampilkan email, telepon, dan lokasi Nawaf di Kroya, Cilacap.';
+            }
+            if (lower.includes('project') || lower.includes('portofolio')) {
+                return 'Website menampilkan portofolio dengan beberapa project web development dan UI/UX design.';
+            }
+        }
+
+        return null;
     }
 
     function checkPythonAPI() {
@@ -488,7 +555,8 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                 })
                 .catch(function() {
                     usePythonAPI = false;
-                    const reply = findBestResponse(text);
+                    const pageReply = answerFromPageContent(text);
+                    const reply = pageReply || findBestResponse(text);
                     setTimeout(function() {
                         hideTyping();
                         addMessage(reply, 'bot');
@@ -498,15 +566,15 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     }, smartDelay(reply));
                 });
         } else {
-            const reply = findBestResponse(text);
-            const delay = smartDelay(reply);
+            const pageReply = answerFromPageContent(text);
+            const reply = pageReply || findBestResponse(text);
             setTimeout(function() {
                 hideTyping();
                 addMessage(reply, 'bot');
                 const context = detectContext(text);
                 updateSuggestions(context);
                 chatSuggestions.style.display = 'flex';
-            }, delay);
+            }, smartDelay(reply));
         }
     }
 

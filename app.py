@@ -6,6 +6,9 @@ import os
 import re
 import random
 import logging
+import smtplib
+import ssl
+from email.message import EmailMessage
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all domains
@@ -23,6 +26,12 @@ os.makedirs('logs', exist_ok=True)
 # Chat history storage (in production, use database)
 HISTORY_FILE = 'logs/chat_history.json'
 MAX_HISTORY = 100
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+EMAIL_USER = os.environ.get('EMAIL_USER')
+EMAIL_PASS = os.environ.get('EMAIL_PASS')
+EMAIL_NOTIFY_TO = os.environ.get('EMAIL_NOTIFY_TO', EMAIL_USER)
 
 class NawafAI:
     """Advanced AI Chatbot for Nawaf's Portfolio"""
@@ -249,6 +258,42 @@ def save_chat_history(user_msg, bot_msg):
         logger.error(f"Error saving history: {e}")
 
 
+def send_email_notification(subject, body):
+    if not EMAIL_USER or not EMAIL_PASS or not EMAIL_NOTIFY_TO:
+        logger.warning('Email notification skipped because SMTP credentials are not configured.')
+        return False
+
+    message = EmailMessage()
+    message['Subject'] = subject
+    message['From'] = EMAIL_USER
+    message['To'] = EMAIL_NOTIFY_TO
+    message.set_content(body)
+
+    context = ssl.create_default_context()
+    try:
+        with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
+            server.starttls(context=context)
+            server.login(EMAIL_USER, EMAIL_PASS)
+            server.send_message(message)
+        logger.info('Unanswered question email has been sent successfully.')
+        return True
+    except Exception as e:
+        logger.error(f'Failed to send email notification: {e}')
+        return False
+
+
+def notify_unanswered_question(question, user_agent=None, source='website'):
+    subject = 'AI Unanswered Question Notification'
+    body = (
+        f'Pertanyaan dari website belum bisa dijawab oleh AI.\n\n'
+        f'Pertanyaan:\n{question}\n\n'
+        f'Sumber: {source}\n'
+        f'User-Agent: {user_agent or "unknown"}\n'
+        f'Tanggal: {datetime.now().isoformat()}\n'
+    )
+    return send_email_notification(subject, body)
+
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
@@ -281,16 +326,28 @@ def chat():
         # Process message with AI
         bot_response = ai.process_message(user_message)
         suggestions = ai.get_suggestions(user_message)
-        
+        reported = False
+
+        if bot_response in ai.unknown:
+            user_agent = request.headers.get('User-Agent')
+            reported = notify_unanswered_question(user_message, user_agent=user_agent)
+            if reported:
+                bot_response = (
+                    'Maaf, saya belum bisa menjawab pertanyaan itu dengan tepat saat ini. '
+                    'Saya sudah mengirim informasi ini ke email pemilik agar bisa ditinjau dan diperbaiki. '
+                    'Silakan tunggu pembaruan selanjutnya.'
+                )
+
         # Save to history
         save_chat_history(user_message, bot_response)
         
-        logger.info(f"User: {user_message} | Bot: {bot_response[:50]}...")
+        logger.info(f"User: {user_message} | Bot: {bot_response[:50]}... reported={reported}")
         
         return jsonify({
             'success': True,
             'message': bot_response,
             'suggestions': suggestions,
+            'reported': reported,
             'timestamp': datetime.now().isoformat(),
             'context': 'nawaf_portfolio'
         })
