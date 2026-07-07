@@ -8,6 +8,247 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// ========== DARK MODE THEME TOGGLE ==========
+const themeToggle = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme') || 'light';
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeToggle.textContent = '☀️';
+} else {
+    document.body.classList.remove('dark-mode');
+    themeToggle.textContent = '🌙';
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
+// ========== LANGUAGE TRANSLATIONS ==========
+const translations = {
+    id: {
+        home: 'Beranda',
+        work: 'Karya',
+        about: 'Tentang',
+        contact: 'Kontak',
+        subtitle_home: 'Frontend Development',
+        title_home: 'Membangun Solusi Digital yang Berdampak',
+        description_home: 'Saya Nawaf Gadi AL fatih, siswa Rekayasa Perangkat Lunak (RPL) yang fokus pada pengembangan web dan aplikasi Android, serta memiliki minat dalam bidang IT Support dan problem solving.',
+        view_work: 'Lihat Karya',
+        get_in_touch: 'Hubungi Saya',
+        portfolio: 'PORTFOLIO',
+        selected_works: 'Karya Terpilih',
+        works_description: 'Berikut adalah beberapa proyek yang telah saya kerjakan, mencakup berbagai aspek pengembangan web dan aplikasi. Setiap proyek mencerminkan komitmen saya terhadap kualitas, inovasi, dan solusi yang efektif.',
+        about_me: 'TENTANG SAYA',
+        learn_grow: 'Belajar, Berkembang, dan Menciptakan Solusi yang Bermanfaat',
+        about_description: 'Sebagai siswa RPL, saya memiliki passion dalam dunia pemrograman dan pengembangan sistem. Saya percaya bahwa teknologi bukan hanya tentang menulis kode, tetapi tentang menciptakan solusi yang bermanfaat dan efisien. Saya memiliki pengalaman mengerjakan proyek berbasis Laravel, membangun tampilan interaktif dengan HTML, CSS, dan JavaScript, serta mengembangkan aplikasi menggunakan Android Studio. Saya terus meningkatkan kemampuan teknis dan problem solving untuk mencapai cita-cita menjadi Help Desk Support Manager yang profesional.',
+        years_experience: 'Tahun Pengalaman',
+        projects_completed: 'Proyek Selesai',
+        contact_me: 'HUBUNGI SAYA',
+        get_in_touch_title: 'Hubungi Saya',
+        contact_description: 'Saya terbuka untuk peluang dan kolaborasi baru. Jangan ragu untuk menghubungi jika Anda memiliki pertanyaan!',
+        email: 'Email',
+        location: 'Lokasi',
+        phone: 'Telepon',
+        your_name: 'Nama Anda',
+        your_email: 'Email Anda',
+        your_message: 'Pesan Anda',
+        send_message: 'Kirim Pesan',
+        view_project: 'Lihat Proyek',
+        project_in_github: 'Lihat Proyek di GitHub',
+        creating_experiences: 'Menciptakan pengalaman digital yang bermakna.',
+        all_rights: '© 2026 Nawaf Gadi Alfatih. Semua hak dilindungi.',
+        web_development: 'PENGEMBANGAN WEB',
+        ui_ux_design: 'Desain UI/UX',
+        placeholder_ask: 'Tanyakan tentang Nawaf...'
+    },
+    en: {
+        home: 'Home',
+        work: 'Work',
+        about: 'About',
+        contact: 'Contact',
+        subtitle_home: 'Frontend Development',
+        title_home: 'Building Impactful Digital Solutions',
+        description_home: 'I am Nawaf Gadi AL fatih, a Software Engineering student (RPL) focused on web and Android application development, with interest in IT Support and problem-solving.',
+        view_work: 'View Work',
+        get_in_touch: 'Get in Touch',
+        portfolio: 'PORTFOLIO',
+        selected_works: 'Selected works',
+        works_description: 'Here are some projects I have worked on, covering various aspects of web and application development. Each project reflects my commitment to quality, innovation, and effective solutions.',
+        about_me: 'ABOUT ME',
+        learn_grow: 'Learning, Growing, and Creating Beneficial Solutions',
+        about_description: 'As an RPL student, I have a passion for programming and system development. I believe that technology is not just about writing code, but about creating useful and efficient solutions. I have experience working on Laravel-based projects, building interactive interfaces with HTML, CSS, and JavaScript, and developing applications using Android Studio. I am continually improving my technical skills and problem-solving abilities to achieve my dream of becoming a professional Help Desk Support Manager who can lead an IT Support team effectively.',
+        years_experience: 'Years Experience',
+        projects_completed: 'Projects Completed',
+        contact_me: 'CONTACT ME',
+        get_in_touch_title: 'Get in Touch',
+        contact_description: 'I am currently open to new opportunities and collaborations. Feel free to reach out if you have any questions or just want to say hello!',
+        email: 'Email',
+        location: 'Location',
+        phone: 'Phone',
+        your_name: 'Your Name',
+        your_email: 'Your Email',
+        your_message: 'Your Message',
+        send_message: 'Send Message',
+        view_project: 'View Project',
+        project_in_github: 'View Project in github',
+        creating_experiences: 'Creating digital experiences that matter.',
+        all_rights: '© 2026 Nawaf Gadi Alfatih. All rights reserved.',
+        web_development: 'WEB DEVELOPMENT',
+        ui_ux_design: 'UI/UX Design',
+        placeholder_ask: 'Ask about Nawaf...'
+    },
+    ar: {
+        home: 'الرئيسية',
+        work: 'العمل',
+        about: 'حول',
+        contact: 'تواصل',
+        subtitle_home: 'تطوير الواجهة الأمامية',
+        title_home: 'بناء حلول رقمية مؤثرة',
+        description_home: 'أنا ناوف جاضي الفتيح، طالب هندسة البرمجيات (RPL) أركز على تطوير الويب والتطبيقات الأندرويد، ولدي اهتمام بمجال دعم تكنولوجيا المعلومات وحل المشاكل.',
+        view_work: 'عرض الأعمال',
+        get_in_touch: 'تواصل معي',
+        portfolio: 'المحفظة',
+        selected_works: 'الأعمال المختارة',
+        works_description: 'فيما يلي بعض المشاريع التي عملت عليها، تغطي جوانب مختلفة من تطوير الويب والتطبيقات. يعكس كل مشروع التزامي بالجودة والابتكار والحلول الفعالة.',
+        about_me: 'عني',
+        learn_grow: 'التعلم والنمو وإنشاء حلول مفيدة',
+        about_description: 'كطالب في قسم الهندسة البرمجية، أملك شغفاً بعالم البرمجة وتطوير الأنظمة. أؤمن بأن التكنولوجيا ليست مجرد كتابة أكواد بل عن إنشاء حلول مفيدة وفعالة. لدي خبرة في العمل على مشاريع Laravel، وبناء واجهات تفاعلية باستخدام HTML و CSS و JavaScript، وتطوير تطبيقات باستخدام Android Studio. أعمل باستمرار على تحسين مهاراتي التقنية وقدرات حل المشاكل.',
+        years_experience: 'سنوات من الخبرة',
+        projects_completed: 'المشاريع المنجزة',
+        contact_me: 'تواصل معي',
+        get_in_touch_title: 'تواصل',
+        contact_description: 'أنا مفتوح حالياً لفرص جديدة والتعاون. لا تتردد في التواصل معي إذا كان لديك أي أسئلة!',
+        email: 'البريد الإلكتروني',
+        location: 'الموقع',
+        phone: 'الهاتف',
+        your_name: 'اسمك',
+        your_email: 'بريدك الإلكتروني',
+        your_message: 'رسالتك',
+        send_message: 'إرسال الرسالة',
+        view_project: 'عرض المشروع',
+        project_in_github: 'عرض المشروع في جيت هاب',
+        creating_experiences: 'إنشاء تجارب رقمية ذات معنى.',
+        all_rights: '© 2026 ناوف جاضي الفتيح. جميع الحقوق محفوظة.',
+        web_development: 'تطوير الويب',
+        ui_ux_design: 'تصميم الواجهة والتجربة',
+        placeholder_ask: 'اسأل عن ناوف...'
+    },
+    zh: {
+        home: '主页',
+        work: '作品',
+        about: '关于',
+        contact: '联系',
+        subtitle_home: '前端开发',
+        title_home: '构建有影响力的数字解决方案',
+        description_home: '我是Nawaf Gadi AL fatih，一名软件工程学生(RPL)，专注于Web和Android应用开发，对IT支持和问题解决感兴趣。',
+        view_work: '查看作品',
+        get_in_touch: '联系我',
+        portfolio: '作品集',
+        selected_works: '精选作品',
+        works_description: '以下是我完成的一些项目，涵盖Web和应用开发的各个方面。每个项目都反映了我对质量、创新和有效解决方案的承诺。',
+        about_me: '关于我',
+        learn_grow: '学习、成长和创建有用的解决方案',
+        about_description: '作为RPL学生，我对编程和系统开发充满热情。我相信技术不仅是写代码，更是创建有用和高效的解决方案。我有使用Laravel进行项目开发的经验，使用HTML、CSS和JavaScript构建交互式界面，以及使用Android Studio开发应用的经验。我不断提高技术技能和解决问题的能力。',
+        years_experience: '年工作经验',
+        projects_completed: '完成项目数',
+        contact_me: '联系我',
+        get_in_touch_title: '保持联系',
+        contact_description: '我目前开放新机会和合作。如有任何问题，请随时与我联系！',
+        email: '电子邮件',
+        location: '位置',
+        phone: '电话',
+        your_name: '你的名字',
+        your_email: '你的邮箱',
+        your_message: '你的信息',
+        send_message: '发送信息',
+        view_project: '查看项目',
+        project_in_github: '在GitHub查看项目',
+        creating_experiences: '创建有意义的数字体验。',
+        all_rights: '© 2026 Nawaf Gadi Alfatih。保留所有权利。',
+        web_development: '网络开发',
+        ui_ux_design: '用户界面/用户体验设计',
+        placeholder_ask: '问关于Nawaf的问题...'
+    }
+};
+
+// ========== LANGUAGE SWITCHING ==========
+const langToggle = document.getElementById('lang-toggle');
+const langDropdown = document.getElementById('lang-dropdown');
+const langMenu = document.getElementById('lang-menu');
+const langOptions = document.querySelectorAll('.lang-option');
+
+// Load saved language (default: Indonesian)
+let currentLang = localStorage.getItem('language') || 'id';
+langToggle.textContent = currentLang.toUpperCase();
+
+// Mark active language option
+document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.classList.remove('active');
+    if (opt.getAttribute('data-lang') === currentLang) {
+        opt.classList.add('active');
+    }
+});
+
+langToggle.addEventListener('click', () => {
+    langDropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!langDropdown.contains(e.target)) {
+        langDropdown.classList.remove('active');
+    }
+});
+
+langOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        currentLang = option.getAttribute('data-lang');
+        localStorage.setItem('language', currentLang);
+        
+        langOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+        langToggle.textContent = currentLang.toUpperCase();
+        
+        updateLanguage(currentLang);
+        langDropdown.classList.remove('active');
+    });
+});
+
+function updateLanguage(lang) {
+    // Update elements with data-key attributes (main translation system)
+    document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key && translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+    
+    // Update navigation links with data-{lang} attributes
+    document.querySelectorAll('.nav-link').forEach(link => {
+        const text = link.getAttribute(`data-${lang}`);
+        if (text) {
+            link.textContent = text;
+        }
+    });
+    
+    // Update input placeholders
+    document.querySelectorAll('[data-placeholder-key]').forEach(element => {
+        const key = element.getAttribute('data-placeholder-key');
+        if (key && translations[lang] && translations[lang][key]) {
+            element.placeholder = translations[lang][key];
+        }
+    });
+}
+
+// Initialize language
+updateLanguage(currentLang);
+
 // Mobile menu toggle
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -301,7 +542,10 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         return fetch(PYTHON_API_URL + '/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text })
+            body: JSON.stringify({ 
+                message: text,
+                language: currentLang
+            })
         }).then(function(res) { return res.json(); });
     }
 

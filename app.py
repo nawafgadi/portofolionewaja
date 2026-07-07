@@ -34,143 +34,228 @@ EMAIL_PASS = os.environ.get('EMAIL_PASS')
 EMAIL_NOTIFY_TO = os.environ.get('EMAIL_NOTIFY_TO', EMAIL_USER)
 
 class NawafAI:
-    """Advanced AI Chatbot for Nawaf's Portfolio"""
+    """Advanced AI Chatbot for Nawaf's Portfolio - Multilingual Support"""
     
     def __init__(self):
         self.responses = self._load_responses()
-        self.greetings = [
-            "Halo! Senang bertemu dengan Anda. Ada yang bisa saya bantu tentang Nawaf? 😊",
-            "Hai! Asisten AI Nawaf siap membantu. Mau tahu apa nih? 🤖",
-            "Hello! Welcome to Nawaf's portfolio. How can I help you today? 🌟",
-            "Selamat datang! Saya asisten virtual Nawaf. Mau tanya apa? ✨"
-        ]
-        self.thanks = [
-            "Sama-sama! Senang bisa membantu. Jika ada pertanyaan lain, silakan tanya saja. 😊",
-            "With pleasure! Jangan ragu untuk kembali bertanya kapan saja. 👍",
-            "You're welcome! Have a great day! 🌟"
-        ]
-        self.farewells = [
-            "Sampai jumpa! Semoga harimu menyenangkan. 👋",
-            "Bye! Thanks for visiting Nawaf's portfolio. Have a wonderful day! 🌈",
-            "Dadah! Jangan lupa kembali lagi ya. Take care! 💫"
-        ]
-        self.unknown = [
-            "Maaf, saya belum memahami pertanyaan tersebut. Anda bisa bertanya tentang: Nawaf, project, skill, kontak, pengalaman, atau teknologi yang dikuasai. 🤔",
-            "Hmm, saya belum punya jawaban untuk itu. Coba tanya tentang:\n• Siapa Nawaf\n• Projectnya\n• Skill teknologi\n• Cara hubungi\n\nSaya siap bantu! 🙋",
-            "Saya masih belajar nih! Saat ini saya bisa jawab tentang Nawaf, project, skill, dan kontak. Mau tanya yang mana? 😅"
-        ]
     
     def _load_responses(self):
-        """Load response database"""
+        """Load multilingual response database"""
         return {
             'about': {
-                'keywords': ['tentang', 'nawaf', 'siapa', 'profile', 'profil', 'biodata', 'diri', 'orang', 'nama'],
-                'responses': [
+                'keywords': ['tentang', 'nawaf', 'siapa', 'profile', 'profil', 'biodata', 'diri', 'orang', 'nama', 'about', 'who'],
+                'id': [
                     "Nawaf Gadi Alfatih adalah siswa Rekayasa Perangkat Lunak (RPL) yang fokus pada pengembangan web dan aplikasi Android. Ia memiliki passion di bidang IT Support dan bercita-cita menjadi Help Desk Support Manager. 🎯",
                     "Nawaf adalah seorang developer muda berbakat dari Kroya, Cilacap. Dengan 2+ tahun pengalaman dan 20+ project, ia terus berkembang di bidang teknologi. 🚀",
                     "Kenalan yuk! Nawaf Gadi Alfatih - siswa RPL, web & mobile developer, dan calon Help Desk Support Manager profesional. 💻"
+                ],
+                'en': [
+                    "Nawaf Gadi Alfatih is a Software Engineering (RPL) student focused on web and Android application development. He is passionate about IT Support and aspires to become a professional Help Desk Support Manager. 🎯",
+                    "Nawaf is a talented young developer from Kroya, Cilacap. With 2+ years of experience and 20+ projects, he continues to grow in the technology field. 🚀",
+                    "Meet Nawaf Gadi Alfatih - an RPL student, web & mobile developer, and aspiring professional Help Desk Support Manager. 💻"
+                ],
+                'ar': [
+                    "ناوف جادي الفتيح طالب في هندسة البرمجيات (RPL) يركز على تطوير الويب والتطبيقات. لديه شغف بمجال دعم تكنولوجيا المعلومات ويطمح ليصبح مدير دعم Help Desk محترف. 🎯",
+                    "ناوف مطور شاب موهوب من كروا، جيلاجاب. مع 2+ سنة من الخبرة و20+ مشروع، يستمر في التطور في مجال التكنولوجيا. 🚀",
+                    "تعرّف على ناوف جادي الفتيح - طالب RPL، مطور ويب وتطبيقات، ومدير دعم Help Desk طموح. 💻"
+                ],
+                'zh': [
+                    "Nawaf Gadi Alfatih 是一名软件工程(RPL)专业学生,专注于网络和安卓应用开发。他对IT支持充满热情,立志成为专业的Help Desk支持经理。🎯",
+                    "Nawaf 是来自Kroya的年轻天才开发者。拥有2+年经验和20+个项目,他在科技领域不断成长。🚀",
+                    "认识Nawaf Gadi Alfatih - RPL学生、网络和移动应用开发者、有志的Help Desk支持经理。💻"
                 ]
             },
             'projects': {
-                'keywords': ['project', 'proyek', 'karya', 'portofolio', 'web', 'aplikasi', 'apps', 'website', 'hasil kerja', 'aplikasi'],
-                'responses': [
-                    "Nawaf telah mengerjakan berbagai project menarik:\n\n• Web Tiket - Sistem pemesanan tiket online\n• Bank Sampah - Manajemen sampah digital\n• Ucapan Idulfitri - Web greeting interaktif\n• E-Cashier, Pertanian, Bank Awan - UI/UX Design\n• Prediksi Stunting - Aplikasi prediksi kesehatan\n\nSemua project menunjukkan komitmen pada kualitas! ⭐",
-                    "Beberapa project unggulan Nawaf:\n🎫 Web Tiket\n♻️ Bank Sampah\n🌙 Ucapan Idulfitri\n💳 E-Cashier (UI/UX)\n🌾 Pertanian (UI/UX)\n☁️ Bank Awan (UI/UX)\n📊 Prediksi Stunting\n\nIngin lihat detailnya? Cek bagian Work! 🔍",
-                    "Nawaf sudah membangun 20+ project! Dari web development sampai UI/UX design, semua dikerjakan dengan dedikasi tinggi. Project favoritnya? Web Tiket dan Bank Sampah! 🏆"
+                'keywords': ['project', 'proyek', 'karya', 'portofolio', 'web', 'aplikasi', 'apps', 'website', 'hasil kerja'],
+                'id': [
+                    "Nawaf telah mengerjakan berbagai project menarik:\n\n• Web Tiket - Sistem pemesanan tiket online\n• Bank Sampah - Manajemen sampah digital\n• Admin Ticket - Dashboard administratif\n• E-Cashier, Pertanian, Bank Awan - UI/UX Design\n• Curious Chimpanzee - Game 2D\n• Cashier Mobile - Aplikasi POS\n• Phone Mobile - E-commerce App\n\nSemua project menunjukkan komitmen pada kualitas! ⭐",
+                    "Beberapa project unggulan Nawaf:\n🎫 Web Tiket\n♻️ Bank Sampah\n📊 Admin Ticket\n💳 E-Cashier (UI/UX)\n🌾 Pertanian (UI/UX)\n☁️ Bank Awan (UI/UX)\n🎮 Curious Chimpanzee\n📱 Cashier Mobile\n\nIngin lihat detailnya? Cek bagian Work! 🔍"
+                ],
+                'en': [
+                    "Nawaf has worked on various interesting projects:\n\n• Web Tiket - Online ticket booking system\n• Bank Sampah - Digital waste management\n• Admin Ticket - Administrative dashboard\n• E-Cashier, Agriculture, Bank Awan - UI/UX Design\n• Curious Chimpanzee - 2D Game\n• Cashier Mobile - POS Application\n• Phone Mobile - E-commerce App\n\nAll projects demonstrate commitment to quality! ⭐",
+                    "Some of Nawaf's flagship projects:\n🎫 Web Tiket\n♻️ Bank Sampah\n📊 Admin Ticket\n💳 E-Cashier (UI/UX)\n🌾 Agriculture (UI/UX)\n☁️ Bank Awan (UI/UX)\n🎮 Curious Chimpanzee\n📱 Cashier Mobile\n\nWant details? Check the Work section! 🔍"
+                ],
+                'ar': [
+                    "عمل ناوف على عدة مشاريع مثيرة للاهتمام:\n\n• Web Tiket - نظام حجز التذاكر عبر الإنترنت\n• Bank Sampah - إدارة النفايات الرقمية\n• Admin Ticket - لوحة التحكم الإدارية\n• E-Cashier, الزراعة, Bank Awan - تصميم UI/UX\n• Curious Chimpanzee - لعبة ثنائية الأبعاد\n• Cashier Mobile - تطبيق نقاط البيع\n• Phone Mobile - تطبيق التجارة الإلكترونية\n\nجميع المشاريع تظهر الالتزام بالجودة! ⭐"
+                ],
+                'zh': [
+                    "Nawaf 完成了许多有趣的项目:\n\n• Web Tiket - 在线订票系统\n• Bank Sampah - 数字废物管理\n• Admin Ticket - 管理仪表板\n• E-Cashier、农业、Bank Awan - UI/UX设计\n• Curious Chimpanzee - 2D游戏\n• Cashier Mobile - 销售点应用\n• Phone Mobile - 电商应用\n\n所有项目都体现了对质量的承诺! ⭐"
                 ]
             },
             'skills': {
-                'keywords': ['skill', 'keahlian', 'bisa', 'teknologi', 'tech', 'stack', 'bahasa pemrograman', 'framework', 'tool', 'tools', 'pandai'],
-                'responses': [
-                    "Skill teknologi Nawaf:\n\n🎨 UI/UX Design\n💻 Frontend Development\n⚡ JavaScript & React\n📄 HTML & CSS\n📱 Kotlin (Android)\n🐍 Python\n🎨 Figma & Canva\n\nDan masih terus belajar! 📚",
-                    "Tech stack yang dikuasai Nawaf:\n• Frontend: HTML, CSS, JavaScript, React\n• Mobile: Kotlin, Android Studio\n• Backend: Laravel, Python\n• Design: Figma, Canva\n• Lainnya: Git, problem solving\n\nVersatile banget kan? 😎",
-                    "Nawaf mahir di:\n🌐 Web Development\n📱 Android Development\n🎨 UI/UX Design\n🔧 IT Support\n\nTools: VS Code, Android Studio, Figma, Git, Laravel"
+                'keywords': ['skill', 'keahlian', 'bisa', 'teknologi', 'tech', 'stack', 'bahasa pemrograman', 'framework'],
+                'id': [
+                    "Skill teknologi Nawaf:\n\n🎨 UI/UX Design\n💻 Frontend Development\n⚡ JavaScript & React\n📄 HTML & CSS\n📱 Kotlin (Android)\n🐍 Python\n🛠️ Laravel\n🎨 Figma & Canva\n\nDan masih terus belajar! 📚",
+                    "Tech stack yang dikuasai Nawaf:\n• Frontend: HTML, CSS, JavaScript, React\n• Mobile: Kotlin, Android Studio\n• Backend: Laravel, Python\n• Design: Figma, Canva\n• Tools: Git, VS Code\n\nVersatile banget kan? 😎"
+                ],
+                'en': [
+                    "Nawaf's technology skills:\n\n🎨 UI/UX Design\n💻 Frontend Development\n⚡ JavaScript & React\n📄 HTML & CSS\n📱 Kotlin (Android)\n🐍 Python\n🛠️ Laravel\n🎨 Figma & Canva\n\nAnd still learning! 📚",
+                    "Tech stack mastered by Nawaf:\n• Frontend: HTML, CSS, JavaScript, React\n• Mobile: Kotlin, Android Studio\n• Backend: Laravel, Python\n• Design: Figma, Canva\n• Tools: Git, VS Code\n\nPretty versatile right? 😎"
+                ],
+                'ar': [
+                    "مهارات ناوف التكنولوجية:\n\n🎨 تصميم UI/UX\n💻 تطوير الواجهة الأمامية\n⚡ JavaScript و React\n📄 HTML و CSS\n📱 Kotlin (Android)\n🐍 Python\n🛠️ Laravel\n🎨 Figma و Canva\n\nويستمر في التعلم! 📚"
+                ],
+                'zh': [
+                    "Nawaf的技术技能:\n\n🎨 UI/UX设计\n💻 前端开发\n⚡ JavaScript和React\n📄 HTML和CSS\n📱 Kotlin (Android)\n🐍 Python\n🛠️ Laravel\n🎨 Figma和Canva\n\n还在继续学习! 📚"
                 ]
             },
             'contact': {
-                'keywords': ['kontak', 'contact', 'hubungi', 'email', 'telepon', 'phone', 'nomor', 'alamat', 'lokasi', 'where', 'address', 'hubung'],
-                'responses': [
-                    "Hubungi Nawaf di:\n\n📧 Email: nawaf52626@gmail.com\n📱 Telepon: +62 882-3938-6759\n📍 Lokasi: Kroya, Cilacap, Jawa Tengah\n\nAtau kirim pesan lewat form Contact di website ini! 💬",
-                    "Mau kolaborasi? Hubungi Nawaf:\n✉️ nawaf52626@gmail.com\n☎️ +62 882-3938-6759\n📍 Kroya, Cilacap, Jateng\n\nRespons cepat di jam kerja! ⚡"
-                ]
-            },
-            'school': {
-                'keywords': ['sekolah', 'school', 'pelajar', 'siswa', 'smk', 'rpl', 'jurusan', 'kelas', 'pendidikan'],
-                'responses': [
-                    "Nawaf adalah siswa jurusan Rekayasa Perangkat Lunak (RPL). Belajar pemrograman sejak SMK dan terus mengasah skill! 🎓",
-                    "Nawaf menempuh pendidikan di jurusan RPL (Rekayasa Perangkat Lunak). Fokus pada software development dan IT. 📚"
+                'keywords': ['kontak', 'contact', 'hubungi', 'email', 'telepon', 'phone', 'nomor', 'alamat', 'lokasi'],
+                'id': [
+                    "Hubungi Nawaf di:\n\n📧 Email: nawaf52626@gmail.com\n📱 Telepon: +62 882-3938-6759\n📍 Lokasi: Kroya, Cilacap, Jawa Tengah\n\nAtau kirim pesan lewat form Contact di website ini! 💬"
+                ],
+                'en': [
+                    "Contact Nawaf at:\n\n📧 Email: nawaf52626@gmail.com\n📱 Phone: +62 882-3938-6759\n📍 Location: Kroya, Cilacap, Central Java\n\nOr send a message through the Contact form on this website! 💬"
+                ],
+                'ar': [
+                    "اتصل بناوف على:\n\n📧 البريد الإلكتروني: nawaf52626@gmail.com\n📱 الهاتف: +62 882-3938-6759\n📍 الموقع: كروا، جيلاجاب، جاوة الوسطى\n\nأو أرسل رسالة عبر نموذج الاتصال على هذا الموقع! 💬"
+                ],
+                'zh': [
+                    "联系Nawaf:\n\n📧 电子邮件: nawaf52626@gmail.com\n📱 电话: +62 882-3938-6759\n📍 位置: 克罗亚，济拉贾，中爪哇\n\n或通过本网站上的联系表单发送消息! 💬"
                 ]
             },
             'experience': {
-                'keywords': ['pengalaman', 'experience', 'lama', 'tahun', 'berapa', 'karir', 'career', 'kerja'],
-                'responses': [
-                    "Nawaf memiliki pengalaman 2+ tahun di bidang pengembangan software dan telah menyelesaikan 20+ project. Perjalanan yang luar biasa! 🚀",
-                    "Dengan 2+ tahun pengalaman dan 20+ project completed, Nawaf terus berkembang menjadi developer profesional. 💪"
-                ]
-            },
-            'laravel': {
-                'keywords': ['laravel', 'php', 'backend', 'server'],
-                'responses': ["Nawaf memiliki pengalaman mengerjakan project berbasis Laravel. Framework PHP favorit untuk project skala menengah! 🔧"]
-            },
-            'android': {
-                'keywords': ['android', 'kotlin', 'mobile', 'apk', 'play store', 'hp'],
-                'responses': ["Nawaf mengembangkan aplikasi Android menggunakan Android Studio dan Kotlin. Siap bantu buat aplikasi mobile kamu! 📱"]
-            },
-            'price': {
-                'keywords': ['harga', 'biaya', 'cost', 'price', 'fee', 'bayar', 'mahal', 'murah', 'budget', 'rp', 'rupiah', 'berapa'],
-                'responses': ["Untuk informasi harga dan budget project, silakan hubungi Nawaf langsung via email atau WhatsApp. Setiap project memiliki estimasi berbeda sesuai kompleksitasnya! 💰"]
-            },
-            'hire': {
-                'keywords': ['hire', 'kerja', 'freelance', 'part time', 'full time', 'job', 'lowongan', 'rekrut', 'rekrutmen'],
-                'responses': ["Nawaf terbuka untuk kesempatan freelance, part-time, atau kolaborasi project. Hubungi via email untuk diskusi lebih lanjut! 🤝"]
-            },
-            'social': {
-                'keywords': ['sosial media', 'social media', 'instagram', 'linkedin', 'github', 'twitter', 'x', 'sosmed', 'follow', 'ig'],
-                'responses': [
-                    "Follow Nawaf di sosial media:\n\n📸 Instagram: @nwfgal_\n💼 LinkedIn: Nawaf Gadi Al Fatih\n🐙 GitHub: @nawafgadi\n🐦 X/Twitter: @NawafgadiA65406\n\nJangan lupa connect ya! 🔗"
-                ]
-            },
-            'help': {
-                'keywords': ['bantu', 'help', 'bantuan', 'gimana', 'how', 'cara', 'apa', 'what'],
-                'responses': [
-                    "Saya bisa bantu jawab tentang:\n• Siapa Nawaf\n• Project yang pernah dibuat\n• Skill & teknologi\n• Cara kontak\n• Informasi lainnya\n\nTanya aja! 🤗",
-                    "Butuh bantuan? Coba ketik keyword seperti: tentang, project, skill, kontak, email, atau lokasi. Saya siap bantu! 💪"
+                'keywords': ['pengalaman', 'experience', 'lama', 'tahun', 'berapa', 'karir', 'career'],
+                'id': [
+                    "Nawaf memiliki pengalaman 2+ tahun di bidang pengembangan software dan telah menyelesaikan 20+ project. Perjalanan yang luar biasa! 🚀"
+                ],
+                'en': [
+                    "Nawaf has 2+ years of experience in software development and has completed 20+ projects. An amazing journey! 🚀"
+                ],
+                'ar': [
+                    "لدى ناوف 2+ سنة من الخبرة في تطوير البرمجيات واستكمل 20+ مشروع. رحلة مذهلة! 🚀"
+                ],
+                'zh': [
+                    "Nawaf拥有2年以上的软件开发经验,已完成20多个项目。一段惊人的旅程! 🚀"
                 ]
             }
         }
     
-    def get_greeting(self):
+    def get_greeting(self, language='id'):
+        """Get contextual greeting based on language and time"""
         hour = datetime.now().hour
-        if hour < 11:
-            greeting = "Selamat pagi"
-        elif hour < 15:
-            greeting = "Selamat siang"
-        elif hour < 18:
-            greeting = "Selamat sore"
-        else:
-            greeting = "Selamat malam"
-        return f"{greeting}! {random.choice(self.greetings.split('! ')[1] if '! ' in random.choice(self.greetings) else random.choice(self.greetings))}"
+        
+        greetings = {
+            'id': {
+                'morning': "Selamat pagi! Senang bertemu dengan Anda. Ada yang bisa saya bantu tentang Nawaf? 😊",
+                'afternoon': "Selamat siang! Ada yang bisa saya bantu tentang Nawaf? 🤖",
+                'evening': "Selamat sore! Senang bisa membantu Anda. 💬",
+                'night': "Selamat malam! Asisten AI Nawaf siap membantu. 🌙"
+            },
+            'en': {
+                'morning': "Good morning! Nice to meet you. Can I help you with information about Nawaf? 😊",
+                'afternoon': "Good afternoon! How can I assist you regarding Nawaf? 🤖",
+                'evening': "Good evening! Happy to help you. 💬",
+                'night': "Good night! Nawaf's AI assistant is ready to help. 🌙"
+            },
+            'ar': {
+                'morning': "صباح الخير! يسعدني التعرف عليك. هل يمكنني مساعدتك بمعلومات عن ناوف؟ 😊",
+                'afternoon': "مساء الخير! كيف يمكنني مساعدتك فيما يتعلق بناوف؟ 🤖",
+                'evening': "تمام المساء! يسعدني مساعدتك. 💬",
+                'night': "تصبح على خير! مساعد ناوف الذكي جاهز للمساعدة. 🌙"
+            },
+            'zh': {
+                'morning': "早上好! 很高兴认识你。我可以帮你了解Nawaf吗? 😊",
+                'afternoon': "下午好! 我能如何帮助你了解Nawaf? 🤖",
+                'evening': "晚上好! 很高兴为你服务。💬",
+                'night': "晚安! Nawaf的AI助手随时准备帮助。🌙"
+            }
+        }
+        
+        period = 'morning' if hour < 11 else 'afternoon' if hour < 15 else 'evening' if hour < 18 else 'night'
+        
+        lang_greetings = greetings.get(language, greetings['id'])
+        return lang_greetings.get(period, lang_greetings['afternoon'])
     
-    def process_message(self, message):
-        """Process user message and return AI response"""
+    def process_message(self, message, language='id'):
+        """Process user message and return AI response in specified language"""
         if not message or not message.strip():
-            return "Silakan ketik pesan Anda. Saya siap membantu! 😊"
+            responses = {
+                'id': "Silakan ketik pesan Anda. Saya siap membantu! 😊",
+                'en': "Please type your message. I'm ready to help! 😊",
+                'ar': "يرجى كتابة رسالتك. أنا مستعد للمساعدة! 😊",
+                'zh': "请输入您的消息。我已准备就绪! 😊"
+            }
+            return responses.get(language, responses['id'])
         
         msg_lower = message.lower().strip()
         
+        # Multilingual greeting patterns
+        greetings_patterns = {
+            'id': ['halo', 'hai', 'hello', 'selamat'],
+            'en': ['hello', 'hi', 'hey', 'greetings'],
+            'ar': ['مرحبا', 'السلام', 'صباح'],
+            'zh': ['你好', '嗨', '问候']
+        }
+        
+        thanks_patterns = {
+            'id': ['terima kasih', 'thanks', 'makasih', 'tq'],
+            'en': ['thank you', 'thanks', 'thx'],
+            'ar': ['شكرا', 'شكراً', 'تشكر'],
+            'zh': ['谢谢', '感谢', '谢了']
+        }
+        
+        farewell_patterns = {
+            'id': ['bye', 'dadah', 'sampai jumpa', 'selamat tinggal'],
+            'en': ['bye', 'goodbye', 'see you'],
+            'ar': ['باي', 'وداعا', 'إلى اللقاء'],
+            'zh': ['再见', '拜拜', '回见']
+        }
+        
         # Check for greetings
-        if any(word in msg_lower for word in ['halo', 'hai', 'hello', 'hi', 'hey', 'selamat']):
-            return random.choice(self.greetings)
+        for pattern in greetings_patterns.get(language, []):
+            if pattern in msg_lower:
+                return self.get_greeting(language)
         
-        # Check for thanks
-        if any(word in msg_lower for word in ['terima kasih', 'thanks', 'thank you', 'makasih', 'tq', 'thx']):
-            return random.choice(self.thanks)
+        # Thanks responses
+        thanks_responses = {
+            'id': [
+                "Sama-sama! Senang bisa membantu. Jika ada pertanyaan lain, silakan tanya saja. 😊",
+                "Dengan senang hati! Jangan ragu untuk kembali bertanya. 👍"
+            ],
+            'en': [
+                "You're welcome! Happy to help. Feel free to ask anytime. 😊",
+                "My pleasure! Don't hesitate to come back with more questions. 👍"
+            ],
+            'ar': [
+                "على الرحب والسعة! يسعدني أن أساعدك. لا تتردد في السؤال مرة أخرى. 😊",
+                "بكل سرور! لا تتردد في العودة بمزيد من الأسئلة. 👍"
+            ],
+            'zh': [
+                "不客气! 很高兴为你服务。随时提问。 😊",
+                "我的荣幸! 不要犹豫再次提问。 👍"
+            ]
+        }
         
-        # Check for farewell
-        if any(word in msg_lower for word in ['bye', 'goodbye', 'dadah', 'sampai jumpa', 'selamat tinggal', 'see you']):
-            return random.choice(self.farewells)
+        for pattern in thanks_patterns.get(language, []):
+            if pattern in msg_lower:
+                return random.choice(thanks_responses.get(language, thanks_responses['id']))
         
-        # Score-based matching
+        # Farewell responses
+        farewell_responses = {
+            'id': [
+                "Sampai jumpa! Semoga harimu menyenangkan. 👋",
+                "Dadah! Terima kasih telah berkunjung. 💫"
+            ],
+            'en': [
+                "Goodbye! Have a great day! 👋",
+                "See you! Thanks for visiting. 💫"
+            ],
+            'ar': [
+                "وداعاً! أتمنى لك يوماً رائعاً! 👋",
+                "إلى اللقاء! شكراً لزيارتك. 💫"
+            ],
+            'zh': [
+                "再见! 祝你有美好的一天! 👋",
+                "拜拜! 感谢访问。💫"
+            ]
+        }
+        
+        for pattern in farewell_patterns.get(language, []):
+            if pattern in msg_lower:
+                return random.choice(farewell_responses.get(language, farewell_responses['id']))
+        
+        # Score-based keyword matching
         best_match = None
         max_score = 0
         
@@ -178,57 +263,134 @@ class NawafAI:
             score = 0
             for keyword in data['keywords']:
                 if keyword in msg_lower:
-                    score += len(keyword)  # Longer keyword = higher score
-            
-            # Bonus for exact word match
-            words = re.findall(r'\b\w+\b', msg_lower)
-            for keyword in data['keywords']:
-                if keyword in words:
-                    score += 5
+                    score += len(keyword)
             
             if score > max_score:
                 max_score = score
-                best_match = data['responses']
+                best_match = data
         
-        if best_match:
-            return random.choice(best_match)
+        if best_match and language in best_match:
+            return random.choice(best_match[language])
         
-        return random.choice(self.unknown)
+        # Unknown response
+        unknown_responses = {
+            'id': [
+                "Maaf, saya belum memahami pertanyaan tersebut. Coba tanya tentang: Nawaf, project, skill, kontak, atau pengalaman. 🤔",
+                "Hmm, saya belum punya jawaban untuk itu. Tanya yang lain yuk! 😅"
+            ],
+            'en': [
+                "Sorry, I don't quite understand that question. Try asking about: Nawaf, projects, skills, contact, or experience. 🤔",
+                "Hmm, I don't have an answer for that yet. Ask something else! 😅"
+            ],
+            'ar': [
+                "أعتذر، لم أفهم السؤال بعد. حاول السؤال عن: ناوف، المشاريع، المهارات، الاتصال أو الخبرة. 🤔",
+                "همم، ليس لدي جواب لذلك حتى الآن. اسأل شيئاً آخر! 😅"
+            ],
+            'zh': [
+                "抱歉,我还不太理解那个问题。试试问关于: Nawaf、项目、技能、联系或经验。🤔",
+                "嗯，我还没有答案。问些别的吧! 😅"
+            ]
+        }
+        
+        return random.choice(unknown_responses.get(language, unknown_responses['id']))
     
-    def get_suggestions(self, message):
-        """Get contextual suggestions based on message"""
+    def get_suggestions(self, message, language='id'):
+        """Get contextual suggestions in specified language"""
         msg_lower = message.lower()
         
-        if any(w in msg_lower for w in ['nawaf', 'siapa', 'tentang', 'profile']):
-            return [
-                {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
-                {"msg": "Skill teknologi apa yang dikuasai?", "label": "Lihat Skill"},
-                {"msg": "Bagaimana cara kontak?", "label": "Kontak"}
-            ]
-        elif any(w in msg_lower for w in ['project', 'proyek', 'karya', 'web', 'aplikasi']):
-            return [
-                {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
-                {"msg": "Skill teknologi apa yang dikuasai?", "label": "Lihat Skill"},
-                {"msg": "Berapa harga project?", "label": "Harga"}
-            ]
-        elif any(w in msg_lower for w in ['skill', 'teknologi', 'bisa', 'tech']):
-            return [
-                {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
-                {"msg": "Bagaimana cara kontak?", "label": "Kontak"},
-                {"msg": "Pengalaman kerja berapa lama?", "label": "Pengalaman"}
-            ]
-        elif any(w in msg_lower for w in ['kontak', 'hubungi', 'email', 'telepon', 'lokasi']):
-            return [
-                {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
-                {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
-                {"msg": "Jam operasional?", "label": "Jam Operasional"}
-            ]
+        suggestions_db = {
+            'id': {
+                'about': [
+                    {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
+                    {"msg": "Skill teknologi apa saja?", "label": "Lihat Skill"},
+                    {"msg": "Bagaimana cara kontak?", "label": "Kontak"}
+                ],
+                'project': [
+                    {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
+                    {"msg": "Skill teknologi apa saja?", "label": "Lihat Skill"},
+                    {"msg": "Berapa harga project?", "label": "Harga"}
+                ],
+                'skill': [
+                    {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
+                    {"msg": "Bagaimana cara kontak?", "label": "Kontak"},
+                    {"msg": "Pengalaman kerja berapa lama?", "label": "Pengalaman"}
+                ],
+                'contact': [
+                    {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
+                    {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
+                    {"msg": "Apa skill yang dikuasai?", "label": "Skill"}
+                ],
+                'default': [
+                    {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
+                    {"msg": "Project apa saja?", "label": "Project"},
+                    {"msg": "Skill teknologi apa?", "label": "Skill"}
+                ]
+            },
+            'en': {
+                'about': [
+                    {"msg": "What projects have you done?", "label": "See Projects"},
+                    {"msg": "What technologies do you know?", "label": "See Skills"},
+                    {"msg": "How can I contact you?", "label": "Contact"}
+                ],
+                'project': [
+                    {"msg": "Tell me about Nawaf", "label": "About Nawaf"},
+                    {"msg": "What technologies do you know?", "label": "See Skills"},
+                    {"msg": "What's your rate?", "label": "Pricing"}
+                ],
+                'skill': [
+                    {"msg": "What projects have you done?", "label": "See Projects"},
+                    {"msg": "How can I contact you?", "label": "Contact"},
+                    {"msg": "How much experience do you have?", "label": "Experience"}
+                ],
+                'contact': [
+                    {"msg": "Tell me about Nawaf", "label": "About Nawaf"},
+                    {"msg": "What projects have you done?", "label": "See Projects"},
+                    {"msg": "What technologies do you know?", "label": "See Skills"}
+                ],
+                'default': [
+                    {"msg": "Tell me about Nawaf", "label": "About Nawaf"},
+                    {"msg": "What projects?", "label": "Projects"},
+                    {"msg": "What technologies?", "label": "Skills"}
+                ]
+            },
+            'ar': {
+                'about': [
+                    {"msg": "ما المشاريع التي عملت عليها؟", "label": "شاهد المشاريع"},
+                    {"msg": "ما التقنيات التي تعرفها؟", "label": "شاهد المهارات"},
+                    {"msg": "كيف يمكنني الاتصال؟", "label": "اتصل"}
+                ],
+                'default': [
+                    {"msg": "أخبرني عن ناوف", "label": "عن ناوف"},
+                    {"msg": "ما المشاريع؟", "label": "المشاريع"},
+                    {"msg": "ما المهارات؟", "label": "المهارات"}
+                ]
+            },
+            'zh': {
+                'about': [
+                    {"msg": "你完成过哪些项目?", "label": "查看项目"},
+                    {"msg": "你掌握哪些技术?", "label": "查看技能"},
+                    {"msg": "我如何联系你?", "label": "联系"}
+                ],
+                'default': [
+                    {"msg": "告诉我关于Nawaf的事", "label": "关于Nawaf"},
+                    {"msg": "有哪些项目?", "label": "项目"},
+                    {"msg": "有哪些技能?", "label": "技能"}
+                ]
+            }
+        }
         
-        return [
-            {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
-            {"msg": "Project apa yang pernah dibuat?", "label": "Project"},
-            {"msg": "Skill teknologi apa yang dikuasai?", "label": "Skill"}
-        ]
+        lang_suggestions = suggestions_db.get(language, suggestions_db['id'])
+        
+        if any(w in msg_lower for w in ['nawaf', 'siapa', 'tentang', 'about', 'profile', 'who']):
+            return lang_suggestions.get('about', lang_suggestions['default'])
+        elif any(w in msg_lower for w in ['project', 'proyek', 'karya', 'web', 'aplikasi']):
+            return lang_suggestions.get('project', lang_suggestions['default'])
+        elif any(w in msg_lower for w in ['skill', 'teknologi', 'bisa', 'tech']):
+            return lang_suggestions.get('skill', lang_suggestions['default'])
+        elif any(w in msg_lower for w in ['kontak', 'hubungi', 'email', 'contact']):
+            return lang_suggestions.get('contact', lang_suggestions['default'])
+        
+        return lang_suggestions.get('default', [])
 
 
 # Initialize AI
@@ -323,25 +485,20 @@ def chat():
                 'error': 'Message cannot be empty'
             }), 400
         
-        # Process message with AI
-        bot_response = ai.process_message(user_message)
-        suggestions = ai.get_suggestions(user_message)
+        # Get language from request (default: Indonesian)
+        language = data.get('language', 'id')
+        if language not in ['id', 'en', 'ar', 'zh']:
+            language = 'id'
+        
+        # Process message with AI in specified language
+        bot_response = ai.process_message(user_message, language)
+        suggestions = ai.get_suggestions(user_message, language)
         reported = False
-
-        if bot_response in ai.unknown:
-            user_agent = request.headers.get('User-Agent')
-            reported = notify_unanswered_question(user_message, user_agent=user_agent)
-            if reported:
-                bot_response = (
-                    'Maaf, saya belum bisa menjawab pertanyaan itu dengan tepat saat ini. '
-                    'Saya sudah mengirim informasi ini ke email pemilik agar bisa ditinjau dan diperbaiki. '
-                    'Silakan tunggu pembaruan selanjutnya.'
-                )
 
         # Save to history
         save_chat_history(user_message, bot_response)
         
-        logger.info(f"User: {user_message} | Bot: {bot_response[:50]}... reported={reported}")
+        logger.info(f"User ({language}): {user_message} | Bot: {bot_response[:50]}... reported={reported}")
         
         return jsonify({
             'success': True,
@@ -349,6 +506,7 @@ def chat():
             'suggestions': suggestions,
             'reported': reported,
             'timestamp': datetime.now().isoformat(),
+            'language': language,
             'context': 'nawaf_portfolio'
         })
     
