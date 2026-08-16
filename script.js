@@ -581,7 +581,7 @@ const BASE_PROJECTS = [
         description: 'Sistem deteksi dini risiko stunting pada balita menggunakan Machine Learning algoritma K-Nearest Neighbors (KNN).',
         tags: ['Python', 'Flask', 'Machine Learning', 'KNN', 'Healthcare'],
         image: '',
-        liveUrl: 'https://nawafgadi.github.io/pengukur-stanting-/',
+        liveUrl: null,
         githubUrl: 'https://github.com/nawafgadi/pengukur-stanting-',
         stars: 0,
         forks: 0,
@@ -1667,15 +1667,15 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
             response: {
                 id: `📊 **Project: Deteksi Stunting AI (K-Nearest Neighbors)**\n\n` +
                     `Sistem deteksi dini risiko stunting pada balita menggunakan Machine Learning algoritma **KNN (K-Nearest Neighbors)** berbasis Python & Flask.\n\n` +
-                    `• Menghitung status gizi berdasarkan tinggi badan, berat badan, dan usia balita.\n` +
+                    `• Menghitung status gizi berdasarkan tinggi badan, berat status, dan usia balita.\n` +
                     `• Memberikan rekomendasi tindakan pencegahan stunting secara cepat.\n\n` +
-                    `🌐 [Live Demo Aplikasi](https://nawafgadi.github.io/pengukur-stanting-/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/pengukur-stanting-)`,
+                    `🔗 **Kode Sumber:** [GitHub: nawafgadi/pengukur-stanting-](https://github.com/nawafgadi/pengukur-stanting-)`,
                 jv: `📊 **Proyek: Deteksi Stunting AI (KNN Algorithm)**\n\n` +
                     `Aplikasi pinter kanggo ndeteksi risiko stunting nang bocah balita nggunakna algoritma Machine Learning **KNN (K-Nearest Neighbors)** berbasis Python & Flask.\n\n` +
                     `• Ngetung status gizi sekang dhuwur awak, bobot awak, lan umure balita.\n` +
                     `• Menehi saran tindakan pancegahan stunting sacara cepet.\n\n` +
-                    `🌐 [Live Demo Aplikasi](https://nawafgadi.github.io/pengukur-stanting-/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/pengukur-stanting-)`,
-                en: `📊 **Project: AI Stunting Detection (KNN)**\n\nEarly screening tool for child stunting risks using Machine Learning K-Nearest Neighbors (KNN) algorithm with Python & Flask.\n\n🌐 [Live Demo](https://nawafgadi.github.io/pengukur-stanting-/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/pengukur-stanting-)`
+                    `🔗 **Kode Sumber:** [GitHub: nawafgadi/pengukur-stanting-](https://github.com/nawafgadi/pengukur-stanting-)`,
+                en: `📊 **Project: AI Stunting Detection (KNN)**\n\nEarly screening tool for child stunting risks using Machine Learning K-Nearest Neighbors (KNN) algorithm with Python & Flask.\n\n🔗 **Repository:** [GitHub: nawafgadi/pengukur-stanting-](https://github.com/nawafgadi/pengukur-stanting-)`
             },
             suggestions: {
                 id: [
@@ -1876,7 +1876,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                 id: `🚀 **Daftar Karya & Proyek Unggulan Nawaf (15+ Projects):**\n\n` +
                     `🌾 **Smart Agriculture:** [Kartu Tani](https://github.com/nawafgadi/kartu-tani) (Python/Django)\n` +
                     `🛍️ **E-Commerce:** [Plazio](https://github.com/lastfound/Plazio_e-commerce) & Luxe Mobile\n` +
-                    `🤖 **AI & ML:** [CBPR Recommendation](https://github.com/KyyTzy09/CBPR) & [Deteksi Stunting KNN](https://nawafgadi.github.io/pengukur-stanting-/)\n` +
+                    `🤖 **AI & ML:** [CBPR Recommendation](https://github.com/KyyTzy09/CBPR) & [Deteksi Stunting KNN](https://github.com/nawafgadi/pengukur-stanting-)\n` +
                     `🎫 **Web App:** [Web Tiket Online](https://nawafgadi.github.io/web-tiket/) & [Bank Sampah](https://nawafgadi.github.io/xipplg4_03_banksampah/)\n` +
                     `📱 **Mobile App:** [Kasir POS Mobile (Kotlin)](https://github.com/nawafgadi/kasirApp)\n` +
                     `🎮 **Game 2D:** [Curious Chimpanzee](https://github.com/nawafgadi/game_mk2_PAS) (Unity C#)\n` +
@@ -1885,7 +1885,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                 jv: `🚀 **Daftar Kabeh Karya & Proyek Nawaf (15+ Proyek):**\n\n` +
                     `🌾 **Smart Agriculture:** [Kartu Tani](https://github.com/nawafgadi/kartu-tani) (Python/Django)\n` +
                     `🛍️ **Toko Online:** [Plazio](https://github.com/lastfound/Plazio_e-commerce) & Luxe Mobile\n` +
-                    `🤖 **AI & ML:** [CBPR AI](https://github.com/KyyTzy09/CBPR) & [Deteksi Stunting KNN](https://nawafgadi.github.io/pengukur-stanting-/)\n` +
+                    `🤖 **AI & ML:** [CBPR AI](https://github.com/KyyTzy09/CBPR) & [Deteksi Stunting KNN](https://github.com/nawafgadi/pengukur-stanting-)\n` +
                     `🎫 **Web App:** [Web Tiket Online](https://nawafgadi.github.io/web-tiket/) & [Bank Sampah](https://nawafgadi.github.io/xipplg4_03_banksampah/)\n` +
                     `📱 **Aplikasi Android:** [Kasir POS Mobile (Kotlin)](https://github.com/nawafgadi/kasirApp)\n` +
                     `🎮 **Game 2D:** [Curious Chimpanzee](https://github.com/nawafgadi/game_mk2_PAS) (Unity C#)\n` +
@@ -1894,7 +1894,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                 en: `🚀 **Featured Projects by Nawaf (15+ Projects):**\n\n` +
                     `🌾 **Smart Agriculture:** [Kartu Tani](https://github.com/nawafgadi/kartu-tani)\n` +
                     `🛍️ **E-Commerce:** [Plazio](https://github.com/lastfound/Plazio_e-commerce)\n` +
-                    `🤖 **AI & ML:** [CBPR](https://github.com/KyyTzy09/CBPR) & [Deteksi Stunting KNN](https://nawafgadi.github.io/pengukur-stanting-/)\n` +
+                    `🤖 **AI & ML:** [CBPR](https://github.com/KyyTzy09/CBPR) & [Deteksi Stunting KNN](https://github.com/nawafgadi/pengukur-stanting-)\n` +
                     `🎫 **Web App:** [Web Tiket](https://nawafgadi.github.io/web-tiket/)\n` +
                     `📱 **Mobile:** [Kasir POS (Kotlin)](https://github.com/nawafgadi/kasirApp)\n` +
                     `🎮 **Game 2D:** [Curious Chimpanzee](https://github.com/nawafgadi/game_mk2_PAS)\n\n` +

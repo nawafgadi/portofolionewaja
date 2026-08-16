@@ -169,10 +169,14 @@ class NawafAI:
                     'id': (
                         "📊 **Project: Deteksi Stunting AI (KNN)**\n\n"
                         "Sistem deteksi dini risiko stunting pada balita menggunakan Machine Learning algoritma K-Nearest Neighbors (KNN) berbasis Python & Flask.\n\n"
-                        "🌐 Live Demo: https://nawafgadi.github.io/pengukur-stanting-/\n"
-                        "🔗 GitHub: https://github.com/nawafgadi/pengukur-stanting-"
+                        "🔗 **Kode Sumber:** https://github.com/nawafgadi/pengukur-stanting-"
                     ),
-                    'en': "📊 AI-powered early stunting detection tool using KNN algorithm: https://nawafgadi.github.io/pengukur-stanting-/"
+                    'jv': (
+                        "📊 **Proyek: Deteksi Stunting AI (KNN)**\n\n"
+                        "Aplikasi pinter deteksi risiko stunting balita nganggo algoritma Machine Learning KNN berbasis Python & Flask.\n\n"
+                        "🔗 **Kode Sumber:** https://github.com/nawafgadi/pengukur-stanting-"
+                    ),
+                    'en': "📊 AI-powered early stunting detection tool using KNN algorithm: https://github.com/nawafgadi/pengukur-stanting-"
                 }
             },
             {
