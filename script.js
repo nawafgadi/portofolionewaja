@@ -81,6 +81,8 @@ const translations = {
         all_rights: '© 2026 Nawaf Gadi Alfatih. Semua hak dilindungi.',
         web_development: 'PENGEMBANGAN WEB',
         ui_ux_design: 'Desain UI/UX',
+        skills_mastered_title: 'Bahasa Pemrograman & Teknologi yang Dikuasai',
+        skills_mastered_desc: 'Bahasa dan framework yang saya gunakan dalam membangun seluruh proyek web, aplikasi mobile, AI/ML, game 2D, dan desain UI/UX:',
         placeholder_ask: 'Tanyakan tentang Nawaf...'
     },
     en: {
@@ -133,6 +135,8 @@ const translations = {
         all_rights: '© 2026 Nawaf Gadi Alfatih. All rights reserved.',
         web_development: 'WEB DEVELOPMENT',
         ui_ux_design: 'UI/UX Design',
+        skills_mastered_title: 'Mastered Programming Languages & Tech Stack',
+        skills_mastered_desc: 'Programming languages and frameworks I use to build web projects, mobile apps, AI/ML, 2D games, and UI/UX designs:',
         placeholder_ask: 'Ask about Nawaf...'
     },
     ar: {
@@ -185,6 +189,8 @@ const translations = {
         all_rights: '© 2026 ناوف جاضي الفتيح. جميع الحقوق محفوظة.',
         web_development: 'تطوير الويب',
         ui_ux_design: 'تصميم الواجهة والتجربة',
+        skills_mastered_title: 'لغات البرمجة والتقنيات المتقنة',
+        skills_mastered_desc: 'لغات البرمجة وأطر العمل التي أستخدمها في تطوير الويب، تطبيقات الجوال، الذكاء الاصطناعي، ألعاب 2D وتصميم الواجهات:',
         placeholder_ask: 'اسأل عن ناوف...'
     },
     zh: {
@@ -237,6 +243,8 @@ const translations = {
         all_rights: '© 2026 Nawaf Gadi Alfatih。保留所有权利。',
         web_development: '网络开发',
         ui_ux_design: '用户界面/用户体验设计',
+        skills_mastered_title: '掌握的编程语言与技术栈',
+        skills_mastered_desc: '我用于开发Web项目、移动应用、人工智能(AI/ML)、2D游戏及UI/UX设计的编程语言与技术：',
         placeholder_ask: '问关于Nawaf的问题...'
     }
 };
@@ -1171,15 +1179,34 @@ const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 
 if (navToggle && navMenu) {
-    navToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
+    navToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen = navMenu.classList.toggle('active');
+        const icon = navToggle.querySelector('i');
+        if (icon) {
+            icon.className = isOpen ? 'ri-close-line' : 'ri-menu-line';
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!navMenu.contains(e.target) && !navToggle.contains(e.target) && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            const icon = navToggle.querySelector('i');
+            if (icon) icon.className = 'ri-menu-line';
+        }
     });
 }
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        if (navMenu) navMenu.classList.remove('active');
+        if (navMenu) {
+            navMenu.classList.remove('active');
+            if (navToggle) {
+                const icon = navToggle.querySelector('i');
+                if (icon) icon.className = 'ri-menu-line';
+            }
+        }
     });
 });
 
