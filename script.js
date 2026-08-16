@@ -345,6 +345,7 @@ const EXCLUDED_PROJECT_NAMES = new Set([
     'portofolio-modern-part-v2',
     'portofoliomodernpartv2',
     'nadiaprofile',
+    'nadiaproject',
     'protofolio-nawaf-baru',
     'portfolio-nawaf-baru',
     'protofolio-anyar',
@@ -367,6 +368,7 @@ const EXCLUDED_PROJECT_TITLES = [
     'portfolio modern v2',
     'protofolio modern part v2',
     'nadia halia accountant portfolio',
+    'nadia halia project showcase',
     'portfolio nawaf baru',
     'portfolio versi anyar',
     'landingpage',
@@ -588,21 +590,6 @@ const BASE_PROJECTS = [
         stars: 0,
         forks: 0,
         updated: '2026-06-04'
-    },
-    {
-        id: 'nadiaproject',
-        name: 'nadiaproject',
-        title: 'Nadia Halia Project Showcase',
-        category: 'web',
-        language: 'JavaScript',
-        description: 'Showcase pencapaian dan laporan proyek profesional bidang akuntansi dan manajemen keuangan.',
-        tags: ['JavaScript', 'CSS3', 'Showcase'],
-        image: '',
-        liveUrl: 'https://nawafgadi.github.io/nadiaproject/',
-        githubUrl: 'https://github.com/nawafgadi/nadiaproject',
-        stars: 0,
-        forks: 0,
-        updated: '2026-01-12'
     },
     {
         id: 'idulfitri',
