@@ -338,6 +338,75 @@ const CUSTOM_PROJECT_IMAGES = {
 const GITHUB_USERNAME = 'nawafgadi';
 const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`;
 
+// List of projects / repositories excluded from display
+const EXCLUDED_PROJECT_NAMES = new Set([
+    'portofolionewaja',
+    'protofolio-modern-part-v2',
+    'portofolio-modern-part-v2',
+    'portofoliomodernpartv2',
+    'nadiaprofile',
+    'protofolio-nawaf-baru',
+    'portfolio-nawaf-baru',
+    'protofolio-anyar',
+    'portfolio-versi-anyar',
+    'portfolio-anyar',
+    'landingpage',
+    'contoh1',
+    'contoh-1',
+    'cv-nawaf',
+    'curriculum-vitae-web-nawaf',
+    'portofolio',
+    'portfolio',
+    'abcd',
+    'ulya12345',
+    'nawaf091108',
+    'nawaf220283'
+]);
+
+const EXCLUDED_PROJECT_TITLES = [
+    'portfolio modern v2',
+    'protofolio modern part v2',
+    'nadia halia accountant portfolio',
+    'portfolio nawaf baru',
+    'portfolio versi anyar',
+    'landingpage',
+    'contoh1',
+    'curriculum vitae web nawaf',
+    'portofolio',
+    'portfolio',
+    'abcd',
+    'ulya12345',
+    'nawaf091108',
+    'nawaf220283'
+];
+
+function isProjectExcluded(item) {
+    if (!item) return false;
+    const name = (item.name || '').toLowerCase().trim();
+    const id = (item.id || '').toLowerCase().trim();
+    const title = (item.title || '').toLowerCase().trim();
+
+    if (EXCLUDED_PROJECT_NAMES.has(name) || EXCLUDED_PROJECT_NAMES.has(id)) {
+        return true;
+    }
+
+    const normName = name.replace(/[-_\s]/g, '');
+    const normId = id.replace(/[-_\s]/g, '');
+    const normTitle = title.replace(/[-_\s]/g, '');
+
+    for (const exTitle of EXCLUDED_PROJECT_TITLES) {
+        const normEx = exTitle.replace(/[-_\s]/g, '');
+        if (normTitle === normEx || normName === normEx || normId === normEx) {
+            return true;
+        }
+        if (normEx.length > 5 && (normTitle.includes(normEx) || normName.includes(normEx))) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 // Complete repository dataset with rich metadata (works offline, instant load, live API sync)
 const BASE_PROJECTS = [
     {
@@ -521,21 +590,6 @@ const BASE_PROJECTS = [
         updated: '2026-06-04'
     },
     {
-        id: 'nadiaprofile',
-        name: 'nadiaprofile',
-        title: 'Nadia Halia Accountant Portfolio',
-        category: 'web',
-        language: 'JavaScript & CSS',
-        description: 'Website portofolio profesional akuntan publik dengan tata letak modern, integrasi CV PDF, dan keahlian finansial.',
-        tags: ['JavaScript', 'CSS3', 'Personal Branding', 'CV'],
-        image: '',
-        liveUrl: 'https://nawafgadi.github.io/nadiaprofile/',
-        githubUrl: 'https://github.com/nawafgadi/nadiaprofile',
-        stars: 0,
-        forks: 0,
-        updated: '2026-03-13'
-    },
-    {
         id: 'nadiaproject',
         name: 'nadiaproject',
         title: 'Nadia Halia Project Showcase',
@@ -716,66 +770,6 @@ const BASE_PROJECTS = [
         updated: '2026-08-07'
     },
     {
-        id: 'portofolionewaja',
-        name: 'portofolionewaja',
-        title: 'Portfolio Modern v2',
-        category: 'web',
-        language: 'JavaScript',
-        description: 'Versi website portfolio personal modern dengan dark mode, AI chat, dan integrasi GitHub API.',
-        tags: ['JavaScript', 'Portfolio', 'Responsive'],
-        image: '',
-        liveUrl: 'https://nawafgadi.github.io/portofolionewaja/',
-        githubUrl: 'https://github.com/nawafgadi/portofolionewaja',
-        stars: 0,
-        forks: 0,
-        updated: '2026-07-07'
-    },
-    {
-        id: 'protofolio-nawaf-baru',
-        name: 'protofolio-nawaf-baru',
-        title: 'Portfolio Nawaf Baru',
-        category: 'web',
-        language: 'HTML5 & CSS',
-        description: 'Eksplorasi desain portofolio dengan tata letak minimalis dan interaksi visual halus.',
-        tags: ['HTML5', 'CSS3', 'Portfolio'],
-        image: '',
-        liveUrl: 'https://nawafgadi.github.io/protofolio-nawaf-baru/',
-        githubUrl: 'https://github.com/nawafgadi/protofolio-nawaf-baru',
-        stars: 0,
-        forks: 0,
-        updated: '2026-02-18'
-    },
-    {
-        id: 'protofolio-anyar',
-        name: 'protofolio-anyar',
-        title: 'Portfolio Versi Anyar',
-        category: 'web',
-        language: 'HTML5',
-        description: 'Desain web portfolio dengan fokus pada showcase keahlian frontend dan project.',
-        tags: ['HTML5', 'CSS3', 'Showcase'],
-        image: '',
-        liveUrl: 'https://nawafgadi.github.io/protofolio-anyar/',
-        githubUrl: 'https://github.com/nawafgadi/protofolio-anyar',
-        stars: 0,
-        forks: 0,
-        updated: '2026-02-12'
-    },
-    {
-        id: 'cv-nawaf',
-        name: 'cv-nawaf',
-        title: 'Curriculum Vitae Web Nawaf',
-        category: 'web',
-        language: 'CSS & HTML',
-        description: 'Halaman Curriculum Vitae digital interaktif memuat riwayat pendidikan, pengalaman, dan keahlian.',
-        tags: ['CSS3', 'CV Digital', 'Resume'],
-        image: '',
-        liveUrl: 'https://nawafgadi.github.io/cv-nawaf/',
-        githubUrl: 'https://github.com/nawafgadi/cv-nawaf',
-        stars: 0,
-        forks: 0,
-        updated: '2025-03-01'
-    },
-    {
         id: 'webpersonal',
         name: 'webpersonal',
         title: 'Web Personal Nawaf',
@@ -856,7 +850,7 @@ const BASE_PROJECTS = [
     }
 ];
 
-let allProjectsData = [...BASE_PROJECTS];
+let allProjectsData = BASE_PROJECTS.filter(p => !isProjectExcluded(p));
 let currentFilter = 'all';
 let currentSearchQuery = '';
 
@@ -1061,39 +1055,44 @@ function syncGitHubRepositories() {
             const existingMap = new Map();
             BASE_PROJECTS.forEach(p => existingMap.set(p.name, p));
 
-            const dynamicProjects = repos.map(repo => {
-                const existing = existingMap.get(repo.name);
-                const category = existing ? existing.category : classifyRepoCategory(repo);
-                const title = existing ? existing.title : repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-                const desc = existing && existing.description ? existing.description : (repo.description || `Proyek repositori ${repo.name} yang dikembangkan dengan ${repo.language || 'teknologi modern'}.`);
-                const lang = existing && existing.language ? existing.language : (repo.language || 'Web Code');
-                const hasPages = repo.has_pages;
-                const liveUrl = existing && existing.liveUrl !== undefined ? existing.liveUrl : (hasPages ? `https://${GITHUB_USERNAME}.github.io/${repo.name}/` : repo.homepage);
-                const tags = existing && existing.tags ? existing.tags : [repo.language || 'Code', 'GitHub'].filter(Boolean);
-                const image = existing ? existing.image : (CUSTOM_PROJECT_IMAGES[repo.name] || '');
+            const dynamicProjects = repos
+                .filter(repo => !isProjectExcluded(repo))
+                .map(repo => {
+                    const existing = existingMap.get(repo.name);
+                    const category = existing ? existing.category : classifyRepoCategory(repo);
+                    const title = existing ? existing.title : repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                    const desc = existing && existing.description ? existing.description : (repo.description || `Proyek repositori ${repo.name} yang dikembangkan dengan ${repo.language || 'teknologi modern'}.`);
+                    const lang = existing && existing.language ? existing.language : (repo.language || 'Web Code');
+                    const hasPages = repo.has_pages;
+                    const liveUrl = existing && existing.liveUrl !== undefined ? existing.liveUrl : (hasPages ? `https://${GITHUB_USERNAME}.github.io/${repo.name}/` : repo.homepage);
+                    const tags = existing && existing.tags ? existing.tags : [repo.language || 'Code', 'GitHub'].filter(Boolean);
+                    const image = existing ? existing.image : (CUSTOM_PROJECT_IMAGES[repo.name] || '');
 
-                return {
-                    id: repo.name,
-                    name: repo.name,
-                    title: title,
-                    category: category,
-                    language: lang,
-                    description: desc,
-                    tags: tags,
-                    image: image,
-                    liveUrl: liveUrl || null,
-                    figmaUrl: existing ? existing.figmaUrl : null,
-                    githubUrl: existing && existing.githubUrl ? existing.githubUrl : repo.html_url,
-                    stars: repo.stargazers_count || 0,
-                    forks: repo.forks_count || 0,
-                    updated: repo.updated_at ? repo.updated_at.split('T')[0] : ''
-                };
-            });
+                    return {
+                        id: repo.name,
+                        name: repo.name,
+                        title: title,
+                        category: category,
+                        language: lang,
+                        description: desc,
+                        tags: tags,
+                        image: image,
+                        liveUrl: liveUrl || null,
+                        figmaUrl: existing ? existing.figmaUrl : null,
+                        githubUrl: existing && existing.githubUrl ? existing.githubUrl : repo.html_url,
+                        stars: repo.stargazers_count || 0,
+                        forks: repo.forks_count || 0,
+                        updated: repo.updated_at ? repo.updated_at.split('T')[0] : ''
+                    };
+                })
+                .filter(p => !isProjectExcluded(p));
 
             // Preserve special items like standalone Figma projects and external/collaborative repositories that aren't in GitHub repos API
-            const nonApiItems = BASE_PROJECTS.filter(p => !repos.some(r => r.name.toLowerCase() === (p.name || '').toLowerCase()));
+            const nonApiItems = BASE_PROJECTS
+                .filter(p => !isProjectExcluded(p))
+                .filter(p => !repos.some(r => r.name.toLowerCase() === (p.name || '').toLowerCase()));
             
-            allProjectsData = [...dynamicProjects, ...nonApiItems];
+            allProjectsData = [...dynamicProjects, ...nonApiItems].filter(p => !isProjectExcluded(p));
             
             // Sort by updated date descending
             allProjectsData.sort((a, b) => (b.updated || '').localeCompare(a.updated || ''));
