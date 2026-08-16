@@ -246,6 +246,60 @@ const translations = {
         skills_mastered_title: '掌握的编程语言与技术栈',
         skills_mastered_desc: '我用于开发Web项目、移动应用、人工智能(AI/ML)、2D游戏及UI/UX设计的编程语言与技术：',
         placeholder_ask: '问关于Nawaf的问题...'
+    },
+    jv: {
+        home: 'Kaca Ngarep',
+        work: 'Karya & Proyek',
+        about: 'Bab Inyong',
+        contact: 'Hubungi Inyong',
+        subtitle_home: 'Frontend Development & RPL',
+        title_home: 'Gawe Solusi Digital Sing Manfaat lan Migunani',
+        description_home: 'Inyong Nawaf Gadi AL fatih, bocah Rekayasa Perangkat Lunak (RPL) sekang Kroya, Cilacap sing seneng gawe web, aplikasi Android, lan duwe minat nang bidang IT Support lan ngrampungna masalah teknis.',
+        view_work: 'Ndeleng Karya',
+        get_in_touch: 'Hubungi Inyong',
+        portfolio: 'PORTOFOLIO',
+        selected_works: 'Karya & Proyek GitHub Nawaf',
+        works_description: 'Kiye kabeh proyek lan repositori GitHub inyong sing disinkronna otomatis. Rika teyeng nggoleti proyek, milih kategori teknologi, utawa langsung mbukak live demo lan kode sumbere.',
+        filter_all: 'Kabeh',
+        filter_web: 'Web Dev',
+        filter_mobile: 'Aplikasi HP',
+        filter_ai: 'AI & ML',
+        filter_game: 'Game 2D',
+        filter_design: 'Desain UI/UX',
+        filter_interactive: 'Interaktif & Alat',
+        search_placeholder: 'Goleti jeneng proyek, basa koding, topik...',
+        showing_prefix: 'Nampilna',
+        projects_count_label: 'proyek',
+        live_demo: 'Uji Coba Langsung',
+        github_repo: 'Kode GitHub',
+        figma_design: 'Ndeleng nang Figma',
+        no_projects_title: 'Ora Ana Proyek Sing Ketemu',
+        no_projects_desc: 'Jajal golet nganggo tembung liyane utawa ganti pilihan kategori.',
+        reset_filter: 'Tampilna Kabeh Proyek',
+        about_me: 'BAB INYONG',
+        learn_grow: 'Sinau, Ngrembaka, lan Gawe Karya Sing Maedahi',
+        about_description: 'Dadi bocah RPL, inyong duwe semangat gedhe nang donya koding lan gawe sistem. Inyong percaya yen teknologi kuwe dudu mung nulis kode, tapi babagan gawe solusi sing migunani lan efisien. Inyong duwe pengalaman nggarap proyek Laravel, gawe tampilan interaktif nganggo HTML, CSS, lan JavaScript, sarta gawe aplikasi nganggo Android Studio. Inyong terus ningkatna kemampuan teknis kanggo nggayuh cita-cita dadi Help Desk Support Manager sing profesional.',
+        years_experience: 'Taun Pengalaman',
+        projects_completed: 'Proyek Rampung',
+        contact_me: 'HUBUNGI INYONG',
+        get_in_touch_title: 'Ayo Srawung & Kontak',
+        contact_description: 'Inyong mbukak lawang nggo kesempatan anyar lan kolaborasi. Aja isin-isin takon utawa nyapa inyong!',
+        email: 'Email',
+        location: 'Panggonan',
+        phone: 'Telepon / WA',
+        your_name: 'Jeneng Rika',
+        your_email: 'Email Rika',
+        your_message: 'Pesen Rika',
+        send_message: 'Kirim Pesen',
+        view_project: 'Ndeleng Proyek',
+        project_in_github: 'Ndeleng nang GitHub',
+        creating_experiences: 'Gawe pengalaman digital sing apik lan migunani.',
+        all_rights: '© 2026 Nawaf Gadi Alfatih. Kabeh hak dilindungi.',
+        web_development: 'PENGEMBANGAN WEB',
+        ui_ux_design: 'Desain UI/UX',
+        skills_mastered_title: 'Basa Pemrograman & Teknologi Sing Dikuasai',
+        skills_mastered_desc: 'Basa koding lan framework sing inyong gunakna nggo mbangun kabeh proyek web, aplikasi mobile, AI/ML, game 2D, lan desain antarmuka:',
+        placeholder_ask: 'Takon apa bae bab Nawaf...'
     }
 };
 
@@ -292,10 +346,19 @@ langOptions.forEach(option => {
 });
 
 function updateLanguage(lang) {
+    const t = translations[lang] || translations.id;
+    
     document.querySelectorAll('[data-key]').forEach(element => {
         const key = element.getAttribute('data-key');
-        if (key && translations[lang] && translations[lang][key]) {
-            element.textContent = translations[lang][key];
+        if (key && t[key]) {
+            const icon = element.querySelector('i');
+            if (icon) {
+                element.innerHTML = '';
+                element.appendChild(icon);
+                element.appendChild(document.createTextNode(' ' + t[key]));
+            } else {
+                element.textContent = t[key];
+            }
         }
     });
     
@@ -308,8 +371,8 @@ function updateLanguage(lang) {
     
     document.querySelectorAll('[data-placeholder-key]').forEach(element => {
         const key = element.getAttribute('data-placeholder-key');
-        if (key && translations[lang] && translations[lang][key]) {
-            element.placeholder = translations[lang][key];
+        if (key && t[key]) {
+            element.placeholder = t[key];
         }
     });
 
@@ -1404,6 +1467,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
 
         const welcomeMsgs = {
             id: `${greeting}! Saya **ERA AI**, asisten cerdas portofolio **Nawaf Gadi Alfatih**. 🤖✨\n\nSaya bisa membantu Anda mencari tahu tentang **proyek terbaru** (seperti Kartu Tani, Plazio, CBPR AI), **keahlian teknologi**, **jasa pembuatan web/aplikasi**, hingga **kontak & kolaborasi**. Ada yang ingin ditanyakan?`,
+            jv: `Sugeng rawuh! Inyong **ERA AI**, asisten pinter portofolio **Nawaf Gadi Alfatih**. 🤖✨\n\nInyong teyeng mbantu rika nggoleti info bab **proyek anyar** (kaya Kartu Tani, Plazio, CBPR AI), **keahlian teknologi & koding**, **jasa gawe web/aplikasi**, nganti **kontak & kolaborasi**. Ana sing kepengin ditakokna?`,
             en: `Hello! I am **ERA AI**, the smart assistant for **Nawaf Gadi Alfatih's** portfolio. 🤖✨\n\nI can assist you with details about **featured projects** (like Kartu Tani, Plazio E-commerce, CBPR Recommendation AI), **skills & tech stack**, **services**, and **contact information**. How can I help you today?`,
             ar: `مرحباً! أنا **ERA AI**، المساعد الذكي لمحفظة **ناوف جاضي الفتيح**. 🤖✨\n\nيمكنني مساعدتك في استكشاف **المشاريع** (مثل Kartu Tani و Plazio و CBPR AI) و**المهارات** ومعلومات **الاتصال**. كيف يمكنني مساعدتك؟`,
             zh: `您好！我是 **ERA AI**，**Nawaf Gadi Alfatih** 作品集的智能助手。🤖✨\n\n我可以为您介绍**精选项目**（如Kartu Tani、Plazio、CBPR推荐AI）、**技术栈**以及**联系方式**。请问有什么我可以帮您的？`
@@ -2049,13 +2113,19 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         const defaultResponses = {
             id: `Saya bisa membantu Anda dengan berbagai topik tentang Nawaf:\n` +
                 `• **Proyek:** Kartu Tani, Plazio E-commerce, CBPR AI, Web Tiket, Kasir Mobile, dll.\n` +
-                `• **Keahlian:** UI/UX Design, React, Python, Kotlin, Laravel, Help Desk IT\n` +
+                `• **Keahlian:** Python, Laravel, JavaScript, Kotlin Android, Unity 2D, Figma UI/UX\n` +
                 `• **Layanan & Harga:** Pembuatan website, aplikasi Android, UI/UX\n` +
                 `• **Kontak & Lokasi:** Email, WhatsApp, dan Sosial Media\n\n` +
                 `Silakan pilih topik di bawah atau ketik pertanyaan Anda! 😊`,
+            jv: `Inyong teyeng mbantu rika bab macem-macem topik babagan Nawaf:\n` +
+                `• **Proyek:** Kartu Tani, Plazio E-commerce, CBPR AI, Web Tiket, Kasir POS Mobile, lsp.\n` +
+                `• **Keahlian:** Python, Laravel, JavaScript, Kotlin Android, Unity 2D, Figma UI/UX\n` +
+                `• **Jasa & Gawean:** Gawe website, aplikasi Android, UI/UX design\n` +
+                `• **Kontak & Panggonan:** Email, WhatsApp (+62 882-3938-6759), lan Sosmed\n\n` +
+                `Mangga pilih topik nang ngisor kiye utawa ketik pitakonane rika! 😊`,
             en: `I can assist you with:\n` +
                 `• **Projects:** Kartu Tani, Plazio, CBPR AI, Web Tiket, POS Mobile\n` +
-                `• **Skills:** UI/UX, React, Python, Kotlin, Help Desk IT\n` +
+                `• **Skills:** Python, Laravel, JavaScript, Kotlin, Unity 2D, UI/UX\n` +
                 `• **Services & Rates:** Web & mobile app development\n` +
                 `• **Contact & Socials:** Email, WhatsApp, and GitHub\n\n` +
                 `Feel free to pick a topic below or type your question! 😊`
