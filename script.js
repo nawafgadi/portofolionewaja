@@ -1523,6 +1523,15 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `• Rekapitulasi Data Hasil Panen Komoditas\n\n` +
                     `🔗 **Kode Sumber:** [GitHub: nawafgadi/kartu-tani](https://github.com/nawafgadi/kartu-tani)\n` +
                     `🖼️ Cek kartu proyeknya di bagian [Karya & Proyek](#work)!`,
+                jv: `🌾 **Proyek: Kartu Tani (Sistem Pertanian Digital)**\n\n` +
+                    `Aplikasi web berbasis **Python & Django** kanggo digitalisasi data petani lan ngatur pambagian pupuk subsidi ben tepat sasaran.\n\n` +
+                    `**Fitur Utamane:**\n` +
+                    `• Pendaftaran digital & kartu identitas petani (Farmer ID)\n` +
+                    `• Manajemen alokasi pupuk subsidi sing teratur\n` +
+                    `• Monitoring transaksi petani & dinas pertanian sacara real-time\n` +
+                    `• Rekapitulasi asil panen komoditas\n\n` +
+                    `🔗 **Kode Sumber:** [GitHub: nawafgadi/kartu-tani](https://github.com/nawafgadi/kartu-tani)\n` +
+                    `🖼️ Ndeleng kartu proyeke nang bagian [Karya & Proyek](#work)!`,
                 en: `🌾 **Project: Kartu Tani (Indonesian Farmer Card System)**\n\n` +
                     `A **Python/Django** web application built for digital farmer management and real-time monitoring of subsidized fertilizer distribution.\n\n` +
                     `**Key Highlights:**\n` +
@@ -1540,6 +1549,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Jelaskan project Plazio E-Commerce", label: "Project Plazio" },
                     { msg: "Skill teknologi apa yang dikuasai?", label: "Lihat Skill" }
                 ],
+                jv: [
+                    { msg: "Jelasna proyek CBPR AI", label: "Proyek CBPR AI" },
+                    { msg: "Jelasna proyek Plazio", label: "Proyek Plazio" },
+                    { msg: "Skill teknologi apa bae?", label: "Skill Nawaf" }
+                ],
                 en: [
                     { msg: "Explain the CBPR AI project", label: "CBPR AI Project" },
                     { msg: "Tell me about Plazio E-Commerce", label: "Plazio Store" },
@@ -1550,7 +1564,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'project_plazio',
             context: 'project_plazio',
-            patterns: [/plazio/, /plazio_e-commerce/, /e-commerce/, /toko\s*online/, /belanja\s*online/, /shopping\s*cart/],
+            patterns: [/plazio/, /plazio_e-commerce/, /e-commerce/, /toko\s*online/, /belanja\s*online/, /blanja/, /shopping\s*cart/],
             response: {
                 id: `🛍️ **Project: Plazio E-Commerce Platform**\n\n` +
                     `Aplikasi web toko online modern untuk memfasilitasi transaksi belanja digital yang cepat, responsif, dan terstruktur.\n\n` +
@@ -1561,6 +1575,14 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `• Desain Responsif Desktop & Mobile\n\n` +
                     `🔗 **Kode Sumber:** [GitHub: lastfound/Plazio_e-commerce](https://github.com/lastfound/Plazio_e-commerce)\n` +
                     `💡 Lihat selengkapnya di bagian [Karya](#work)!`,
+                jv: `🛍️ **Proyek: Plazio E-Commerce Platform**\n\n` +
+                    `Aplikasi web toko online modern kanggo transaksi blanja digital sing cepet, responsif, lan gampang dienggo.\n\n` +
+                    `**Fitur Utamane:**\n` +
+                    `• Katalog produk interaktif maneka warna klambi & fashion\n` +
+                    `• Kranjang blanja dinamis (tambah barang, atur jumlah, total rega)\n` +
+                    `• Alur checkout pesenan sing gampang lan responsif nang HP/Laptop\n\n` +
+                    `🔗 **Kode Sumber:** [GitHub: lastfound/Plazio_e-commerce](https://github.com/lastfound/Plazio_e-commerce)\n` +
+                    `💡 Deleng selengkappe nang bagian [Karya & Proyek](#work)!`,
                 en: `🛍️ **Project: Plazio E-Commerce Platform**\n\n` +
                     `A modern online store web application featuring dynamic catalog management, interactive shopping cart, and smooth checkout workflows.\n\n` +
                     `• Interactive Product Grid & Filtering\n` +
@@ -1575,6 +1597,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Jelaskan project CBPR AI", label: "Project CBPR" },
                     { msg: "Bisa buat website toko online?", label: "Jasa Website" },
                     { msg: "Berapa harga pembuatan project?", label: "Estimasi Biaya" }
+                ],
+                jv: [
+                    { msg: "Jelasna proyek CBPR AI", label: "Proyek CBPR" },
+                    { msg: "Bisa gawe website toko online?", label: "Jasa Web" },
+                    { msg: "Pira regane gawe proyek?", label: "Biaya Proyek" }
                 ],
                 en: [
                     { msg: "Explain CBPR AI system", label: "CBPR Project" },
@@ -1597,6 +1624,14 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `4. **Flask Web API:** Menyajikan endpoint rekomendasi ke antarmuka web.\n\n` +
                     `🔗 **Kode Sumber:** [GitHub: KyyTzy09/CBPR](https://github.com/KyyTzy09/CBPR)\n` +
                     `🧠 Jelajahi kategori filter [AI & ML](#work) pada portofolio!`,
+                jv: `🤖 **Proyek: CBPR (Sistem Rekomendasi Produk Cerdas AI)**\n\n` +
+                    `Sistem rekomendasi produk pinter nggunakna **Machine Learning & NLP (Natural Language Processing)** sing digawe nganggo **Python & Flask**.\n\n` +
+                    `**Cara Kerjane:**\n` +
+                    `1. **Olah Teks & NLP:** Mbersihna lan misah tembung sekang jeneng lan katrangan produk.\n` +
+                    `2. **TF-IDF:** Ngowahi teks dadi vektor angka bobot.\n` +
+                    `3. **Cosine Similarity:** Ngetung tingkat kemiripan antar produk ben teyeng menehi rekomendasi sing paling pas.\n\n` +
+                    `🔗 **Kode Sumber:** [GitHub: KyyTzy09/CBPR](https://github.com/KyyTzy09/CBPR)\n` +
+                    `🧠 Deleng filter [AI & ML](#work) nang portofolio!`,
                 en: `🤖 **Project: CBPR (Content-Based Product Recommendation)**\n\n` +
                     `A smart product recommendation engine utilizing **Machine Learning & NLP (Natural Language Processing)** with **Python & Flask**.\n\n` +
                     `**How it works:**\n` +
@@ -1612,6 +1647,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Apa saja project AI Nawaf?", label: "Semua Project AI" },
                     { msg: "Skill Python Nawaf apa saja?", label: "Skill Python" },
                     { msg: "Project Kartu Tani", label: "Kartu Tani" }
+                ],
+                jv: [
+                    { msg: "Proyek AI apa bae sing digawe?", label: "Proyek AI" },
+                    { msg: "Skill Python Nawaf apa bae?", label: "Skill Python" },
+                    { msg: "Proyek Kartu Tani", label: "Kartu Tani" }
                 ],
                 en: [
                     { msg: "Show all AI projects", label: "AI Projects" },
@@ -1630,6 +1670,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `• Menghitung status gizi berdasarkan tinggi badan, berat badan, dan usia balita.\n` +
                     `• Memberikan rekomendasi tindakan pencegahan stunting secara cepat.\n\n` +
                     `🌐 [Live Demo Aplikasi](https://nawafgadi.github.io/pengukur-stanting-/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/pengukur-stanting-)`,
+                jv: `📊 **Proyek: Deteksi Stunting AI (KNN Algorithm)**\n\n` +
+                    `Aplikasi pinter kanggo ndeteksi risiko stunting nang bocah balita nggunakna algoritma Machine Learning **KNN (K-Nearest Neighbors)** berbasis Python & Flask.\n\n` +
+                    `• Ngetung status gizi sekang dhuwur awak, bobot awak, lan umure balita.\n` +
+                    `• Menehi saran tindakan pancegahan stunting sacara cepet.\n\n` +
+                    `🌐 [Live Demo Aplikasi](https://nawafgadi.github.io/pengukur-stanting-/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/pengukur-stanting-)`,
                 en: `📊 **Project: AI Stunting Detection (KNN)**\n\nEarly screening tool for child stunting risks using Machine Learning K-Nearest Neighbors (KNN) algorithm with Python & Flask.\n\n🌐 [Live Demo](https://nawafgadi.github.io/pengukur-stanting-/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/pengukur-stanting-)`
             },
             suggestions: {
@@ -1637,16 +1682,24 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Jelaskan project CBPR AI", label: "Project CBPR" },
                     { msg: "Skill AI & Python Nawaf?", label: "Skill Python" },
                     { msg: "Lihat karya lainnya", label: "Semua Karya" }
+                ],
+                jv: [
+                    { msg: "Jelasna proyek CBPR AI", label: "Proyek CBPR" },
+                    { msg: "Skill AI Nawaf apa bae?", label: "Skill AI" },
+                    { msg: "Ndeleng kabeh karya", label: "Kabeh Karya" }
                 ]
             }
         },
         {
             id: 'project_tiket',
             context: 'project_tiket',
-            patterns: [/tiket/, /web[- ]*tiket/, /travel/, /booking/, /admin[- ]*tiket/],
+            patterns: [/tiket/, /web[- ]*tiket/, /travel/, /booking/, /pesen\s*tiket/, /admin[- ]*tiket/],
             response: {
                 id: `🎫 **Project: Web Tiket Online & Admin Panel**\n\n` +
                     `Aplikasi pemesanan tiket online modern dengan alur pemesanan instan, pemilihan rute/kursi, serta dashboard admin untuk mengelola jadwal armada dan manifest penumpang.\n\n` +
+                    `🌐 [Live Demo Tiket](https://nawafgadi.github.io/web-tiket/) | 🌐 [Admin Dashboard](https://nawafgadi.github.io/web-tiket/admin) | 🔗 [GitHub Repo](https://github.com/nawafgadi/web-tiket)`,
+                jv: `🎫 **Proyek: Web Tiket Online & Dashboard Admin**\n\n` +
+                    `Aplikasi pesen tiket perjalanan online kanthi cepet, pilihan kursi/rute, sarta dashboard admin kanggo ngatur jadwal armada lan data panumpang.\n\n` +
                     `🌐 [Live Demo Tiket](https://nawafgadi.github.io/web-tiket/) | 🌐 [Admin Dashboard](https://nawafgadi.github.io/web-tiket/admin) | 🔗 [GitHub Repo](https://github.com/nawafgadi/web-tiket)`,
                 en: `🎫 **Project: Online Ticket Booking & Admin Panel**\n\nModern transport ticketing web app with instant booking workflow and administrator manifest management.\n\n🌐 [Live Demo](https://nawafgadi.github.io/web-tiket/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/web-tiket)`
             },
@@ -1655,6 +1708,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Project Bank Sampah Digital", label: "Bank Sampah" },
                     { msg: "Bisa buatkan website custom?", label: "Jasa Web" },
                     { msg: "Bagaimana cara kontak Nawaf?", label: "Kontak" }
+                ],
+                jv: [
+                    { msg: "Proyek Bank Sampah Digital", label: "Bank Sampah" },
+                    { msg: "Bisa gawekna website custom?", label: "Jasa Web" },
+                    { msg: "Kepriwe carane kontak Nawaf?", label: "Kontak" }
                 ]
             }
         },
@@ -1665,6 +1723,9 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
             response: {
                 id: `♻️ **Project: Bank Sampah Digital**\n\n` +
                     `Platform edukasi lingkungan dan kalkulator tabungan sampah terintegrasi untuk membantu pengelolaan limbah anorganik, plastik, dan daur ulang.\n\n` +
+                    `🌐 [Live Demo Bank Sampah](https://nawafgadi.github.io/xipplg4_03_banksampah/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/xipplg4_03_banksampah)`,
+                jv: `♻️ **Proyek: Bank Sampah Digital**\n\n` +
+                    `Platform edukasi lingkungan lan kalkulator tabungan sampah kanggo mbantu ngolah sampah plastik lan daur ulang.\n\n` +
                     `🌐 [Live Demo Bank Sampah](https://nawafgadi.github.io/xipplg4_03_banksampah/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/xipplg4_03_banksampah)`,
                 en: `♻️ **Project: Digital Waste Bank (Bank Sampah)**\n\nEnvironmental education and community waste-saving calculator web app.\n\n🌐 [Live Demo](https://nawafgadi.github.io/xipplg4_03_banksampah/) | 🔗 [GitHub Repo](https://github.com/nawafgadi/xipplg4_03_banksampah)`
             },
@@ -1684,6 +1745,9 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                 id: `📱 **Project: Kasir POS Mobile App (Android Kotlin)**\n\n` +
                     `Aplikasi Point of Sale (POS) Android berbasis **Kotlin & Android Studio** dengan arsitektur REST API untuk kasir toko, pencatatan transaksi, dan inventori barang.\n\n` +
                     `🔗 [GitHub Repo: kasirApp](https://github.com/nawafgadi/kasirApp)`,
+                jv: `📱 **Proyek: Kasir POS Mobile App (Android Kotlin)**\n\n` +
+                    `Aplikasi kasir Point of Sale (POS) Android native sing digawe nganggo **Kotlin & Android Studio** kanggo nyatet transaksi dodolan toko lan stok barang.\n\n` +
+                    `🔗 [GitHub Repo: kasirApp](https://github.com/nawafgadi/kasirApp)`,
                 en: `📱 **Project: Cashier POS Mobile App (Kotlin)**\n\nAndroid Point of Sale mobile application developed with Kotlin and REST API integration for retail stores.\n\n🔗 [GitHub Repo: kasirApp](https://github.com/nawafgadi/kasirApp)`
             },
             suggestions: {
@@ -1691,6 +1755,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Skill Mobile & Kotlin Nawaf?", label: "Skill Kotlin" },
                     { msg: "Desain E-Cashier di Figma", label: "E-Cashier Figma" },
                     { msg: "Bisa buat aplikasi Android?", label: "Jasa Android" }
+                ],
+                jv: [
+                    { msg: "Skill Kotlin Nawaf apa bae?", label: "Skill Kotlin" },
+                    { msg: "Desain E-Cashier Figma", label: "E-Cashier Figma" },
+                    { msg: "Bisa gawe aplikasi Android?", label: "Jasa Android" }
                 ]
             }
         },
@@ -1702,12 +1771,19 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                 id: `🎮 **Project: Curious Chimpanzee 2D Platformer Game**\n\n` +
                     `Game petualangan 2D yang dibangun menggunakan **Unity Engine & C#**. Menghadirkan gameplay seru mengumpulkan pisang, menghindari rintangan, dan menyelesaikan stage level.\n\n` +
                     `🔗 [GitHub Repo: game_mk2_PAS](https://github.com/nawafgadi/game_mk2_PAS)`,
+                jv: `🎮 **Proyek: Game 2D Curious Chimpanzee (Unity & C#)**\n\n` +
+                    `Game petualangan 2D platformer sing digawe nggunakna **Unity Engine & C#**. Misine ngumpulna gedhang, ngindari rintangan, lan ngrampungna level.\n\n` +
+                    `🔗 [GitHub Repo: game_mk2_PAS](https://github.com/nawafgadi/game_mk2_PAS)`,
                 en: `🎮 **Project: Curious Chimpanzee 2D (Unity & C#)**\n\n2D adventure platformer game featuring banana collection mechanics, pause managers, and physics obstacles.\n\n🔗 [GitHub Repo](https://github.com/nawafgadi/game_mk2_PAS)`
             },
             suggestions: {
                 id: [
                     { msg: "Tampilkan semua project", label: "Semua Project" },
                     { msg: "Skill pemrograman apa saja?", label: "Skill" }
+                ],
+                jv: [
+                    { msg: "Tampilna kabeh proyek", label: "Kabeh Proyek" },
+                    { msg: "Skill koding apa bae?", label: "Skill Nawaf" }
                 ]
             }
         },
@@ -1721,6 +1797,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `2. **Bank Awan Mobile Banking:** Desain fintech mobile modern bernuansa Cloud Blue dengan fitur QRIS & mutasi.\n` +
                     `3. **Pertanian Smart Farming UI:** Desain aplikasi mobile pemantauan tanaman.\n\n` +
                     `🎨 Jelajahi kategori filter [UI/UX Design](#work) untuk melihat preview desain Figma!`,
+                jv: `🎨 **Karya Desain UI/UX nang Figma:**\n\n` +
+                    `1. **E-Cashier POS System:** Desain antarmuka kasir toko modern lan gampang dienggo.\n` +
+                    `2. **Bank Awan Mobile Banking:** Desain mobile banking tema Cloud Blue lengkap karo QRIS lan mutasi rekening.\n` +
+                    `3. **Pertanian Smart Farming UI:** Desain aplikasi ngawasi tanduran tani.\n\n` +
+                    `🎨 Ndeleng kabeh desain nang filter [Desain UI/UX](#work)!`,
                 en: `🎨 **UI/UX Design Works (Figma):**\n\n• E-Cashier POS System Design\n• Bank Awan Mobile Banking (Cloud Blue Fintech)\n• Smart Agriculture Mobile App\n\n🎨 Check out the [UI/UX Design](#work) section on the portfolio!`
             },
             suggestions: {
@@ -1736,7 +1817,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'category_web',
             context: 'category_web',
-            patterns: [/proyek\s*web/, /project\s*web/, /web\s*dev/, /website\s*apa\s*aja/],
+            patterns: [/proyek\s*web/, /project\s*web/, /web\s*dev/, /gawe\s*web/, /website\s*apa\s*aja/],
             response: {
                 id: `🌐 **Proyek Web Development Nawaf:**\n\n` +
                     `• **Kartu Tani:** Smart Agriculture & Alokasi Pupuk (Python/Django)\n` +
@@ -1746,6 +1827,13 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `• **Astra Chiller:** Katalog Sistem Pendingin Industri\n` +
                     `• **Silsilah Keturunan:** Visualisasi Pohon Keluarga Interaktif\n\n` +
                     `👉 Coba filter kategori **Web Dev** di bagian [Karya](#work)!`,
+                jv: `🌐 **Proyek Web Development Nawaf:**\n\n` +
+                    `• **Kartu Tani:** Sistem Pertanian & Pupuk Subsidi (Python Django)\n` +
+                    `• **Plazio E-Commerce:** Toko Online Modern (PHP/JS)\n` +
+                    `• **Web Tiket Online:** Pesenan Tiket & Panel Admin (HTML/CSS/JS)\n` +
+                    `• **Bank Sampah Digital:** Edukasi Lingkungan\n` +
+                    `• **Astra Chiller & Silsilah Keturunan**\n\n` +
+                    `👉 Rika teyeng milih filter **Web Dev** nang bagian [Karya & Proyek](#work)!`,
                 en: `🌐 **Web Development Projects:**\n\n• **Kartu Tani:** Smart Agriculture Platform (Python/Django)\n• **Plazio:** Modern E-Commerce Store\n• **Web Tiket:** Online Ticket Booking & Admin\n• **Bank Sampah:** Digital Waste Management\n• **Astra Chiller & Silsilah Keturunan**\n\n👉 Filter by **Web Dev** in the [Work](#work) section!`
             },
             suggestions: {
@@ -1766,6 +1854,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `2. **Deteksi Stunting AI:** Skrining risiko gizi balita dengan Machine Learning KNN.\n` +
                     `3. **ERA AI Assistant:** Asisten virtual cerdas portofolio multi-bahasa.\n\n` +
                     `👉 Cek filter [AI & ML](#work) pada bagian portfolio!`,
+                jv: `🤖 **Proyek AI & Machine Learning Nawaf:**\n\n` +
+                    `1. **CBPR Recommendation:** Sistem rekomendasi produk pinter nganggo NLP & TF-IDF.\n` +
+                    `2. **Deteksi Stunting AI:** Skrining gizi balita nggunakna algoritma KNN.\n` +
+                    `3. **ERA AI Assistant:** Asisten cerdas portofolio sing teyeng Basa Jawa Ngapak!\n\n` +
+                    `👉 Ndeleng filter [AI & ML](#work) nang portofolio!`,
                 en: `🤖 **AI & Machine Learning Projects:**\n\n1. **CBPR:** Content-Based Recommendation using NLP & TF-IDF.\n2. **Stunting Detection AI:** Toddler nutrition screening with KNN algorithm.\n3. **ERA AI Assistant:** Multilingual smart portfolio assistant.`
             },
             suggestions: {
@@ -1778,9 +1871,9 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'category_all_projects',
             context: 'category_all_projects',
-            patterns: [/semua\s*proyek/, /daftar\s*project/, /project\s*apa\s*(saja|aja|pernah)/, /karya\s*apa\s*aja/, /portofolio\s*apa\s*aja/],
+            patterns: [/semua\s*proyek/, /daftar\s*project/, /project\s*apa\s*(saja|aja|pernah)/, /karya\s*apa\s*aja/, /portofolio\s*apa\s*aja/, /apa\s*bae\s*karyane/, /karyane\s*nawaf/],
             response: {
-                id: `🚀 **Daftar Karya & Proyek Unggulan Nawaf (20+ Projects):**\n\n` +
+                id: `🚀 **Daftar Karya & Proyek Unggulan Nawaf (15+ Projects):**\n\n` +
                     `🌾 **Smart Agriculture:** [Kartu Tani](https://github.com/nawafgadi/kartu-tani) (Python/Django)\n` +
                     `🛍️ **E-Commerce:** [Plazio](https://github.com/lastfound/Plazio_e-commerce) & Luxe Mobile\n` +
                     `🤖 **AI & ML:** [CBPR Recommendation](https://github.com/KyyTzy09/CBPR) & [Deteksi Stunting KNN](https://nawafgadi.github.io/pengukur-stanting-/)\n` +
@@ -1789,7 +1882,16 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `🎮 **Game 2D:** [Curious Chimpanzee](https://github.com/nawafgadi/game_mk2_PAS) (Unity C#)\n` +
                     `🎨 **UI/UX Design:** E-Cashier, Bank Awan, Pertanian di Figma\n\n` +
                     `Semua proyek dapat Anda filter dan cari langsung di bagian [Karya](#work)! 🔍`,
-                en: `🚀 **Featured Projects by Nawaf (20+ Projects):**\n\n` +
+                jv: `🚀 **Daftar Kabeh Karya & Proyek Nawaf (15+ Proyek):**\n\n` +
+                    `🌾 **Smart Agriculture:** [Kartu Tani](https://github.com/nawafgadi/kartu-tani) (Python/Django)\n` +
+                    `🛍️ **Toko Online:** [Plazio](https://github.com/lastfound/Plazio_e-commerce) & Luxe Mobile\n` +
+                    `🤖 **AI & ML:** [CBPR AI](https://github.com/KyyTzy09/CBPR) & [Deteksi Stunting KNN](https://nawafgadi.github.io/pengukur-stanting-/)\n` +
+                    `🎫 **Web App:** [Web Tiket Online](https://nawafgadi.github.io/web-tiket/) & [Bank Sampah](https://nawafgadi.github.io/xipplg4_03_banksampah/)\n` +
+                    `📱 **Aplikasi Android:** [Kasir POS Mobile (Kotlin)](https://github.com/nawafgadi/kasirApp)\n` +
+                    `🎮 **Game 2D:** [Curious Chimpanzee](https://github.com/nawafgadi/game_mk2_PAS) (Unity C#)\n` +
+                    `🎨 **Desain UI/UX:** E-Cashier, Bank Awan, Pertanian nang Figma\n\n` +
+                    `Kabeh proyek teyeng difilter lan digolti nang bagian [Karya & Proyek](#work)! 🔍`,
+                en: `🚀 **Featured Projects by Nawaf (15+ Projects):**\n\n` +
                     `🌾 **Smart Agriculture:** [Kartu Tani](https://github.com/nawafgadi/kartu-tani)\n` +
                     `🛍️ **E-Commerce:** [Plazio](https://github.com/lastfound/Plazio_e-commerce)\n` +
                     `🤖 **AI & ML:** [CBPR](https://github.com/KyyTzy09/CBPR) & [Deteksi Stunting KNN](https://nawafgadi.github.io/pengukur-stanting-/)\n` +
@@ -1803,6 +1905,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Ceritakan tentang Kartu Tani", label: "Kartu Tani" },
                     { msg: "Skill teknologi apa yang dikuasai?", label: "Skill Nawaf" },
                     { msg: "Bagaimana cara kontak Nawaf?", label: "Kontak" }
+                ],
+                jv: [
+                    { msg: "Ceritakna bab Kartu Tani", label: "Kartu Tani" },
+                    { msg: "Skill teknologi apa bae?", label: "Skill Nawaf" },
+                    { msg: "Kepriwe carane kontak Nawaf?", label: "Kontak" }
                 ]
             }
         },
@@ -1811,21 +1918,32 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'skills_tech',
             context: 'skills_tech',
-            patterns: [/skill/, /keahlian/, /bisa\s*apa/, /teknologi/, /tech\s*stack/, /bahasa\s*pemrograman/, /framework/, /menguasai/],
+            patterns: [/skill/, /keahlian/, /bisa\s*apa/, /teknologi/, /tech\s*stack/, /bahasa\s*pemrograman/, /basa\s*koding/, /basa\s*pemrograman/, /framework/, /menguasai/],
             response: {
                 id: `💻 **Keahlian & Tech Stack Nawaf Gadi Alfatih:**\n\n` +
                     `🎨 **UI/UX Design:** Figma, Canva, Wireframing, User Centered Design\n` +
-                    `⚡ **Frontend:** HTML5, CSS3, JavaScript (ES6+), React, Responsive Layout\n` +
+                    `⚡ **Frontend:** HTML5, CSS3, JavaScript (ES6+), Responsive Layout\n` +
                     `🔧 **Backend & Database:** Python (Django, Flask), PHP (Laravel), REST API, MySQL\n` +
                     `📱 **Mobile Development:** Kotlin, Android Studio\n` +
+                    `🎮 **Game 2D:** C# & Unity Engine\n` +
                     `🧠 **AI & Machine Learning:** NLP, TF-IDF, K-Nearest Neighbors (KNN)\n` +
                     `🛠️ **Tools & Support:** Git/GitHub, VS Code, IT Troubleshooting, IT Help Desk\n\n` +
                     `Nawaf selalu belajar dan mengikuti perkembangan teknologi terbaru! 📚`,
+                jv: `💻 **Keahlian & Teknologi Sing Dikuasai Nawaf:**\n\n` +
+                    `🎨 **Desain UI/UX:** Figma, Canva, Wireframing, User Interface\n` +
+                    `⚡ **Frontend Web:** HTML5, CSS3, JavaScript (ES6+), Tata Letak Responsif\n` +
+                    `🔧 **Backend & Database:** Python (Django, Flask), PHP (Laravel), REST API, MySQL\n` +
+                    `📱 **Mobile App:** Kotlin, Android Studio\n` +
+                    `🎮 **Game Development:** C# & Unity 2D\n` +
+                    `🧠 **AI & Machine Learning:** NLP, TF-IDF, K-Nearest Neighbors (KNN)\n` +
+                    `🛠️ **Tools & Support:** Git/GitHub, VS Code, Troubleshooting Komputer & IT Help Desk\n\n` +
+                    `Nawaf terus sinau teknologi anyar ben karyane tansah maedahi! 📚✨`,
                 en: `💻 **Tech Stack & Skills mastered by Nawaf:**\n\n` +
                     `🎨 **UI/UX Design:** Figma, Canva, Wireframing\n` +
-                    `⚡ **Frontend:** HTML5, CSS3, JavaScript, React\n` +
+                    `⚡ **Frontend:** HTML5, CSS3, JavaScript\n` +
                     `🔧 **Backend:** Python (Django, Flask), PHP (Laravel), REST APIs\n` +
                     `📱 **Mobile:** Kotlin, Android Studio\n` +
+                    `🎮 **Game Dev:** C# & Unity 2D\n` +
                     `🧠 **AI/ML:** NLP, TF-IDF, KNN\n` +
                     `🛠️ **IT Support:** Troubleshooting, Help Desk, Ticket Management`
             },
@@ -1833,6 +1951,11 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                 id: [
                     { msg: "Project apa yang pernah dibuat?", label: "Lihat Project" },
                     { msg: "Bisa buat website / aplikasi?", label: "Jasa Pembuatan" },
+                    { msg: "Cita-cita Help Desk Manager?", label: "Help Desk Support" }
+                ],
+                jv: [
+                    { msg: "Proyek apa bae sing wis digawe?", label: "Proyek Nawaf" },
+                    { msg: "Bisa gawe website / aplikasi?", label: "Jasa Gawean" },
                     { msg: "Cita-cita Help Desk Manager?", label: "Help Desk Support" }
                 ]
             }
@@ -1849,6 +1972,13 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `• Kemampuan komunikasi yang ramah, jelas, dan solutif kepada end-user\n` +
                     `• Pemahaman alur eskalasi tiket dan kepuasan pengguna (SLA)\n` +
                     `• Penguasaan teknis software development yang mempermudah koordinasi dengan tim teknis 🎯`,
+                jv: `👨‍💼 **Minat & Cita-cita: IT Help Desk Support Manager**\n\n` +
+                    `Saliyane koding, Nawaf nduweni minat gedhe nang babagan **IT Support & Problem Solving** kanthi gegayuhan dadi **Help Desk Support Manager** sing profesional.\n\n` +
+                    `**Kaluwihan:**\n` +
+                    `• Analisis lan ngrampungna masalah teknis (hardware, software, lan jaringan)\n` +
+                    `• Komunikasi sing ramah, cetha, lan solutif maring pangguna (user)\n` +
+                    `• Pangerten babagan manajemen tiket support lan kapuasan layanan (SLA)\n` +
+                    `• Pengalaman koding sing nggampangna koordinasi karo tim developer 🎯`,
                 en: `👨‍💼 **Career Aspiration: IT Help Desk Support Manager**\n\nNawaf is passionate about IT Support and Problem Solving, aiming to become a professional Help Desk Support Manager who leads technical support teams effectively.`
             },
             suggestions: {
@@ -1864,7 +1994,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'services_hire',
             context: 'services_hire',
-            patterns: [/jasa/, /bisa\s*bikin/, /bisa\s*buat/, /order/, /pesan/, /sewa/, /hire/, /freelance/, /kerjasama/, /kolaborasi/, /buatkan\s*web/],
+            patterns: [/jasa/, /bisa\s*bikin/, /bisa\s*buat/, /bisa\s*gawe/, /order/, /pesan/, /sewa/, /hire/, /freelance/, /kerjasama/, /kolaborasi/, /buatkan\s*web/, /gawekna\s*web/],
             response: {
                 id: `💼 **Layanan & Jasa yang Disediakan Nawaf:**\n\n` +
                     `1. 🌐 **Pembuatan Website:** Landing Page, Toko Online/E-commerce, Company Profile, Web App interaktif.\n` +
@@ -1872,6 +2002,12 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `3. 🎨 **Desain UI/UX:** Prototipe interaktif & mockup di Figma yang siap didevelop.\n` +
                     `4. 🛠️ **Konsultasi IT & Troubleshooting:** Solusi teknis dan implementasi sistem.\n\n` +
                     `Tertarik berkolaborasi? Anda bisa langsung kirim pesan melalui [Form Kontak](#contact) atau WhatsApp **+62 882-3938-6759**! 🤝`,
+                jv: `💼 **Layanan & Jasa Sing Disediakna Nawaf:**\n\n` +
+                    `1. 🌐 **Gawe Website:** Portofolio, Landing Page, Toko Online / E-commerce, Web Informasi, lsp.\n` +
+                    `2. 📱 **Gawe Aplikasi Android:** Aplikasi mobile toko/kasir, sistem inventaris, tugas sekolah/kuliah.\n` +
+                    `3. 🎨 **Desain UI/UX Figma:** Mockup lan prototipe interaktif sing siap dikoding.\n` +
+                    `4. 🛠️ **Konsultasi IT & Troubleshooting:** Ngrampungna masalah teknis komputer lan sistem.\n\n` +
+                    `Kepengin kolaborasi utawa pesen gawean? Langsung bae kirim pesen liwat [Formulir Kontak](#contact) utawa WhatsApp **+62 882-3938-6759**! 🤝`,
                 en: `💼 **Services Offered by Nawaf:**\n\n1. 🌐 **Web Development:** Landing pages, online stores, interactive web apps.\n2. 📱 **Mobile Apps:** Android app development using Kotlin.\n3. 🎨 **UI/UX Design:** Interactive prototypes & mockups in Figma.\n\nFeel free to reach out via the [Contact Form](#contact) or WhatsApp!`
             },
             suggestions: {
@@ -1879,13 +2015,18 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Berapa harga / estimasi biaya?", label: "Estimasi Biaya" },
                     { msg: "Bagaimana cara kontak Nawaf?", label: "Kontak WhatsApp" },
                     { msg: "Lihat contoh project", label: "Lihat Project" }
+                ],
+                jv: [
+                    { msg: "Pira regane gawe proyek?", label: "Estimasi Biaya" },
+                    { msg: "Kepriwe carane kontak Nawaf?", label: "Kontak WhatsApp" },
+                    { msg: "Ndeleng conto proyek", label: "Conto Proyek" }
                 ]
             }
         },
         {
             id: 'pricing_cost',
             context: 'pricing_cost',
-            patterns: [/harga/, /biaya/, /tarif/, /cost/, /price/, /budget/, /fee/, /bayar/, /mahal/, /murah/, /rp/, /rupiah/],
+            patterns: [/harga/, /biaya/, /tarif/, /cost/, /price/, /budget/, /fee/, /bayar/, /mahal/, /murah/, /rp/, /rupiah/, /pira\s*regane/, /piro\s*regane/, /regane/],
             response: {
                 id: `💰 **Estimasi Biaya & Harga Proyek:**\n\n` +
                     `Biaya pengerjaan proyek bersifat **sangat fleksibel dan terjangkau**, disesuaikan dengan:\n` +
@@ -1893,12 +2034,22 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `• Kebutuhan integrasi backend / database / API\n` +
                     `• Timeline pengerjaan (deadline)\n\n` +
                     `💡 **Konsultasi Gratis!** Silakan diskusikan kebutuhan Anda langsung dengan Nawaf via WhatsApp **+62 882-3938-6759** atau email **nawaf52626@gmail.com** untuk penawaran terbaik! ✨`,
+                jv: `💰 **Estimasi Rega & Biaya Gawe Proyek:**\n\n` +
+                    `Biaya gawe proyek kuwe **fleksibel lan ramah nang kantong**, disesuikna karo:\n` +
+                    `• Kerumitan fitur lan cacahe kaca web / layar aplikasi\n` +
+                    `• Kebutuhan database, backend API, utawa AI\n` +
+                    `• Wektu pengerjaan (deadline)\n\n` +
+                    `💡 **Konsultasi Gratis!** Mangga dirembug langsung bareng Nawaf liwat WhatsApp **+62 882-3938-6759** utawa email **nawaf52626@gmail.com** nggo entuk penawaran sing paling apik! ✨`,
                 en: `💰 **Pricing & Rates:**\n\nProject pricing is flexible and tailored to your project's scope, feature complexity, and deadline. Free consultation is available via email or WhatsApp!`
             },
             suggestions: {
                 id: [
                     { msg: "Layanan apa saja yang bisa dibuat?", label: "Layanan" },
                     { msg: "Bagaimana cara kontak Nawaf?", label: "Kontak" }
+                ],
+                jv: [
+                    { msg: "Layanan apa bae sing teyeng digawe?", label: "Layanan" },
+                    { msg: "Kepriwe carane kontak Nawaf?", label: "Kontak" }
                 ]
             }
         },
@@ -1907,7 +2058,7 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'contact_info',
             context: 'contact_info',
-            patterns: [/kontak/, /contact/, /hubungi/, /email/, /telepon/, /phone/, /whatsapp/, /wa/, /nomor/, /alamat/, /lokasi/, /dimana/, /tinggal/],
+            patterns: [/kontak/, /contact/, /hubungi/, /email/, /telepon/, /phone/, /whatsapp/, /wa/, /nomor/, /nomer/, /alamat/, /lokasi/, /dimana/, /tinggal/, /panggonan/],
             response: {
                 id: `📫 **Informasi Kontak Nawaf Gadi Alfatih:**\n\n` +
                     `📧 **Email:** [nawaf52626@gmail.com](mailto:nawaf52626@gmail.com)\n` +
@@ -1915,6 +2066,12 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `📍 **Lokasi:** Kroya, Cilacap, Jawa Tengah, Indonesia\n` +
                     `⏰ **Jam Aktif:** 08:00 - 22:00 WIB\n\n` +
                     `Anda juga bisa langsung mengisi pesan di [Form Kontak](#contact) pada halaman ini! 💬`,
+                jv: `📫 **Informasi Kontak Nawaf Gadi Alfatih:**\n\n` +
+                    `📧 **Email:** [nawaf52626@gmail.com](mailto:nawaf52626@gmail.com)\n` +
+                    `📱 **Telepon / WhatsApp:** [+62 882-3938-6759](https://wa.me/6288239386759)\n` +
+                    `📍 **Panggonan:** Kroya, Cilacap, Jawa Tengah, Indonesia\n` +
+                    `⏰ **Wektu Aktif:** 08:00 - 22:00 WIB\n\n` +
+                    `Rika uga teyeng ngisi pesen langsung nang [Formulir Kontak](#contact) nang kaca ngisor! 💬`,
                 en: `📫 **Contact Nawaf Gadi Alfatih:**\n\n📧 **Email:** nawaf52626@gmail.com\n📱 **Phone/WhatsApp:** +62 882-3938-6759\n📍 **Location:** Kroya, Cilacap, Central Java, Indonesia\n\nOr send a message via the [Contact Form](#contact)!`
             },
             suggestions: {
@@ -1922,6 +2079,30 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Apa akun media sosial Nawaf?", label: "Sosial Media" },
                     { msg: "Bisa minta CV / Resume?", label: "Minta CV" },
                     { msg: "Layanan apa saja yang disediakan?", label: "Layanan" }
+                ],
+                jv: [
+                    { msg: "Akun sosmed Nawaf apa bae?", label: "Media Sosial" },
+                    { msg: "Layanan apa bae sing ana?", label: "Layanan" }
+                ]
+            }
+        },
+        {
+            id: 'origin_location',
+            context: 'origin_location',
+            patterns: [/sekang\s*ngendi/, /asale\s*ngendi/, /wong\s*ngendi/, /omah(e)?\s*ngendi/, /kroya/, /cilacap/],
+            response: {
+                id: `📍 Nawaf berasal dari **Kroya, Kabupaten Cilacap, Jawa Tengah, Indonesia**. Asli wong Cilacap yang bangga dengan identitas dan siap berkarya secara profesional! 🇮🇩✨`,
+                jv: `📍 Nawaf kuwe asale sekang **Kroya, Kabupaten Cilacap, Jawa Tengah**. Wong Ngapak asli Cilacap sing seneng koding, gawe aplikasi, lan siap mbantu proyek digital rika! 🇮🇩✨`,
+                en: `📍 Nawaf is originally from **Kroya, Cilacap Regency, Central Java, Indonesia**. 🇮🇩✨`
+            },
+            suggestions: {
+                id: [
+                    { msg: "Ceritakan tentang Nawaf", label: "Tentang Nawaf" },
+                    { msg: "Bagaimana cara kontak?", label: "Kontak" }
+                ],
+                jv: [
+                    { msg: "Ceritakna babagan Nawaf", label: "Bab Nawaf" },
+                    { msg: "Kepriwe carane kontak?", label: "Kontak" }
                 ]
             }
         },
@@ -1936,6 +2117,12 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     `📸 **Instagram:** [@nwfgal_](https://www.instagram.com/nwfgal_/)\n` +
                     `🐦 **X / Twitter:** [@NawafgadiA65406](https://x.com/NawafgadiA65406)\n\n` +
                     `Yuk connect dan follow untuk update proyek terbaru! 🚀`,
+                jv: `🌐 **Akun Media Sosial Resmine Nawaf:**\n\n` +
+                    `🐙 **GitHub:** [github.com/nawafgadi](https://github.com/nawafgadi)\n` +
+                    `💼 **LinkedIn:** [Nawaf Gadi Al Fatih](https://www.linkedin.com/in/nawaf-gadi-al-fatih-904539346/)\n` +
+                    `📸 **Instagram:** [@nwfgal_](https://www.instagram.com/nwfgal_/)\n` +
+                    `🐦 **X / Twitter:** [@NawafgadiA65406](https://x.com/NawafgadiA65406)\n\n` +
+                    `Monggo di-follow lan dikontak nggo seduluran utawa proyek bareng! 🚀`,
                 en: `🌐 **Official Social Media:**\n\n🐙 GitHub: [github.com/nawafgadi](https://github.com/nawafgadi)\n💼 LinkedIn: [Nawaf Gadi Al Fatih](https://www.linkedin.com/in/nawaf-gadi-al-fatih-904539346/)\n📸 Instagram: [@nwfgal_](https://www.instagram.com/nwfgal_/)\n🐦 X/Twitter: [@NawafgadiA65406](https://x.com/NawafgadiA65406)`
             },
             suggestions: {
@@ -1952,6 +2139,8 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
             response: {
                 id: `📄 **Curriculum Vitae (CV) & Resume:**\n\n` +
                     `Portofolio online lengkap dapat langsung diakses di website ini. Untuk dokumen CV formal format PDF (untuk keperluan rekrutmen, magang, atau freelance), Anda dapat meminta langsung via email **nawaf52626@gmail.com** atau WhatsApp! 📬`,
+                jv: `📄 **Curriculum Vitae (CV) & Resume:**\n\n` +
+                    `Portofolio online lengkap teyeng diakses langsung nang website kiye. Yen rika mbutuhna dokumen CV resmi format PDF (nggo lamaran, magang, utawa freelance), rika teyeng nyuwun langsung liwat email **nawaf52626@gmail.com** utawa WhatsApp! 📬`,
                 en: `📄 **CV & Resume:**\n\nFor a formal PDF Resume/CV for job or internship opportunities, feel free to request it directly at **nawaf52626@gmail.com**!`
             },
             suggestions: {
@@ -1966,30 +2155,60 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'about_bio',
             context: 'about_bio',
-            patterns: [/siapa\s*(nawaf|kamu)/, /tentang\s*nawaf/, /profil/, /biodata/, /sekolah/, /smk/, /rpl/, /jurusan/, /umur/, /pengalaman/],
+            patterns: [/siapa\s*(nawaf|kamu)/, /sapa\s*(kuwe|nawaf)/, /tentang\s*nawaf/, /bab\s*nawaf/, /profil/, /biodata/, /sekolah/, /smk/, /rpl/, /jurusan/, /umur/, /pengalaman/],
             response: {
                 id: `👋 **Tentang Nawaf Gadi Alfatih:**\n\n` +
-                    `Nawaf adalah siswa jurusan **Rekayasa Perangkat Lunak (RPL)** asal Kroya, Cilacap, Jawa Tengah. Ia memiliki pengalaman **2+ tahun** dan telah menyelesaikan **20+ proyek** dalam pengembangan website, aplikasi Android, dan kecerdasan buatan.\n\n` +
+                    `Nawaf adalah siswa jurusan **Rekayasa Perangkat Lunak (RPL)** asal Kroya, Cilacap, Jawa Tengah. Ia memiliki pengalaman **2+ tahun** dan telah menyelesaikan **15+ proyek** dalam pengembangan website, aplikasi Android, dan kecerdasan buatan.\n\n` +
                     `💡 **Visi & Passion:** Fokus pada penciptaan solusi digital yang berdampak nyata serta bercita-cita menjadi **Help Desk Support Manager** yang profesional. 🎯\n\n` +
                     `Baca selengkapnya di bagian [Tentang Saya](#about)!`,
-                en: `👋 **About Nawaf Gadi Alfatih:**\n\nNawaf is a Software Engineering (RPL) student from Kroya, Central Java. With **2+ years of experience** and **20+ completed projects**, he specializes in Web & Android development, with strong aspirations to become a professional **Help Desk Support Manager**.`
+                jv: `👋 **Babagan Nawaf Gadi Alfatih:**\n\n` +
+                    `Nawaf kuwe bocah jurusan **Rekayasa Perangkat Lunak (RPL)** sekang Kroya, Cilacap, Jawa Tengah. Dheweke duwe pengalaman **2+ taun** lan wis ngrampungna **15+ proyek** nang babagan website, aplikasi Android, game 2D, lan kecerdasan buatan (AI).\n\n` +
+                    `💡 **Gegayuhan:** Fokus gawe solusi digital sing migunani lan kepengin dadi **Help Desk Support Manager** sing profesional. 🎯\n\n` +
+                    `Waca katrangan luwih jangkep nang bagian [Bab Inyong](#about)!`,
+                en: `👋 **About Nawaf Gadi Alfatih:**\n\nNawaf is a Software Engineering (RPL) student from Kroya, Central Java. With **2+ years of experience** and **15+ completed projects**, he specializes in Web & Android development, with strong aspirations to become a professional **Help Desk Support Manager**.`
             },
             suggestions: {
                 id: [
                     { msg: "Project apa saja yang dibuat?", label: "Lihat Project" },
                     { msg: "Skill teknologi apa yang dikuasai?", label: "Lihat Skill" },
                     { msg: "Bagaimana cara kontak Nawaf?", label: "Kontak" }
+                ],
+                jv: [
+                    { msg: "Proyek apa bae sing wis digawe?", label: "Proyek Nawaf" },
+                    { msg: "Skill teknologi apa bae?", label: "Skill Nawaf" },
+                    { msg: "Kepriwe carane kontak Nawaf?", label: "Kontak" }
                 ]
             }
         },
 
         // --- 7. CHIT-CHAT, GREETINGS & CASUAL ---
         {
+            id: 'jokes_ngapak',
+            context: 'jokes_ngapak',
+            patterns: [/ngapak/, /ora\s*ngapak/, /guyon/, /lucu/, /lelucon/],
+            response: {
+                id: `Haha! *"Ora Ngapak Ora Kepenak!"* 😄 Walaupun bahasa Ngapak terdengar unik dan medok, coding dan desain Nawaf tetap berstandar modern dan profesional! Ada yang ingin ditanyakan tentang karya Nawaf? 🚀`,
+                jv: `Haha! *"Ora Ngapak Ora Kepenak sedulur!"* 😄 Senajan bocahe asli Kroya Cilacap medok, tapi urusan koding, web, lan aplikasi Android tetep standar modern lan profesional! Ana sing kepengin rika takokna bab karyane Nawaf? 🚀`,
+                en: `Haha! That's the famous local Javanese catchphrase *"Ora Ngapak Ora Kepenak"*! Nawaf embraces his Cilacap roots while building high-standard, modern digital products. Anything else you'd like to explore? 😄`
+            },
+            suggestions: {
+                id: [
+                    { msg: "Ceritakan tentang Nawaf", label: "Tentang Nawaf" },
+                    { msg: "Lihat proyek unggulan", label: "Proyek" }
+                ],
+                jv: [
+                    { msg: "Ceritakna babagan Nawaf", label: "Bab Nawaf" },
+                    { msg: "Tampilna kabeh proyek", label: "Proyek Nawaf" }
+                ]
+            }
+        },
+        {
             id: 'greetings',
             context: 'greetings',
-            patterns: [/halo/, /hai/, /hello/, /hi\b/, /hey/, /pagi/, /siang/, /sore/, /malam/, /assalamu/],
+            patterns: [/halo/, /hai/, /hello/, /hi\b/, /hey/, /pagi/, /siang/, /sore/, /malam/, /assalamu/, /sugeng/, /pripun/, /kepriwe/],
             response: {
                 id: `Halo! Senang bertemu dengan Anda. 😊 Ada yang bisa saya bantu tentang portofolio, proyek, keahlian, atau kontak Nawaf?`,
+                jv: `Sugeng rawuh sedulur! Inyong **ERA AI**, asisten cerdas portofolio Nawaf Gadi Alfatih. 😊 Ana sing teyeng inyong bantu babagan proyek, skill teknologi, jasa gawe web, utawa kontak Nawaf?`,
                 en: `Hello! Nice to meet you. 😊 How can I assist you with Nawaf's projects, skills, or contact info?`,
                 ar: `مرحباً بك! يسعدني التحدث معك. 😊 كيف يمكنني مساعدتك؟`,
                 zh: `您好！很高兴为您服务。😊 有什么我可以帮您的？`
@@ -1999,15 +2218,21 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Ceritakan tentang Nawaf", label: "Tentang Nawaf" },
                     { msg: "Project apa yang pernah dibuat?", label: "Lihat Project" },
                     { msg: "Skill apa yang dikuasai?", label: "Lihat Skill" }
+                ],
+                jv: [
+                    { msg: "Ceritakna babagan Nawaf", label: "Bab Nawaf" },
+                    { msg: "Proyek apa bae sing digawe?", label: "Proyek Nawaf" },
+                    { msg: "Skill apa bae sing dikuasai?", label: "Skill Nawaf" }
                 ]
             }
         },
         {
             id: 'thanks',
             context: 'thanks',
-            patterns: [/terima\s*kasih/, /makasih/, /thanks/, /thank\s*you/, /tq/, /thx/, /syukron/, /nuhun/],
+            patterns: [/terima\s*kasih/, /makasih/, /thanks/, /thank\s*you/, /tq/, /thx/, /syukron/, /nuhun/, /matur\s*nuwun/, /matur\s*suwun/, /kesuwun/, /suwun/],
             response: {
                 id: `Sama-sama! Senang sekali bisa membantu Anda. Jika ada pertanyaan lain mengenai proyek atau ingin berkolaborasi dengan Nawaf, jangan ragu untuk bertanya ya! 😊✨`,
+                jv: `Sami-sami sedulur! Seneng pisan teyeng mbantu rika. Yen ana pitakonan liyane utawa kepengin kolaborasi karo Nawaf, aja isin-isin takon maning ya! 😊✨`,
                 en: `You're very welcome! Glad I could help. Feel free to ask anytime if you need more details about Nawaf's work! 🌟`
             },
             suggestions: {
@@ -2020,9 +2245,10 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'compliment',
             context: 'compliment',
-            patterns: [/pintar/, /cerdas/, /keren/, /hebat/, /bagus/, /mantap/, /cool/, /awesome/, /smart/],
+            patterns: [/pintar/, /cerdas/, /keren/, /hebat/, /bagus/, /mantap/, /cool/, /awesome/, /smart/, /apik/, /jos/, /apik\s*tenan/],
             response: {
                 id: `Terima kasih banyak atas apresiasinya! 😄 Semua ini berkat dedikasi dan kerja keras Nawaf dalam belajar software development dan kecerdasan buatan. Semoga harimu menyenangkan! 🚀`,
+                jv: `Matur nuwun sanget atas apresiasine rika! 😄 Kabeh kiye merga semangate Nawaf anggone sinau pemrograman lan teknologi AI. Mugi-mugi dinane rika nyenengna! 🚀`,
                 en: `Thank you so much! 😄 That's all thanks to Nawaf's continuous dedication to learning software development and AI. Have an amazing day! 🚀`
             },
             suggestions: {
@@ -2035,9 +2261,10 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'creator',
             context: 'creator',
-            patterns: [/siapa\s*(yang\s*bikin|pembuat|creator|owner)/, /era\s*ai/, /bot/],
+            patterns: [/siapa\s*(yang\s*bikin|pembuat|creator|owner)/, /sapa\s*sing\s*gawe/, /era\s*ai/, /bot/],
             response: {
                 id: `Saya **ERA AI**, asisten cerdas yang dibuat khusus oleh **Nawaf Gadi Alfatih** untuk memandu pengunjung website portofolio ini. 🤖💻`,
+                jv: `Inyong **ERA AI**, asisten virtual cerdas sing digawe khusus dening **Nawaf Gadi Alfatih** kanggo mbantu pengunjung website portofolio kiye. 🤖💻`,
                 en: `I am **ERA AI**, an intelligent assistant built by **Nawaf Gadi Alfatih** to guide visitors across this portfolio! 🤖💻`
             },
             suggestions: {
@@ -2050,9 +2277,10 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         {
             id: 'farewell',
             context: 'farewell',
-            patterns: [/bye/, /dadah/, /sampai\s*jumpa/, /selamat\s*tinggal/, /see\s*you/],
+            patterns: [/bye/, /dadah/, /sampai\s*jumpa/, /selamat\s*tinggal/, /see\s*you/, /pamit/],
             response: {
                 id: `Sampai jumpa! Terima kasih telah berkunjung ke portofolio Nawaf. Semoga harimu menyenangkan dan sukses selalu! 👋✨`,
+                jv: `Matur nuwun wis mampir maring portofolio Nawaf! Mugi-mugi sukses lan sehat terus sedulur! Sampai jumpa maning! 👋✨`,
                 en: `Goodbye! Thanks for visiting Nawaf's portfolio. Have a wonderful day ahead! 👋✨`
             },
             suggestions: {
@@ -2063,8 +2291,30 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         }
     ];
 
+    function detectUserLanguage(input, globalLang) {
+        const text = input.toLowerCase();
+        // Javanese / Ngapak triggers
+        if (/\b(inyong|nyong|rika|kowe|sapa|ngendi|endi|pira|piro|kepriwe|piye|pripun|karo|nang|sing|gawe|gawekna|proyek|karya|bocah|sekolah|sinau|suwun|kesuwun|matur\s*nuwun|matur\s*suwun|apik|kroya|cilacap|rpl|ora|aja|bisa|teyeng|monggo|mangga|sugeng|ngapak|jeneng|dolan|regane|rega|duit|mangan|turu|sedulur|dheweke)\b/i.test(text)) {
+            return 'jv';
+        }
+        // Arabic
+        if (/[\u0600-\u06FF]/.test(text)) {
+            return 'ar';
+        }
+        // Chinese
+        if (/[\u4E00-\u9FFF]/.test(text)) {
+            return 'zh';
+        }
+        // English
+        if (/\b(what|who|where|how|tell\s*me|project|skills|services|price|cost|contact|hello|thanks|bye)\b/i.test(text) && !/\b(apa|siapa|dimana|bagaimana|halo|makasih)\b/i.test(text)) {
+            return 'en';
+        }
+        return globalLang || 'id';
+    }
+
     function smartNLU(input, lang) {
         const lower = input.toLowerCase().trim();
+        const effectiveLang = detectUserLanguage(input, lang);
         let bestMatch = null;
         let highestScore = 0;
 
@@ -2090,14 +2340,25 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         }
 
         if (bestMatch && highestScore > 0) {
-            const reply = (bestMatch.response[lang] || bestMatch.response.id || bestMatch.response.en);
-            const suggs = (bestMatch.suggestions && (bestMatch.suggestions[lang] || bestMatch.suggestions.id || bestMatch.suggestions.en)) || null;
+            const reply = (bestMatch.response[effectiveLang] || bestMatch.response[lang] || bestMatch.response.id || bestMatch.response.en);
+            const suggs = (bestMatch.suggestions && (bestMatch.suggestions[effectiveLang] || bestMatch.suggestions[lang] || bestMatch.suggestions.id || bestMatch.suggestions.en)) || null;
             return { reply, suggestions: suggs, context: bestMatch.context };
         }
 
         // Fallback: search in rendered page text
         const pageText = (document.body.innerText || '').toLowerCase();
         if (lower.length > 3 && pageText.includes(lower)) {
+            if (effectiveLang === 'jv') {
+                return {
+                    reply: `Manut isi website, katrangan babagan "${input}" ana nang kaca kiye. Rika teyeng ndeleng bagian [Karya & Proyek](#work), [Bab Inyong](#about), utawa [Hubungi Inyong](#contact) nggo informasi luwih jangkep. 📌`,
+                    suggestions: [
+                        { msg: "Ceritakna babagan Nawaf", label: "Bab Nawaf" },
+                        { msg: "Proyek apa bae sing digawe?", label: "Daftar Proyek" },
+                        { msg: "Kepriwe carane kontak?", label: "Kontak" }
+                    ],
+                    context: 'default'
+                };
+            }
             return {
                 reply: `Berdasarkan isi website, informasi mengenai "${input}" ada di halaman ini. Anda dapat menelusuri bagian [Karya & Proyek](#work), [Tentang Saya](#about), atau [Kontak](#contact) untuk detail lengkap. 📌`,
                 suggestions: [
@@ -2131,13 +2392,27 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                 `Feel free to pick a topic below or type your question! 😊`
         };
 
-        return {
-            reply: defaultResponses[lang] || defaultResponses.id,
-            suggestions: [
+        const defaultSuggestions = {
+            id: [
                 { msg: "Ceritakan tentang Nawaf", label: "Tentang Nawaf" },
                 { msg: "Project unggulan apa saja?", label: "Project Unggulan" },
                 { msg: "Skill teknologi apa yang dikuasai?", label: "Skill & Tech" }
             ],
+            jv: [
+                { msg: "Ceritakna babagan Nawaf", label: "Bab Nawaf" },
+                { msg: "Proyek apa bae sing digawe?", label: "Proyek Nawaf" },
+                { msg: "Skill teknologi apa bae?", label: "Skill & Tech" }
+            ],
+            en: [
+                { msg: "Tell me about Nawaf", label: "About Nawaf" },
+                { msg: "Featured projects?", label: "Featured Projects" },
+                { msg: "Tech stack & skills?", label: "Skills & Tech" }
+            ]
+        };
+
+        return {
+            reply: defaultResponses[effectiveLang] || defaultResponses.id,
+            suggestions: defaultSuggestions[effectiveLang] || defaultSuggestions.id,
             context: 'default'
         };
     }

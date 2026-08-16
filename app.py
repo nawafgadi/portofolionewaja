@@ -331,6 +331,12 @@ class NawafAI:
                 'evening': "Selamat sore! Senang bisa membantu Anda seputar portofolio Nawaf. 💬",
                 'night': "Selamat malam! Asisten AI Nawaf siap membantu Anda. 🌙"
             },
+            'jv': {
+                'morning': "Sugeng enjang sedulur! Inyong ERA AI, asisten virtual Nawaf Gadi Alfatih. Ana sing teyeng inyong bantu? 😊",
+                'afternoon': "Sugeng siang sedulur! Inyong ERA AI siap mbantu rika nggoleti proyek lan skill Nawaf. 🤖",
+                'evening': "Sugeng sonten sedulur! Seneng teyeng mbantu rika bab portofolio Nawaf. 💬",
+                'night': "Sugeng dalu sedulur! Asisten AI Nawaf siap mbantu rika. 🌙"
+            },
             'en': {
                 'morning': "Good morning! I am ERA AI, Nawaf's virtual assistant. How can I help you? 😊",
                 'afternoon': "Good afternoon! How can I assist you regarding Nawaf's projects or skills? 🤖",
@@ -345,20 +351,30 @@ class NawafAI:
     def process_message(self, message, language='id'):
         """Process user message using regex patterns and intelligent matching"""
         if not message or not message.strip():
+            if language == 'jv':
+                return "Mangga ketik pitakonane rika babagan Nawaf, proyek, utawa keahliane. Inyong siap mbantu! 😊"
             return "Silakan ketik pertanyaan Anda tentang Nawaf, proyek, atau keahlian. Saya siap membantu! 😊"
         
         msg_lower = message.lower().strip()
         
+        # Detect Javanese keywords
+        if any(w in msg_lower for w in ['inyong', 'nyong', 'rika', 'kowe', 'sapa', 'ngendi', 'kepriwe', 'piye', 'gawe', 'kesuwun', 'matur', 'suwun', 'sugeng']):
+            language = 'jv'
+        
         # Check greetings
-        if any(g in msg_lower for g in ['halo', 'hai', 'hello', 'hi', 'hey', 'pagi', 'siang', 'sore', 'malam', 'assalamu']):
+        if any(g in msg_lower for g in ['halo', 'hai', 'hello', 'hi', 'hey', 'pagi', 'siang', 'sore', 'malam', 'assalamu', 'sugeng', 'pripun', 'kepriwe']):
             return self.get_greeting(language)
         
         # Check thanks
-        if any(t in msg_lower for t in ['terima kasih', 'thanks', 'makasih', 'tq', 'thx', 'thank you']):
+        if any(t in msg_lower for t in ['terima kasih', 'thanks', 'makasih', 'tq', 'thx', 'thank you', 'matur nuwun', 'kesuwun', 'suwun']):
+            if language == 'jv':
+                return "Sami-sami sedulur! Seneng pisan teyeng mbantu rika. Aja isin-isin takon maning ya! 😊✨"
             return "Sama-sama! Senang bisa membantu. Jangan ragu untuk bertanya hal lain tentang proyek Nawaf ya! 😊✨"
         
         # Check farewell
-        if any(f in msg_lower for f in ['bye', 'dadah', 'sampai jumpa', 'selamat tinggal', 'see you']):
+        if any(f in msg_lower for f in ['bye', 'dadah', 'sampai jumpa', 'selamat tinggal', 'see you', 'pamit']):
+            if language == 'jv':
+                return "Matur nuwun wis mampir maring portofolio Nawaf! Mugi-mugi sukses terus sedulur! 👋✨"
             return "Sampai jumpa! Terima kasih telah berkunjung ke portofolio Nawaf. Semoga sukses selalu! 👋✨"
         
         # Check knowledge entries with regex pattern matching
@@ -379,6 +395,15 @@ class NawafAI:
             return resps.get(language, resps.get('id', resps.get('en', '')))
         
         # Default smart response
+        if language == 'jv':
+            return (
+                "Inyong teyeng mbantu rika bab macem-macem topik babagan Nawaf:\n"
+                "• **Proyek:** Kartu Tani, Plazio E-commerce, CBPR AI, Web Tiket, Kasir POS\n"
+                "• **Keahlian:** Python, Laravel, JavaScript, Kotlin Android, Unity 2D, Figma UI/UX\n"
+                "• **Jasa & Rega:** Gawe website, aplikasi Android, UI/UX\n"
+                "• **Kontak & Panggonan:** Email, WhatsApp, lan Media Sosial\n\n"
+                "Mangga ketik pitakonane rika! 😊"
+            )
         return (
             "Saya bisa membantu Anda mencari tahu tentang:\n"
             "• **Proyek:** Kartu Tani, Plazio E-commerce, CBPR AI, Web Tiket, Kasir POS\n"
@@ -500,7 +525,7 @@ def chat():
         
         # Get language from request (default: Indonesian)
         language = data.get('language', 'id')
-        if language not in ['id', 'en', 'ar', 'zh']:
+        if language not in ['id', 'en', 'ar', 'zh', 'jv']:
             language = 'id'
         
         # Process message with AI in specified language
