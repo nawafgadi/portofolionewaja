@@ -583,7 +583,7 @@ const BASE_PROJECTS = [
         description: 'Aplikasi visualisasi pohon silsilah keluarga interaktif untuk melacak relasi generasi dan data biografi anggota keluarga.',
         tags: ['HTML5', 'JavaScript', 'Genealogy Tree'],
         image: '',
-        liveUrl: 'https://nawafgadi.github.io/keturunan/',
+        liveUrl: null,
         githubUrl: 'https://github.com/nawafgadi/keturunan',
         stars: 0,
         forks: 0,
