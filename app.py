@@ -34,363 +34,376 @@ EMAIL_PASS = os.environ.get('EMAIL_PASS')
 EMAIL_NOTIFY_TO = os.environ.get('EMAIL_NOTIFY_TO', EMAIL_USER)
 
 class NawafAI:
-    """Advanced AI Chatbot for Nawaf's Portfolio - Multilingual Support"""
+    """Advanced AI Chatbot for Nawaf's Portfolio - Multilingual Support with Deep Knowledge"""
     
     def __init__(self):
-        self.responses = self._load_responses()
+        self.knowledge = self._load_knowledge()
     
-    def _load_responses(self):
-        """Load multilingual response database"""
-        return {
-            'about': {
-                'keywords': ['tentang', 'nawaf', 'siapa', 'profile', 'profil', 'biodata', 'diri', 'orang', 'nama', 'about', 'who'],
-                'id': [
-                    "Nawaf Gadi Alfatih adalah siswa Rekayasa Perangkat Lunak (RPL) yang fokus pada pengembangan web dan aplikasi Android. Ia memiliki passion di bidang IT Support dan bercita-cita menjadi Help Desk Support Manager. 🎯",
-                    "Nawaf adalah seorang developer muda berbakat dari Kroya, Cilacap. Dengan 2+ tahun pengalaman dan 20+ project, ia terus berkembang di bidang teknologi. 🚀",
-                    "Kenalan yuk! Nawaf Gadi Alfatih - siswa RPL, web & mobile developer, dan calon Help Desk Support Manager profesional. 💻"
-                ],
-                'en': [
-                    "Nawaf Gadi Alfatih is a Software Engineering (RPL) student focused on web and Android application development. He is passionate about IT Support and aspires to become a professional Help Desk Support Manager. 🎯",
-                    "Nawaf is a talented young developer from Kroya, Cilacap. With 2+ years of experience and 20+ projects, he continues to grow in the technology field. 🚀",
-                    "Meet Nawaf Gadi Alfatih - an RPL student, web & mobile developer, and aspiring professional Help Desk Support Manager. 💻"
-                ],
-                'ar': [
-                    "ناوف جادي الفتيح طالب في هندسة البرمجيات (RPL) يركز على تطوير الويب والتطبيقات. لديه شغف بمجال دعم تكنولوجيا المعلومات ويطمح ليصبح مدير دعم Help Desk محترف. 🎯",
-                    "ناوف مطور شاب موهوب من كروا، جيلاجاب. مع 2+ سنة من الخبرة و20+ مشروع، يستمر في التطور في مجال التكنولوجيا. 🚀",
-                    "تعرّف على ناوف جادي الفتيح - طالب RPL، مطور ويب وتطبيقات، ومدير دعم Help Desk طموح. 💻"
-                ],
-                'zh': [
-                    "Nawaf Gadi Alfatih 是一名软件工程(RPL)专业学生,专注于网络和安卓应用开发。他对IT支持充满热情,立志成为专业的Help Desk支持经理。🎯",
-                    "Nawaf 是来自Kroya的年轻天才开发者。拥有2+年经验和20+个项目,他在科技领域不断成长。🚀",
-                    "认识Nawaf Gadi Alfatih - RPL学生、网络和移动应用开发者、有志的Help Desk支持经理。💻"
-                ]
+    def _load_knowledge(self):
+        """Load comprehensive knowledge dataset with rich metadata"""
+        return [
+            {
+                'id': 'project_kartu_tani',
+                'patterns': [r'kartu\s*tani', r'tani', r'pupuk\s*subsidi', r'smart\s*agriculture', r'petani'],
+                'responses': {
+                    'id': (
+                        "🌾 **Project: Kartu Tani (Smart Agriculture System)**\n\n"
+                        "Platform web digital berbasis **Python & Django** untuk digitalisasi manajemen kartu identitas petani dan pengawasan distribusi alokasi pupuk bersubsidi.\n\n"
+                        "**Fitur Utama:**\n"
+                        "• Registrasi & Onboarding Digital Petani (Farmer ID Card)\n"
+                        "• Subsidy Allocation Management (Distribusi pupuk tepat sasaran)\n"
+                        "• Transaction Monitoring Real-time untuk Pengecer & Dinas Pertanian\n"
+                        "• Rekapitulasi Data Hasil Panen Komoditas\n\n"
+                        "🔗 **Kode Sumber:** https://github.com/nawafgadi/kartu-tani"
+                    ),
+                    'en': (
+                        "🌾 **Project: Kartu Tani (Indonesian Farmer Card System)**\n\n"
+                        "A **Python/Django** web application built for digital farmer management and real-time monitoring of subsidized fertilizer distribution.\n\n"
+                        "• Digital Farmer Onboarding & ID Verification\n"
+                        "• Demand-Driven Fertilizer Subsidy Allocation\n"
+                        "• Real-time Retailer & Ministry Transaction Monitoring\n\n"
+                        "🔗 **Source Code:** https://github.com/nawafgadi/kartu-tani"
+                    )
+                },
+                'suggestions': {
+                    'id': [
+                        {"msg": "Jelaskan project CBPR AI", "label": "Project CBPR AI"},
+                        {"msg": "Jelaskan project Plazio E-Commerce", "label": "Project Plazio"},
+                        {"msg": "Skill teknologi apa yang dikuasai?", "label": "Lihat Skill"}
+                    ],
+                    'en': [
+                        {"msg": "Explain the CBPR AI project", "label": "CBPR AI Project"},
+                        {"msg": "Tell me about Plazio E-Commerce", "label": "Plazio Store"},
+                        {"msg": "What technologies do you use?", "label": "Skills"}
+                    ]
+                }
             },
-            'projects': {
-                'keywords': ['project', 'proyek', 'karya', 'portofolio', 'web', 'aplikasi', 'apps', 'website', 'hasil kerja'],
-                'id': [
-                    "Nawaf telah mengerjakan berbagai project menarik:\n\n• Web Tiket - Sistem pemesanan tiket online\n• Bank Sampah - Manajemen sampah digital\n• Admin Ticket - Dashboard administratif\n• E-Cashier, Pertanian, Bank Awan - UI/UX Design\n• Curious Chimpanzee - Game 2D\n• Cashier Mobile - Aplikasi POS\n• Phone Mobile - E-commerce App\n\nSemua project menunjukkan komitmen pada kualitas! ⭐",
-                    "Beberapa project unggulan Nawaf:\n🎫 Web Tiket\n♻️ Bank Sampah\n📊 Admin Ticket\n💳 E-Cashier (UI/UX)\n🌾 Pertanian (UI/UX)\n☁️ Bank Awan (UI/UX)\n🎮 Curious Chimpanzee\n📱 Cashier Mobile\n\nIngin lihat detailnya? Cek bagian Work! 🔍"
-                ],
-                'en': [
-                    "Nawaf has worked on various interesting projects:\n\n• Web Tiket - Online ticket booking system\n• Bank Sampah - Digital waste management\n• Admin Ticket - Administrative dashboard\n• E-Cashier, Agriculture, Bank Awan - UI/UX Design\n• Curious Chimpanzee - 2D Game\n• Cashier Mobile - POS Application\n• Phone Mobile - E-commerce App\n\nAll projects demonstrate commitment to quality! ⭐",
-                    "Some of Nawaf's flagship projects:\n🎫 Web Tiket\n♻️ Bank Sampah\n📊 Admin Ticket\n💳 E-Cashier (UI/UX)\n🌾 Agriculture (UI/UX)\n☁️ Bank Awan (UI/UX)\n🎮 Curious Chimpanzee\n📱 Cashier Mobile\n\nWant details? Check the Work section! 🔍"
-                ],
-                'ar': [
-                    "عمل ناوف على عدة مشاريع مثيرة للاهتمام:\n\n• Web Tiket - نظام حجز التذاكر عبر الإنترنت\n• Bank Sampah - إدارة النفايات الرقمية\n• Admin Ticket - لوحة التحكم الإدارية\n• E-Cashier, الزراعة, Bank Awan - تصميم UI/UX\n• Curious Chimpanzee - لعبة ثنائية الأبعاد\n• Cashier Mobile - تطبيق نقاط البيع\n• Phone Mobile - تطبيق التجارة الإلكترونية\n\nجميع المشاريع تظهر الالتزام بالجودة! ⭐"
-                ],
-                'zh': [
-                    "Nawaf 完成了许多有趣的项目:\n\n• Web Tiket - 在线订票系统\n• Bank Sampah - 数字废物管理\n• Admin Ticket - 管理仪表板\n• E-Cashier、农业、Bank Awan - UI/UX设计\n• Curious Chimpanzee - 2D游戏\n• Cashier Mobile - 销售点应用\n• Phone Mobile - 电商应用\n\n所有项目都体现了对质量的承诺! ⭐"
-                ]
+            {
+                'id': 'project_plazio',
+                'patterns': [r'plazio', r'plazio_e-commerce', r'e-commerce', r'toko\s*online', r'belanja\s*online', r'shopping\s*cart'],
+                'responses': {
+                    'id': (
+                        "🛍️ **Project: Plazio E-Commerce Platform**\n\n"
+                        "Aplikasi web toko online modern untuk memfasilitasi transaksi belanja digital yang cepat, responsif, dan terstruktur.\n\n"
+                        "**Fitur Utama:**\n"
+                        "• Katalog Produk Interaktif multi-kategori pakaian & fashion\n"
+                        "• Sistem Keranjang Belanja Dinamis (Add to Cart, Update Qty, Subtotal)\n"
+                        "• Integrasi Alur Checkout dan Manajemen Pesanan\n\n"
+                        "🔗 **Kode Sumber:** https://github.com/lastfound/Plazio_e-commerce"
+                    ),
+                    'en': (
+                        "🛍️ **Project: Plazio E-Commerce Platform**\n\n"
+                        "A modern online store web application featuring dynamic catalog management, interactive shopping cart, and smooth checkout workflows.\n\n"
+                        "🔗 **Repository:** https://github.com/lastfound/Plazio_e-commerce"
+                    )
+                },
+                'suggestions': {
+                    'id': [
+                        {"msg": "Jelaskan project CBPR AI", "label": "Project CBPR"},
+                        {"msg": "Bisa buat website toko online?", "label": "Jasa Website"},
+                        {"msg": "Berapa harga pembuatan project?", "label": "Estimasi Biaya"}
+                    ],
+                    'en': [
+                        {"msg": "Explain CBPR AI system", "label": "CBPR Project"},
+                        {"msg": "Can you build an e-commerce website?", "label": "Hire Web Dev"},
+                        {"msg": "What is your pricing?", "label": "Pricing"}
+                    ]
+                }
             },
-            'skills': {
-                'keywords': ['skill', 'keahlian', 'bisa', 'teknologi', 'tech', 'stack', 'bahasa pemrograman', 'framework'],
-                'id': [
-                    "Skill teknologi Nawaf:\n\n🎨 UI/UX Design\n💻 Frontend Development\n⚡ JavaScript & React\n📄 HTML & CSS\n📱 Kotlin (Android)\n🐍 Python\n🛠️ Laravel\n🎨 Figma & Canva\n\nDan masih terus belajar! 📚",
-                    "Tech stack yang dikuasai Nawaf:\n• Frontend: HTML, CSS, JavaScript, React\n• Mobile: Kotlin, Android Studio\n• Backend: Laravel, Python\n• Design: Figma, Canva\n• Tools: Git, VS Code\n\nVersatile banget kan? 😎"
-                ],
-                'en': [
-                    "Nawaf's technology skills:\n\n🎨 UI/UX Design\n💻 Frontend Development\n⚡ JavaScript & React\n📄 HTML & CSS\n📱 Kotlin (Android)\n🐍 Python\n🛠️ Laravel\n🎨 Figma & Canva\n\nAnd still learning! 📚",
-                    "Tech stack mastered by Nawaf:\n• Frontend: HTML, CSS, JavaScript, React\n• Mobile: Kotlin, Android Studio\n• Backend: Laravel, Python\n• Design: Figma, Canva\n• Tools: Git, VS Code\n\nPretty versatile right? 😎"
-                ],
-                'ar': [
-                    "مهارات ناوف التكنولوجية:\n\n🎨 تصميم UI/UX\n💻 تطوير الواجهة الأمامية\n⚡ JavaScript و React\n📄 HTML و CSS\n📱 Kotlin (Android)\n🐍 Python\n🛠️ Laravel\n🎨 Figma و Canva\n\nويستمر في التعلم! 📚"
-                ],
-                'zh': [
-                    "Nawaf的技术技能:\n\n🎨 UI/UX设计\n💻 前端开发\n⚡ JavaScript和React\n📄 HTML和CSS\n📱 Kotlin (Android)\n🐍 Python\n🛠️ Laravel\n🎨 Figma和Canva\n\n还在继续学习! 📚"
-                ]
+            {
+                'id': 'project_cbpr',
+                'patterns': [r'cbpr', r'content[- ]*based', r'rekomendasi', r'recommendation', r'nlp', r'tf[- ]*idf'],
+                'responses': {
+                    'id': (
+                        "🤖 **Project: CBPR (Content-Based Product Recommendation)**\n\n"
+                        "Sistem rekomendasi produk cerdas berbasis **Machine Learning & NLP (Natural Language Processing)** yang dibangun menggunakan **Python & Flask**.\n\n"
+                        "**Cara Kerja & Arsitektur:**\n"
+                        "1. **Text Input & Preprocessing:** Tokenisasi dan pembersihan teks deskripsi & nama produk.\n"
+                        "2. **Feature Extraction (TF-IDF):** Mengonversi teks menjadi representasi vektor berbobot.\n"
+                        "3. **Cosine Similarity Model:** Menghitung skor kemiripan antar produk untuk rekomendasi akurat.\n\n"
+                        "🔗 **Kode Sumber:** https://github.com/KyyTzy09/CBPR"
+                    ),
+                    'en': (
+                        "🤖 **Project: CBPR (Content-Based Product Recommendation)**\n\n"
+                        "A smart product recommendation engine utilizing **Machine Learning & NLP (Natural Language Processing)** with **Python & Flask** and TF-IDF feature extraction.\n\n"
+                        "🔗 **Repository:** https://github.com/KyyTzy09/CBPR"
+                    )
+                },
+                'suggestions': {
+                    'id': [
+                        {"msg": "Apa saja project AI Nawaf?", "label": "Semua Project AI"},
+                        {"msg": "Skill Python Nawaf apa saja?", "label": "Skill Python"},
+                        {"msg": "Project Kartu Tani", "label": "Kartu Tani"}
+                    ],
+                    'en': [
+                        {"msg": "Show all AI projects", "label": "AI Projects"},
+                        {"msg": "Tell me about Python skills", "label": "Python Skills"},
+                        {"msg": "Kartu Tani Project", "label": "Kartu Tani"}
+                    ]
+                }
             },
-            'contact': {
-                'keywords': ['kontak', 'contact', 'hubungi', 'email', 'telepon', 'phone', 'nomor', 'alamat', 'lokasi'],
-                'id': [
-                    "Hubungi Nawaf di:\n\n📧 Email: nawaf52626@gmail.com\n📱 Telepon: +62 882-3938-6759\n📍 Lokasi: Kroya, Cilacap, Jawa Tengah\n\nAtau kirim pesan lewat form Contact di website ini! 💬"
-                ],
-                'en': [
-                    "Contact Nawaf at:\n\n📧 Email: nawaf52626@gmail.com\n📱 Phone: +62 882-3938-6759\n📍 Location: Kroya, Cilacap, Central Java\n\nOr send a message through the Contact form on this website! 💬"
-                ],
-                'ar': [
-                    "اتصل بناوف على:\n\n📧 البريد الإلكتروني: nawaf52626@gmail.com\n📱 الهاتف: +62 882-3938-6759\n📍 الموقع: كروا، جيلاجاب، جاوة الوسطى\n\nأو أرسل رسالة عبر نموذج الاتصال على هذا الموقع! 💬"
-                ],
-                'zh': [
-                    "联系Nawaf:\n\n📧 电子邮件: nawaf52626@gmail.com\n📱 电话: +62 882-3938-6759\n📍 位置: 克罗亚，济拉贾，中爪哇\n\n或通过本网站上的联系表单发送消息! 💬"
-                ]
+            {
+                'id': 'project_tiket',
+                'patterns': [r'tiket', r'web[- ]*tiket', r'booking', r'travel'],
+                'responses': {
+                    'id': (
+                        "🎫 **Project: Web Tiket Online & Admin Panel**\n\n"
+                        "Aplikasi pemesanan tiket online modern dengan alur booking cepat dan dashboard manajemen armada.\n\n"
+                        "🌐 Live: https://nawafgadi.github.io/web-tiket/\n"
+                        "🔗 GitHub: https://github.com/nawafgadi/web-tiket"
+                    ),
+                    'en': "🎫 Online ticket booking platform with live demo at https://nawafgadi.github.io/web-tiket/"
+                },
+                'suggestions': {
+                    'id': [
+                        {"msg": "Project Bank Sampah Digital", "label": "Bank Sampah"},
+                        {"msg": "Bisa buatkan website custom?", "label": "Jasa Web"},
+                        {"msg": "Bagaimana cara kontak Nawaf?", "label": "Kontak"}
+                    ]
+                }
             },
-            'experience': {
-                'keywords': ['pengalaman', 'experience', 'lama', 'tahun', 'berapa', 'karir', 'career'],
-                'id': [
-                    "Nawaf memiliki pengalaman 2+ tahun di bidang pengembangan software dan telah menyelesaikan 20+ project. Perjalanan yang luar biasa! 🚀"
-                ],
-                'en': [
-                    "Nawaf has 2+ years of experience in software development and has completed 20+ projects. An amazing journey! 🚀"
-                ],
-                'ar': [
-                    "لدى ناوف 2+ سنة من الخبرة في تطوير البرمجيات واستكمل 20+ مشروع. رحلة مذهلة! 🚀"
-                ],
-                'zh': [
-                    "Nawaf拥有2年以上的软件开发经验,已完成20多个项目。一段惊人的旅程! 🚀"
-                ]
+            {
+                'id': 'project_stunting',
+                'patterns': [r'stunting', r'knn', r'kesehatan', r'balita'],
+                'responses': {
+                    'id': (
+                        "📊 **Project: Deteksi Stunting AI (KNN)**\n\n"
+                        "Sistem deteksi dini risiko stunting pada balita menggunakan Machine Learning algoritma K-Nearest Neighbors (KNN) berbasis Python & Flask.\n\n"
+                        "🌐 Live Demo: https://nawafgadi.github.io/pengukur-stanting-/\n"
+                        "🔗 GitHub: https://github.com/nawafgadi/pengukur-stanting-"
+                    ),
+                    'en': "📊 AI-powered early stunting detection tool using KNN algorithm: https://nawafgadi.github.io/pengukur-stanting-/"
+                }
+            },
+            {
+                'id': 'project_banksampah',
+                'patterns': [r'bank\s*sampah', r'sampah', r'limbah'],
+                'responses': {
+                    'id': (
+                        "♻️ **Project: Bank Sampah Digital**\n\n"
+                        "Platform edukasi lingkungan dan kalkulator tabungan sampah terintegrasi.\n\n"
+                        "🌐 Live: https://nawafgadi.github.io/xipplg4_03_banksampah/\n"
+                        "🔗 GitHub: https://github.com/nawafgadi/xipplg4_03_banksampah"
+                    )
+                }
+            },
+            {
+                'id': 'projects_all',
+                'patterns': [r'project', r'proyek', r'karya', r'portofolio', r'hasil kerja', r'buat\s*apa\s*aja'],
+                'responses': {
+                    'id': (
+                        "🚀 **Daftar Karya & Proyek Unggulan Nawaf:**\n\n"
+                        "• **Kartu Tani:** Smart Agriculture & Alokasi Pupuk (Python/Django)\n"
+                        "• **Plazio E-Commerce:** Platform Toko Online (JS/PHP)\n"
+                        "• **CBPR AI:** Sistem Rekomendasi Produk NLP & TF-IDF (Python/Flask)\n"
+                        "• **Web Tiket Online:** Sistem Pemesanan & Admin Manifest\n"
+                        "• **Bank Sampah Digital:** Platform Edukasi Lingkungan\n"
+                        "• **Kasir POS Mobile:** Android POS App (Kotlin)\n"
+                        "• **Deteksi Stunting AI:** Machine Learning KNN\n"
+                        "• **Curious Chimpanzee:** Game 2D Platformer (Unity C#)\n"
+                        "• **UI/UX Design:** E-Cashier, Bank Awan, Pertanian di Figma\n\n"
+                        "Semua proyek tersedia di bagian Karya pada portofolio! 🔍"
+                    ),
+                    'en': (
+                        "🚀 **Featured Projects by Nawaf:**\n\n"
+                        "• Kartu Tani (Smart Agriculture)\n"
+                        "• Plazio (E-Commerce Platform)\n"
+                        "• CBPR (Content-Based Recommendation AI)\n"
+                        "• Web Tiket (Online Ticket Booking)\n"
+                        "• Bank Sampah (Waste Management Web)\n"
+                        "• Cashier POS Mobile (Kotlin Android)\n"
+                        "• Stunting Detection AI (KNN)\n"
+                        "• Curious Chimpanzee (2D Game)"
+                    )
+                },
+                'suggestions': {
+                    'id': [
+                        {"msg": "Ceritakan tentang Kartu Tani", "label": "Kartu Tani"},
+                        {"msg": "Skill teknologi apa yang dikuasai?", "label": "Skill Nawaf"},
+                        {"msg": "Bagaimana cara kontak Nawaf?", "label": "Kontak"}
+                    ]
+                }
+            },
+            {
+                'id': 'skills',
+                'patterns': [r'skill', r'keahlian', r'teknologi', r'tech', r'stack', r'bahasa pemrograman', r'framework'],
+                'responses': {
+                    'id': (
+                        "💻 **Skill & Tech Stack Nawaf:**\n\n"
+                        "🎨 **UI/UX Design:** Figma, Canva, Wireframing\n"
+                        "⚡ **Frontend:** HTML5, CSS3, JavaScript (ES6+), React\n"
+                        "🔧 **Backend:** Python (Django, Flask), PHP (Laravel), REST API\n"
+                        "📱 **Mobile:** Kotlin, Android Studio\n"
+                        "🧠 **AI & ML:** NLP, TF-IDF, K-Nearest Neighbors (KNN)\n"
+                        "🛠️ **IT Support:** Troubleshooting, Help Desk Management"
+                    ),
+                    'en': (
+                        "💻 **Skills Mastered by Nawaf:**\n\n"
+                        "• Frontend: React, JavaScript, HTML5, CSS3\n"
+                        "• Mobile: Kotlin, Android Studio\n"
+                        "• Backend: Python (Django/Flask), PHP (Laravel)\n"
+                        "• AI/ML: NLP, TF-IDF, KNN\n"
+                        "• Design: Figma, Canva\n"
+                        "• IT Support & Help Desk Management"
+                    )
+                },
+                'suggestions': {
+                    'id': [
+                        {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
+                        {"msg": "Bisa buat website / aplikasi?", "label": "Jasa Pembuatan"},
+                        {"msg": "Cita-cita Help Desk Manager?", "label": "Help Desk Support"}
+                    ]
+                }
+            },
+            {
+                'id': 'contact',
+                'patterns': [r'kontak', r'contact', r'hubungi', r'email', r'telepon', r'phone', r'whatsapp', r'wa', r'lokasi', r'alamat'],
+                'responses': {
+                    'id': (
+                        "📫 **Informasi Kontak Nawaf:**\n\n"
+                        "📧 Email: nawaf52626@gmail.com\n"
+                        "📱 Telepon/WhatsApp: +62 882-3938-6759\n"
+                        "📍 Lokasi: Kroya, Cilacap, Jawa Tengah\n"
+                        "🐙 GitHub: https://github.com/nawafgadi\n"
+                        "💼 LinkedIn: Nawaf Gadi Al Fatih\n\n"
+                        "Silakan hubungi untuk diskusi project atau kolaborasi! 💬"
+                    ),
+                    'en': (
+                        "📫 **Contact Nawaf:**\n\n"
+                        "📧 Email: nawaf52626@gmail.com\n"
+                        "📱 Phone/WhatsApp: +62 882-3938-6759\n"
+                        "📍 Location: Kroya, Cilacap, Central Java, Indonesia"
+                    )
+                },
+                'suggestions': {
+                    'id': [
+                        {"msg": "Apa akun media sosial Nawaf?", "label": "Sosial Media"},
+                        {"msg": "Bisa minta CV / Resume?", "label": "Minta CV"},
+                        {"msg": "Layanan apa saja yang disediakan?", "label": "Layanan"}
+                    ]
+                }
+            },
+            {
+                'id': 'services_pricing',
+                'patterns': [r'jasa', r'bisa\s*bikin', r'bisa\s*buat', r'harga', r'biaya', r'tarif', r'cost', r'price', r'budget', r'hire', r'freelance'],
+                'responses': {
+                    'id': (
+                        "💼 **Layanan & Jasa Pembuatan:**\n\n"
+                        "1. 🌐 **Pembuatan Website:** Landing Page, Toko Online, Web App Interaktif.\n"
+                        "2. 📱 **Aplikasi Android:** Native Kotlin & Android Studio.\n"
+                        "3. 🎨 **Desain UI/UX:** Figma interactive prototype & mockup.\n\n"
+                        "💰 **Harga & Konsultasi:** Estimasi biaya fleksibel dan gratis konsultasi. Hubungi WhatsApp +62 882-3938-6759!"
+                    ),
+                    'en': "💼 Web & Mobile Development services with flexible pricing. Contact via WhatsApp +62 882-3938-6759!"
+                }
+            },
+            {
+                'id': 'about',
+                'patterns': [r'tentang', r'nawaf', r'siapa', r'profile', r'profil', r'biodata', r'smk', r'rpl', r'pengalaman'],
+                'responses': {
+                    'id': (
+                        "👋 **Nawaf Gadi Alfatih** adalah siswa Rekayasa Perangkat Lunak (RPL) dari Kroya, Cilacap.\n\n"
+                        "Dengan **2+ tahun pengalaman** dan **20+ proyek**, ia fokus pada web dev, aplikasi Android, dan bercita-cita menjadi **Help Desk Support Manager** profesional. 🎯"
+                    ),
+                    'en': (
+                        "👋 **Nawaf Gadi Alfatih** is a Software Engineering (RPL) student from Kroya, Central Java with 2+ years of experience in Web and Mobile development."
+                    )
+                },
+                'suggestions': {
+                    'id': [
+                        {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
+                        {"msg": "Skill teknologi apa saja?", "label": "Lihat Skill"},
+                        {"msg": "Bagaimana cara kontak?", "label": "Kontak"}
+                    ]
+                }
             }
-        }
+        ]
     
     def get_greeting(self, language='id'):
         """Get contextual greeting based on language and time"""
         hour = datetime.now().hour
+        period = 'morning' if hour < 11 else 'afternoon' if hour < 15 else 'evening' if hour < 18 else 'night'
         
         greetings = {
             'id': {
-                'morning': "Selamat pagi! Senang bertemu dengan Anda. Ada yang bisa saya bantu tentang Nawaf? 😊",
-                'afternoon': "Selamat siang! Ada yang bisa saya bantu tentang Nawaf? 🤖",
-                'evening': "Selamat sore! Senang bisa membantu Anda. 💬",
-                'night': "Selamat malam! Asisten AI Nawaf siap membantu. 🌙"
+                'morning': "Selamat pagi! Saya ERA AI, asisten virtual Nawaf Gadi Alfatih. Ada yang bisa saya bantu? 😊",
+                'afternoon': "Selamat siang! Saya ERA AI siap membantu Anda mencari tahu tentang proyek dan skill Nawaf. 🤖",
+                'evening': "Selamat sore! Senang bisa membantu Anda seputar portofolio Nawaf. 💬",
+                'night': "Selamat malam! Asisten AI Nawaf siap membantu Anda. 🌙"
             },
             'en': {
-                'morning': "Good morning! Nice to meet you. Can I help you with information about Nawaf? 😊",
-                'afternoon': "Good afternoon! How can I assist you regarding Nawaf? 🤖",
-                'evening': "Good evening! Happy to help you. 💬",
+                'morning': "Good morning! I am ERA AI, Nawaf's virtual assistant. How can I help you? 😊",
+                'afternoon': "Good afternoon! How can I assist you regarding Nawaf's projects or skills? 🤖",
+                'evening': "Good evening! Happy to help you with Nawaf's portfolio. 💬",
                 'night': "Good night! Nawaf's AI assistant is ready to help. 🌙"
-            },
-            'ar': {
-                'morning': "صباح الخير! يسعدني التعرف عليك. هل يمكنني مساعدتك بمعلومات عن ناوف؟ 😊",
-                'afternoon': "مساء الخير! كيف يمكنني مساعدتك فيما يتعلق بناوف؟ 🤖",
-                'evening': "تمام المساء! يسعدني مساعدتك. 💬",
-                'night': "تصبح على خير! مساعد ناوف الذكي جاهز للمساعدة. 🌙"
-            },
-            'zh': {
-                'morning': "早上好! 很高兴认识你。我可以帮你了解Nawaf吗? 😊",
-                'afternoon': "下午好! 我能如何帮助你了解Nawaf? 🤖",
-                'evening': "晚上好! 很高兴为你服务。💬",
-                'night': "晚安! Nawaf的AI助手随时准备帮助。🌙"
             }
         }
-        
-        period = 'morning' if hour < 11 else 'afternoon' if hour < 15 else 'evening' if hour < 18 else 'night'
         
         lang_greetings = greetings.get(language, greetings['id'])
         return lang_greetings.get(period, lang_greetings['afternoon'])
     
     def process_message(self, message, language='id'):
-        """Process user message and return AI response in specified language"""
+        """Process user message using regex patterns and intelligent matching"""
         if not message or not message.strip():
-            responses = {
-                'id': "Silakan ketik pesan Anda. Saya siap membantu! 😊",
-                'en': "Please type your message. I'm ready to help! 😊",
-                'ar': "يرجى كتابة رسالتك. أنا مستعد للمساعدة! 😊",
-                'zh': "请输入您的消息。我已准备就绪! 😊"
-            }
-            return responses.get(language, responses['id'])
+            return "Silakan ketik pertanyaan Anda tentang Nawaf, proyek, atau keahlian. Saya siap membantu! 😊"
         
         msg_lower = message.lower().strip()
         
-        # Multilingual greeting patterns
-        greetings_patterns = {
-            'id': ['halo', 'hai', 'hello', 'selamat'],
-            'en': ['hello', 'hi', 'hey', 'greetings'],
-            'ar': ['مرحبا', 'السلام', 'صباح'],
-            'zh': ['你好', '嗨', '问候']
-        }
+        # Check greetings
+        if any(g in msg_lower for g in ['halo', 'hai', 'hello', 'hi', 'hey', 'pagi', 'siang', 'sore', 'malam', 'assalamu']):
+            return self.get_greeting(language)
         
-        thanks_patterns = {
-            'id': ['terima kasih', 'thanks', 'makasih', 'tq'],
-            'en': ['thank you', 'thanks', 'thx'],
-            'ar': ['شكرا', 'شكراً', 'تشكر'],
-            'zh': ['谢谢', '感谢', '谢了']
-        }
+        # Check thanks
+        if any(t in msg_lower for t in ['terima kasih', 'thanks', 'makasih', 'tq', 'thx', 'thank you']):
+            return "Sama-sama! Senang bisa membantu. Jangan ragu untuk bertanya hal lain tentang proyek Nawaf ya! 😊✨"
         
-        farewell_patterns = {
-            'id': ['bye', 'dadah', 'sampai jumpa', 'selamat tinggal'],
-            'en': ['bye', 'goodbye', 'see you'],
-            'ar': ['باي', 'وداعا', 'إلى اللقاء'],
-            'zh': ['再见', '拜拜', '回见']
-        }
+        # Check farewell
+        if any(f in msg_lower for f in ['bye', 'dadah', 'sampai jumpa', 'selamat tinggal', 'see you']):
+            return "Sampai jumpa! Terima kasih telah berkunjung ke portofolio Nawaf. Semoga sukses selalu! 👋✨"
         
-        # Check for greetings
-        for pattern in greetings_patterns.get(language, []):
-            if pattern in msg_lower:
-                return self.get_greeting(language)
-        
-        # Thanks responses
-        thanks_responses = {
-            'id': [
-                "Sama-sama! Senang bisa membantu. Jika ada pertanyaan lain, silakan tanya saja. 😊",
-                "Dengan senang hati! Jangan ragu untuk kembali bertanya. 👍"
-            ],
-            'en': [
-                "You're welcome! Happy to help. Feel free to ask anytime. 😊",
-                "My pleasure! Don't hesitate to come back with more questions. 👍"
-            ],
-            'ar': [
-                "على الرحب والسعة! يسعدني أن أساعدك. لا تتردد في السؤال مرة أخرى. 😊",
-                "بكل سرور! لا تتردد في العودة بمزيد من الأسئلة. 👍"
-            ],
-            'zh': [
-                "不客气! 很高兴为你服务。随时提问。 😊",
-                "我的荣幸! 不要犹豫再次提问。 👍"
-            ]
-        }
-        
-        for pattern in thanks_patterns.get(language, []):
-            if pattern in msg_lower:
-                return random.choice(thanks_responses.get(language, thanks_responses['id']))
-        
-        # Farewell responses
-        farewell_responses = {
-            'id': [
-                "Sampai jumpa! Semoga harimu menyenangkan. 👋",
-                "Dadah! Terima kasih telah berkunjung. 💫"
-            ],
-            'en': [
-                "Goodbye! Have a great day! 👋",
-                "See you! Thanks for visiting. 💫"
-            ],
-            'ar': [
-                "وداعاً! أتمنى لك يوماً رائعاً! 👋",
-                "إلى اللقاء! شكراً لزيارتك. 💫"
-            ],
-            'zh': [
-                "再见! 祝你有美好的一天! 👋",
-                "拜拜! 感谢访问。💫"
-            ]
-        }
-        
-        for pattern in farewell_patterns.get(language, []):
-            if pattern in msg_lower:
-                return random.choice(farewell_responses.get(language, farewell_responses['id']))
-        
-        # Score-based keyword matching
-        best_match = None
+        # Check knowledge entries with regex pattern matching
+        best_entry = None
         max_score = 0
         
-        for category, data in self.responses.items():
+        for entry in self.knowledge:
             score = 0
-            for keyword in data['keywords']:
-                if keyword in msg_lower:
-                    score += len(keyword)
-            
+            for pat in entry['patterns']:
+                if re.search(pat, msg_lower):
+                    score += 20
             if score > max_score:
                 max_score = score
-                best_match = data
+                best_entry = entry
         
-        if best_match and language in best_match:
-            return random.choice(best_match[language])
+        if best_entry and max_score > 0:
+            resps = best_entry['responses']
+            return resps.get(language, resps.get('id', resps.get('en', '')))
         
-        # Unknown response
-        unknown_responses = {
-            'id': [
-                "Maaf, saya belum memahami pertanyaan tersebut. Coba tanya tentang: Nawaf, project, skill, kontak, atau pengalaman. 🤔",
-                "Hmm, saya belum punya jawaban untuk itu. Tanya yang lain yuk! 😅"
-            ],
-            'en': [
-                "Sorry, I don't quite understand that question. Try asking about: Nawaf, projects, skills, contact, or experience. 🤔",
-                "Hmm, I don't have an answer for that yet. Ask something else! 😅"
-            ],
-            'ar': [
-                "أعتذر، لم أفهم السؤال بعد. حاول السؤال عن: ناوف، المشاريع، المهارات، الاتصال أو الخبرة. 🤔",
-                "همم، ليس لدي جواب لذلك حتى الآن. اسأل شيئاً آخر! 😅"
-            ],
-            'zh': [
-                "抱歉,我还不太理解那个问题。试试问关于: Nawaf、项目、技能、联系或经验。🤔",
-                "嗯，我还没有答案。问些别的吧! 😅"
-            ]
-        }
-        
-        return random.choice(unknown_responses.get(language, unknown_responses['id']))
+        # Default smart response
+        return (
+            "Saya bisa membantu Anda mencari tahu tentang:\n"
+            "• **Proyek:** Kartu Tani, Plazio E-commerce, CBPR AI, Web Tiket, Kasir POS\n"
+            "• **Keahlian:** UI/UX Design, React, Python, Kotlin, Laravel, Help Desk IT\n"
+            "• **Layanan & Harga:** Pembuatan website, aplikasi Android, UI/UX\n"
+            "• **Kontak & Lokasi:** Email, WhatsApp, dan Sosial Media\n\n"
+            "Silakan ketik pertanyaan Anda! 😊"
+        )
     
     def get_suggestions(self, message, language='id'):
-        """Get contextual suggestions in specified language"""
-        msg_lower = message.lower()
+        """Get contextual suggestions based on matched intent"""
+        msg_lower = (message or '').lower().strip()
         
-        suggestions_db = {
-            'id': {
-                'about': [
-                    {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
-                    {"msg": "Skill teknologi apa saja?", "label": "Lihat Skill"},
-                    {"msg": "Bagaimana cara kontak?", "label": "Kontak"}
-                ],
-                'project': [
-                    {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
-                    {"msg": "Skill teknologi apa saja?", "label": "Lihat Skill"},
-                    {"msg": "Berapa harga project?", "label": "Harga"}
-                ],
-                'skill': [
-                    {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
-                    {"msg": "Bagaimana cara kontak?", "label": "Kontak"},
-                    {"msg": "Pengalaman kerja berapa lama?", "label": "Pengalaman"}
-                ],
-                'contact': [
-                    {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
-                    {"msg": "Project apa yang pernah dibuat?", "label": "Lihat Project"},
-                    {"msg": "Apa skill yang dikuasai?", "label": "Skill"}
-                ],
-                'default': [
-                    {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
-                    {"msg": "Project apa saja?", "label": "Project"},
-                    {"msg": "Skill teknologi apa?", "label": "Skill"}
-                ]
-            },
-            'en': {
-                'about': [
-                    {"msg": "What projects have you done?", "label": "See Projects"},
-                    {"msg": "What technologies do you know?", "label": "See Skills"},
-                    {"msg": "How can I contact you?", "label": "Contact"}
-                ],
-                'project': [
-                    {"msg": "Tell me about Nawaf", "label": "About Nawaf"},
-                    {"msg": "What technologies do you know?", "label": "See Skills"},
-                    {"msg": "What's your rate?", "label": "Pricing"}
-                ],
-                'skill': [
-                    {"msg": "What projects have you done?", "label": "See Projects"},
-                    {"msg": "How can I contact you?", "label": "Contact"},
-                    {"msg": "How much experience do you have?", "label": "Experience"}
-                ],
-                'contact': [
-                    {"msg": "Tell me about Nawaf", "label": "About Nawaf"},
-                    {"msg": "What projects have you done?", "label": "See Projects"},
-                    {"msg": "What technologies do you know?", "label": "See Skills"}
-                ],
-                'default': [
-                    {"msg": "Tell me about Nawaf", "label": "About Nawaf"},
-                    {"msg": "What projects?", "label": "Projects"},
-                    {"msg": "What technologies?", "label": "Skills"}
-                ]
-            },
-            'ar': {
-                'about': [
-                    {"msg": "ما المشاريع التي عملت عليها؟", "label": "شاهد المشاريع"},
-                    {"msg": "ما التقنيات التي تعرفها؟", "label": "شاهد المهارات"},
-                    {"msg": "كيف يمكنني الاتصال؟", "label": "اتصل"}
-                ],
-                'default': [
-                    {"msg": "أخبرني عن ناوف", "label": "عن ناوف"},
-                    {"msg": "ما المشاريع؟", "label": "المشاريع"},
-                    {"msg": "ما المهارات؟", "label": "المهارات"}
-                ]
-            },
-            'zh': {
-                'about': [
-                    {"msg": "你完成过哪些项目?", "label": "查看项目"},
-                    {"msg": "你掌握哪些技术?", "label": "查看技能"},
-                    {"msg": "我如何联系你?", "label": "联系"}
-                ],
-                'default': [
-                    {"msg": "告诉我关于Nawaf的事", "label": "关于Nawaf"},
-                    {"msg": "有哪些项目?", "label": "项目"},
-                    {"msg": "有哪些技能?", "label": "技能"}
-                ]
-            }
-        }
+        for entry in self.knowledge:
+            for pat in entry['patterns']:
+                if re.search(pat, msg_lower):
+                    suggs = entry.get('suggestions', {})
+                    return suggs.get(language, suggs.get('id', suggs.get('en', [])))
         
-        lang_suggestions = suggestions_db.get(language, suggestions_db['id'])
-        
-        if any(w in msg_lower for w in ['nawaf', 'siapa', 'tentang', 'about', 'profile', 'who']):
-            return lang_suggestions.get('about', lang_suggestions['default'])
-        elif any(w in msg_lower for w in ['project', 'proyek', 'karya', 'web', 'aplikasi']):
-            return lang_suggestions.get('project', lang_suggestions['default'])
-        elif any(w in msg_lower for w in ['skill', 'teknologi', 'bisa', 'tech']):
-            return lang_suggestions.get('skill', lang_suggestions['default'])
-        elif any(w in msg_lower for w in ['kontak', 'hubungi', 'email', 'contact']):
-            return lang_suggestions.get('contact', lang_suggestions['default'])
-        
-        return lang_suggestions.get('default', [])
+        default_suggs = [
+            {"msg": "Ceritakan tentang Nawaf", "label": "Tentang Nawaf"},
+            {"msg": "Project unggulan apa saja?", "label": "Project Unggulan"},
+            {"msg": "Skill teknologi apa yang dikuasai?", "label": "Skill & Tech"}
+        ]
+        return default_suggs
 
 
 # Initialize AI
