@@ -192,11 +192,35 @@ class NawafAI:
                 }
             },
             {
+                'id': 'project_lms',
+                'patterns': [r'lms', r'lms[-_ ]*project', r'learning\s*management', r'e[- ]*learning', r'kelas\s*daring'],
+                'responses': {
+                    'id': (
+                        "📚 **Project: LMS Project (Learning Management System)**\n\n"
+                        "Platform web Learning Management System untuk pengelolaan kelas daring, distribusi materi pembelajaran, kuis interaktif, dan tracking progres siswa.\n\n"
+                        "🔗 **Kode Sumber:** https://github.com/nawafgadi/lms_project"
+                    ),
+                    'en': (
+                        "📚 **Project: LMS Project (Learning Management System)**\n\n"
+                        "A modern web-based Learning Management System for managing online classrooms, course materials, assignments, and student learning analytics.\n\n"
+                        "🔗 **Source Code:** https://github.com/nawafgadi/lms_project"
+                    )
+                },
+                'suggestions': {
+                    'id': [
+                        {"msg": "Project Kartu Tani", "label": "Kartu Tani"},
+                        {"msg": "Project CBPR AI", "label": "CBPR AI"},
+                        {"msg": "Semua project Nawaf apa saja?", "label": "Semua Karya"}
+                    ]
+                }
+            },
+            {
                 'id': 'projects_all',
                 'patterns': [r'project', r'proyek', r'karya', r'portofolio', r'hasil kerja', r'buat\s*apa\s*aja'],
                 'responses': {
                     'id': (
                         "🚀 **Daftar Karya & Proyek Unggulan Nawaf:**\n\n"
+                        "• **LMS Project:** Learning Management System (Web Platform)\n"
                         "• **Kartu Tani:** Smart Agriculture & Alokasi Pupuk (Python/Django)\n"
                         "• **Plazio E-Commerce:** Platform Toko Online (JS/PHP)\n"
                         "• **CBPR AI:** Sistem Rekomendasi Produk NLP & TF-IDF (Python/Flask)\n"

@@ -409,7 +409,7 @@ const CUSTOM_PROJECT_IMAGES = {
 const GITHUB_USERNAME = 'nawafgadi';
 const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`;
 
-// List of projects / repositories excluded from display
+// List of projects / repositories excluded from display (clones, templates, portfolio meta repos)
 const EXCLUDED_PROJECT_NAMES = new Set([
     'portofolionewaja',
     'protofolio-modern-part-v2',
@@ -422,7 +422,11 @@ const EXCLUDED_PROJECT_NAMES = new Set([
     'protofolio-anyar',
     'portfolio-versi-anyar',
     'portfolio-anyar',
+    'protofolio-baru',
+    'protofolionew',
+    'nawaf',
     'landingpage',
+    'landingpage-',
     'contoh1',
     'contoh-1',
     'cv-nawaf',
@@ -432,7 +436,8 @@ const EXCLUDED_PROJECT_NAMES = new Set([
     'abcd',
     'ulya12345',
     'nawaf091108',
-    'nawaf220283'
+    'nawaf220283',
+    'https-github.com-nawafgadi-cv-nawaf'
 ]);
 
 const EXCLUDED_PROJECT_TITLES = [
@@ -454,12 +459,16 @@ const EXCLUDED_PROJECT_TITLES = [
 ];
 
 function isProjectExcluded(item) {
-    if (!item) return false;
-    const name = (item.name || '').toLowerCase().trim();
-    const id = (item.id || '').toLowerCase().trim();
-    const title = (item.title || '').toLowerCase().trim();
+    if (!item) return true;
+    const name = String(item.name || '').toLowerCase().trim();
+    const id = String(item.id || '').toLowerCase().trim();
+    const title = String(item.title || '').toLowerCase().trim();
 
     if (EXCLUDED_PROJECT_NAMES.has(name) || EXCLUDED_PROJECT_NAMES.has(id)) {
+        return true;
+    }
+
+    if (name.startsWith('protofolio') || name.startsWith('portfolio')) {
         return true;
     }
 
@@ -482,6 +491,21 @@ function isProjectExcluded(item) {
 
 // Complete repository dataset with rich metadata (works offline, instant load, live API sync)
 const BASE_PROJECTS = [
+    {
+        id: 'lms_project',
+        name: 'lms_project',
+        title: 'LMS Project - Learning Management System',
+        category: 'web',
+        language: 'PHP & Web',
+        description: 'Sistem Manajemen Pembelajaran (Learning Management System) terstruktur untuk pengelolaan materi digital, kelas daring, kuis, dan monitoring siswa.',
+        tags: ['LMS', 'Education', 'E-Learning', 'PHP', 'Web Dev'],
+        image: '',
+        liveUrl: null,
+        githubUrl: 'https://github.com/nawafgadi/lms_project',
+        stars: 0,
+        forks: 0,
+        updated: '2026-08-16'
+    },
     {
         id: 'kartu-tani',
         name: 'kartu-tani',
@@ -908,26 +932,150 @@ const BASE_PROJECTS = [
     }
 ];
 
+const GITHUB_REPOS_STORAGE_KEY = 'nawaf_portfolio_github_repos_v3';
+
 let allProjectsData = BASE_PROJECTS.filter(p => !isProjectExcluded(p));
 let currentFilter = 'all';
 let currentSearchQuery = '';
+let isSyncingGitHub = false;
+
+// Attempt loading cached projects for 0ms initial render latency
+function loadCachedRepositories() {
+    try {
+        const cached = localStorage.getItem(GITHUB_REPOS_STORAGE_KEY);
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                const validCached = parsed.filter(p => !isProjectExcluded(p));
+                if (validCached.length > 0) {
+                    allProjectsData = validCached;
+                    return true;
+                }
+            }
+        }
+    } catch (e) {
+        console.warn('LocalStorage cache note:', e);
+    }
+    return false;
+}
 
 function classifyRepoCategory(repo) {
-    const name = (repo.name || '').toLowerCase();
-    const lang = (repo.language || '').toLowerCase();
-    const desc = (repo.description || '').toLowerCase();
+    const name = String(repo.name || '').toLowerCase();
+    const lang = String(repo.language || '').toLowerCase();
+    const desc = String(repo.description || '').toLowerCase();
+    const topics = Array.isArray(repo.topics) ? repo.topics.map(t => String(t).toLowerCase()) : [];
     
-    if (name.includes('game') || lang.includes('c#')) return 'game';
-    if (name.includes('stunting') || name.includes('ai') || desc.includes('machine learning') || desc.includes('ai')) return 'ai';
-    if (lang.includes('kotlin') || lang.includes('java') || name.includes('kasir') || name.includes('android')) return 'mobile';
-    if (name.includes('idulfitri') || name.includes('ulangtahun') || name.includes('romantis') || name.includes('kalender') || name.includes('umur') || name.includes('ucapan') || name.includes('untuk')) return 'interactive';
-    if (name.includes('figma') || desc.includes('ui/ux') || desc.includes('design')) return 'design';
+    if (name.includes('game') || lang.includes('c#') || lang.includes('unity') || topics.includes('game') || topics.includes('gamedev')) return 'game';
+    if (name.includes('stunting') || name.includes('ai') || name.includes('nlp') || name.includes('cbpr') || desc.includes('machine learning') || desc.includes('ai') || desc.includes('nlp') || topics.includes('ai') || topics.includes('machine-learning')) return 'ai';
+    if (lang.includes('kotlin') || lang.includes('java') || name.includes('kasir') || name.includes('pos') || name.includes('android') || name.includes('mobile') || topics.includes('android') || topics.includes('kotlin')) return 'mobile';
+    if (name.includes('idulfitri') || name.includes('ulangtahun') || name.includes('romantis') || name.includes('kalender') || name.includes('umur') || name.includes('ucapan') || name.includes('untuk') || name.includes('countdown')) return 'interactive';
+    if (name.includes('figma') || desc.includes('ui/ux') || desc.includes('design') || topics.includes('figma') || topics.includes('ui-ux')) return 'design';
     return 'web';
 }
 
+function formatRepoTitle(repoName) {
+    if (!repoName) return 'Project';
+    const knownTitles = {
+        'lms_project': 'LMS Project - Learning Management System',
+        'kartu-tani': 'Kartu Tani - Smart Agriculture System',
+        'Plazio_e-commerce': 'Plazio E-Commerce Platform',
+        'CBPR': 'CBPR - Content-Based Product Recommendation',
+        'web-tiket': 'Web Tiket Online',
+        'kasirApp': 'Kasir POS Mobile App',
+        'game_mk2_PAS': 'Curious Chimpanzee 2D',
+        'APPHP-STORE': 'Luxe Phone Mobile Store',
+        'pengukur-stanting-': 'Deteksi Stunting AI (KNN)',
+        'xipplg4_03_banksampah': 'Bank Sampah Digital',
+        'Astra-Chiller': 'Astra Chiller Cooling Web',
+        'keturunan': 'Silsilah Keturunan Keluarga',
+        'idulfitri': 'Kartu Ucapan Idul Fitri',
+        'pertanian': 'Portal Informasi Pertanian',
+        'AINawaf': 'Nawaf AI Chatbot System',
+        'kalender': 'Kalender Interaktif & Agenda',
+        'umur': 'Kalkulator Umur & Countdown',
+        'mk3': 'Laravel MK3 Application',
+        'my-websitenawaf': 'Web Platform Nawaf',
+        'PSAJ': 'Sistem Penilaian PSAJ',
+        'webpersonal': 'Web Personal Nawaf',
+        'untuk': 'Special Interactive Note',
+        'ulangtahun': 'Birthday Celebration Card',
+        'romantis': 'Romantic Interactive Card',
+        'promsibaju': 'Katalog Promosi Baju & Fashion',
+        'penjelasanAI': 'Modul Penjelasan & Eksplorasi AI',
+        'angkatan33': 'Portal Web Angkatan 33',
+        'ucapan': 'Kartu Pesan & Ucapan Digital'
+    };
+    if (knownTitles[repoName]) return knownTitles[repoName];
+    return repoName
+        .replace(/[-_]+/g, ' ')
+        .replace(/\b(lms|ai|pos|api|psaj|cbpr|mk2|mk3|ui|ux|knn|nlp|crud|rpl|smk)\b/gi, match => match.toUpperCase())
+        .replace(/\b\w/g, char => char.toUpperCase());
+}
+
+function formatRepoDescription(repo, category, language) {
+    if (repo.description && repo.description.trim().length > 5) {
+        return repo.description.trim();
+    }
+    const name = String(repo.name || '');
+    const cleanTitle = formatRepoTitle(name);
+    
+    const knownDescriptions = {
+        'lms_project': 'Sistem Manajemen Pembelajaran (Learning Management System) terstruktur untuk pengelolaan materi digital, kelas daring, kuis, dan monitoring siswa.',
+        'angkatan33': 'Portal web komunitas dan dokumentasi kegiatan sekolah siswa angkatan 33.',
+        'penjelasanAI': 'Modul interaktif edukasi dan eksplorasi konsep dasar kecerdasan buatan (Artificial Intelligence) dan machine learning.',
+        'ucapan': 'Aplikasi pesan kartu ucapan digital interaktif dengan efek visual dinamis.',
+        'promsibaju': 'Website katalog interaktif promosi apparel busana modern dengan formulir pemesanan cepat.'
+    };
+    if (knownDescriptions[name]) return knownDescriptions[name];
+    
+    if (category === 'ai') {
+        return `Sistem kecerdasan buatan cerdas ${cleanTitle} untuk analisis data, otomasi, dan machine learning.`;
+    } else if (category === 'mobile') {
+        return `Aplikasi mobile ${cleanTitle} berbasis ${language || 'Android'} dengan performa optimal dan navigasi lancar.`;
+    } else if (category === 'game') {
+        return `Pengembangan game interaktif ${cleanTitle} dengan mekanisme gameplay menarik dan responsif.`;
+    } else if (category === 'interactive') {
+        return `Aplikasi web interaktif ${cleanTitle} dengan animasi modern dan interaktivitas real-time.`;
+    } else if (category === 'design') {
+        return `Konsep desain antarmuka ${cleanTitle} dengan prototipe modern dan tata letak intuitif.`;
+    } else {
+        return `Platform aplikasi web ${cleanTitle} yang dikembangkan dengan arsitektur terstruktur dan antarmuka responsif.`;
+    }
+}
+
+function formatRepoLanguage(repo, category) {
+    if (repo.language && repo.language.trim()) {
+        return repo.language.trim();
+    }
+    const name = String(repo.name || '').toLowerCase();
+    if (name.includes('lms')) return 'PHP & Web';
+    if (name.includes('ai') || name.includes('stanting') || name.includes('nlp')) return 'Python & AI';
+    if (name.includes('game') || name.includes('unity')) return 'C# & Unity';
+    if (name.includes('kasir') || name.includes('pos') || name.includes('android')) return 'Kotlin';
+    if (name.includes('figma') || category === 'design') return 'Figma Design';
+    if (category === 'interactive') return 'JavaScript & CSS';
+    return 'HTML5 & JS';
+}
+
+function formatRepoTags(repo, category, language) {
+    if (Array.isArray(repo.topics) && repo.topics.length > 0) {
+        return repo.topics.map(t => String(t).replace(/[-_]/g, ' '));
+    }
+    const tags = [];
+    if (language) tags.push(language.split('&')[0].trim());
+    if (category === 'web') tags.push('Web Dev');
+    if (category === 'mobile') tags.push('Mobile App');
+    if (category === 'ai') tags.push('AI & ML');
+    if (category === 'game') tags.push('Game 2D');
+    if (category === 'design') tags.push('UI/UX');
+    if (category === 'interactive') tags.push('Interactive');
+    tags.push('GitHub');
+    return Array.from(new Set(tags)).filter(Boolean);
+}
+
 function getTechIcon(lang, category) {
-    const l = (lang || '').toLowerCase();
-    const c = (category || '').toLowerCase();
+    const l = String(lang || '').toLowerCase();
+    const c = String(category || '').toLowerCase();
     
     if (c === 'design' || l.includes('figma')) return { icon: 'ri-palette-line', color: '#f24e1e', gradient: 'linear-gradient(135deg, #1e1b4b 0%, #311042 100%)' };
     if (c === 'game' || l.includes('c#') || l.includes('unity')) return { icon: 'ri-gamepad-line', color: '#10b981', gradient: 'linear-gradient(135deg, #064e3b 0%, #022c22 100%)' };
@@ -1037,13 +1185,13 @@ function renderProjects() {
         // Action buttons
         let actionsHtml = '';
         if (item.liveUrl) {
-            actionsHtml += `<a href="${item.liveUrl}" target="_blank" rel="noopener noreferrer" class="work-card-btn btn-demo" title="${t.live_demo}"><i class="ri-external-link-line"></i> ${t.live_demo}</a>`;
+            actionsHtml += `<a href="${item.liveUrl}" target="_blank" rel="noopener noreferrer" class="work-card-btn btn-demo" title="${t.live_demo || 'Live Demo'}"><i class="ri-external-link-line"></i> ${t.live_demo || 'Live Demo'}</a>`;
         }
         if (item.figmaUrl) {
-            actionsHtml += `<a href="${item.figmaUrl}" target="_blank" rel="noopener noreferrer" class="work-card-btn btn-figma" title="${t.figma_design}"><i class="ri-palette-line"></i> ${t.figma_design}</a>`;
+            actionsHtml += `<a href="${item.figmaUrl}" target="_blank" rel="noopener noreferrer" class="work-card-btn btn-figma" title="${t.figma_design || 'Lihat di Figma'}"><i class="ri-palette-line"></i> ${t.figma_design || 'Figma'}</a>`;
         }
         if (item.githubUrl) {
-            actionsHtml += `<a href="${item.githubUrl}" target="_blank" rel="noopener noreferrer" class="work-card-btn btn-repo" title="${t.github_repo}"><i class="ri-github-line"></i> ${t.github_repo}</a>`;
+            actionsHtml += `<a href="${item.githubUrl}" target="_blank" rel="noopener noreferrer" class="work-card-btn btn-repo" title="${t.github_repo || 'GitHub Repo'}"><i class="ri-github-line"></i> ${t.github_repo || 'GitHub Repo'}</a>`;
         }
 
         const dateDisplay = formatDateDisplay(item.updated);
@@ -1061,7 +1209,7 @@ function renderProjects() {
                             alt="${item.title || item.name}" 
                             class="work-card-img" 
                             loading="lazy"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                            onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';"
                         >
                     ` : ''}
                     <div class="work-card-banner" style="display: ${resolvedImage ? 'none' : 'flex'};">
@@ -1096,85 +1244,134 @@ function renderProjects() {
 
 window.renderPortfolioProjects = renderProjects;
 
-// Fetch all repositories dynamically from GitHub API
-function syncGitHubRepositories() {
+// Fetch all repositories dynamically from GitHub API (automatic real-time sync)
+function syncGitHubRepositories(isManual = false) {
+    if (isSyncingGitHub) return;
+    isSyncingGitHub = true;
+
     const syncIndicator = document.getElementById('work-sync-indicator');
     const syncLabel = document.getElementById('sync-label');
+    const syncRefreshIcon = document.getElementById('sync-refresh-icon');
 
-    fetch(GITHUB_API_URL)
-        .then(res => {
-            if (!res.ok) throw new Error(`GitHub API HTTP ${res.status}`);
-            return res.json();
-        })
-        .then(repos => {
-            if (!Array.isArray(repos) || repos.length === 0) return;
+    if (syncRefreshIcon) syncRefreshIcon.classList.add('spinning');
+    if (syncLabel && isManual) syncLabel.textContent = 'Menyinkronkan...';
 
-            
-            const existingMap = new Map();
-            BASE_PROJECTS.forEach(p => existingMap.set(p.name, p));
+    // Add cache buster timestamp on manual refresh
+    const apiUrl = isManual 
+        ? `${GITHUB_API_URL}&_t=${Date.now()}` 
+        : GITHUB_API_URL;
 
-            const dynamicProjects = repos
-                .filter(repo => !isProjectExcluded(repo))
-                .map(repo => {
-                    const existing = existingMap.get(repo.name);
-                    const category = existing ? existing.category : classifyRepoCategory(repo);
-                    const title = existing ? existing.title : repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-                    const desc = existing && existing.description ? existing.description : (repo.description || `Proyek repositori ${repo.name} yang dikembangkan dengan ${repo.language || 'teknologi modern'}.`);
-                    const lang = existing && existing.language ? existing.language : (repo.language || 'Web Code');
-                    const hasPages = repo.has_pages;
-                    const liveUrl = existing && existing.liveUrl !== undefined ? existing.liveUrl : (hasPages ? `https://${GITHUB_USERNAME}.github.io/${repo.name}/` : repo.homepage);
-                    const tags = existing && existing.tags ? existing.tags : [repo.language || 'Code', 'GitHub'].filter(Boolean);
-                    const image = existing ? existing.image : (CUSTOM_PROJECT_IMAGES[repo.name] || '');
+    fetch(apiUrl, {
+        headers: {
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    })
+    .then(res => {
+        if (!res.ok) throw new Error(`GitHub API HTTP ${res.status}`);
+        return res.json();
+    })
+    .then(repos => {
+        if (!Array.isArray(repos) || repos.length === 0) return;
 
-                    return {
-                        id: repo.name,
-                        name: repo.name,
-                        title: title,
-                        category: category,
-                        language: lang,
-                        description: desc,
-                        tags: tags,
-                        image: image,
-                        liveUrl: liveUrl || null,
-                        figmaUrl: existing ? existing.figmaUrl : null,
-                        githubUrl: existing && existing.githubUrl ? existing.githubUrl : repo.html_url,
-                        stars: repo.stargazers_count || 0,
-                        forks: repo.forks_count || 0,
-                        updated: repo.updated_at ? repo.updated_at.split('T')[0] : ''
-                    };
-                })
-                .filter(p => !isProjectExcluded(p));
-
-            // Preserve special items like standalone Figma projects and external/collaborative repositories that aren't in GitHub repos API
-            const nonApiItems = BASE_PROJECTS
-                .filter(p => !isProjectExcluded(p))
-                .filter(p => !repos.some(r => r.name.toLowerCase() === (p.name || '').toLowerCase()));
-            
-            allProjectsData = [...dynamicProjects, ...nonApiItems].filter(p => !isProjectExcluded(p));
-            
-            // Sort by updated date descending
-            allProjectsData.sort((a, b) => (b.updated || '').localeCompare(a.updated || ''));
-
-            updateFilterCounts();
-            renderProjects();
-
-            if (syncLabel) syncLabel.textContent = `GitHub Sync (${repos.length} Repos)`;
-            if (syncIndicator) syncIndicator.classList.add('synced');
-        })
-        .catch(err => {
-            console.warn('GitHub API sync note (using cached curated dataset):', err.message);
-            updateFilterCounts();
-            renderProjects();
-            if (syncLabel) syncLabel.textContent = 'GitHub Cached Mode';
+        const existingMap = new Map();
+        BASE_PROJECTS.forEach(p => {
+            if (p.name) existingMap.set(String(p.name).toLowerCase(), p);
+            if (p.id) existingMap.set(String(p.id).toLowerCase(), p);
         });
+
+        const dynamicProjects = repos
+            .filter(repo => !isProjectExcluded(repo))
+            .map(repo => {
+                const repoKey = String(repo.name || '').toLowerCase();
+                const existing = existingMap.get(repoKey);
+                
+                const category = existing ? existing.category : classifyRepoCategory(repo);
+                const title = existing ? existing.title : formatRepoTitle(repo.name);
+                const lang = existing && existing.language ? existing.language : formatRepoLanguage(repo, category);
+                const desc = existing && existing.description ? existing.description : formatRepoDescription(repo, category, lang);
+                
+                const hasPages = Boolean(repo.has_pages);
+                const liveUrl = existing && existing.liveUrl !== undefined 
+                    ? existing.liveUrl 
+                    : (hasPages ? `https://${GITHUB_USERNAME}.github.io/${repo.name}/` : (repo.homepage || null));
+                    
+                const tags = existing && existing.tags ? existing.tags : formatRepoTags(repo, category, lang);
+                const image = existing ? existing.image : (CUSTOM_PROJECT_IMAGES[repo.name] || '');
+
+                return {
+                    id: repo.name,
+                    name: repo.name,
+                    title: title,
+                    category: category,
+                    language: lang,
+                    description: desc,
+                    tags: tags,
+                    image: image,
+                    liveUrl: liveUrl || null,
+                    figmaUrl: existing ? existing.figmaUrl : null,
+                    githubUrl: existing && existing.githubUrl ? existing.githubUrl : (repo.html_url || `https://github.com/${GITHUB_USERNAME}/${repo.name}`),
+                    stars: repo.stargazers_count || 0,
+                    forks: repo.forks_count || 0,
+                    updated: repo.updated_at ? repo.updated_at.split('T')[0] : (existing ? existing.updated : '')
+                };
+            })
+            .filter(p => !isProjectExcluded(p));
+
+        // Preserve non-API items (Figma design concepts & collaborative external repos)
+        const nonApiItems = BASE_PROJECTS
+            .filter(p => !isProjectExcluded(p))
+            .filter(p => !repos.some(r => String(r.name || '').toLowerCase() === String(p.name || '').toLowerCase()));
+
+        allProjectsData = [...dynamicProjects, ...nonApiItems].filter(p => !isProjectExcluded(p));
+        
+        // Sort by updated date descending (newest first)
+        allProjectsData.sort((a, b) => String(b.updated || '').localeCompare(String(a.updated || '')));
+
+        // Cache into localStorage for instant 0ms subsequent loads
+        try {
+            localStorage.setItem(GITHUB_REPOS_STORAGE_KEY, JSON.stringify(allProjectsData));
+        } catch (e) {
+            console.warn('LocalStorage save note:', e);
+        }
+
+        updateFilterCounts();
+        renderProjects();
+
+        if (syncLabel) syncLabel.textContent = `GitHub Auto-Sync (${allProjectsData.length} Karya)`;
+        if (syncIndicator) {
+            syncIndicator.classList.add('synced');
+            syncIndicator.setAttribute('title', `Tersinkronisasi otomatis dengan GitHub @${GITHUB_USERNAME} (${allProjectsData.length} karya). Klik untuk sinkronisasi ulang.`);
+        }
+    })
+    .catch(err => {
+        console.warn('GitHub API sync note (using cached/curated dataset):', err.message);
+        
+        if (!allProjectsData || allProjectsData.length === 0) {
+            allProjectsData = BASE_PROJECTS.filter(p => !isProjectExcluded(p));
+        }
+        
+        updateFilterCounts();
+        renderProjects();
+        
+        if (syncLabel) syncLabel.textContent = `GitHub Auto-Sync (${allProjectsData.length} Karya)`;
+        if (syncIndicator) {
+            syncIndicator.classList.add('synced');
+            syncIndicator.setAttribute('title', `Mode Sinkronisasi Lokal (${allProjectsData.length} karya). Klik untuk sinkronisasi ulang.`);
+        }
+    })
+    .finally(() => {
+        isSyncingGitHub = false;
+        if (syncRefreshIcon) syncRefreshIcon.classList.remove('spinning');
+    });
 }
 
-// Setup Event Listeners for Filters & Search
+// Setup Event Listeners for Filters, Live Search, and Auto-Sync Refresh
 function setupProjectControls() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const searchInput = document.getElementById('project-search-input');
     const clearBtn = document.getElementById('search-clear-btn');
     const resetBtn = document.getElementById('reset-filter-btn');
+    const syncIndicator = document.getElementById('work-sync-indicator');
 
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -1217,18 +1414,25 @@ function setupProjectControls() {
             renderProjects();
         });
     }
+
+    if (syncIndicator) {
+        syncIndicator.addEventListener('click', () => {
+            syncGitHubRepositories(true);
+        });
+    }
 }
 
 // Initialize Project Controls and Data Safely
 let projectControlsInitialized = false;
 function initPortfolio() {
+    loadCachedRepositories();
     updateFilterCounts();
     renderProjects();
     if (!projectControlsInitialized) {
         setupProjectControls();
         projectControlsInitialized = true;
     }
-    syncGitHubRepositories();
+    syncGitHubRepositories(false);
 }
 
 if (document.readyState === 'loading') {
@@ -1657,6 +1861,46 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
                     { msg: "Show all AI projects", label: "AI Projects" },
                     { msg: "Tell me about Python skills", label: "Python Skills" },
                     { msg: "Kartu Tani Project", label: "Kartu Tani" }
+                ]
+            }
+        },
+        {
+            id: 'project_lms',
+            context: 'project_lms',
+            patterns: [/lms/, /lms[-_ ]*project/, /learning\s*management/, /e[- ]*learning/, /kelas\s*daring/, /sekolah\s*online/],
+            response: {
+                id: `📚 **Project: LMS Project (Learning Management System)**\n\n` +
+                    `Platform Learning Management System berbasis web untuk pengelolaan kelas daring, distribusi materi pembelajaran, kuis/tugas, dan evaluasi progres siswa secara terstruktur.\n\n` +
+                    `**Fitur Utama:**\n` +
+                    `• Manajemen Akun Guru, Siswa, dan Admin\n` +
+                    `• Modul Materi Pembelajaran & Pengumpulan Tugas\n` +
+                    `• Monitoring Nilai & Rekap Pembelajaran Daring\n\n` +
+                    `🔗 **Kode Sumber:** [GitHub: nawafgadi/lms_project](https://github.com/nawafgadi/lms_project)\n` +
+                    `💡 Cek kartu proyeknya di bagian [Karya & Proyek](#work)!`,
+                jv: `📚 **Proyek: LMS Project (Learning Management System)**\n\n` +
+                    `Aplikasi web Learning Management System nggo ngatur kelas daring, materi piwulangan, tugas/kuis, lan evaluasi murid.\n\n` +
+                    `🔗 **Kode Sumber:** [GitHub: nawafgadi/lms_project](https://github.com/nawafgadi/lms_project)\n` +
+                    `💡 Deleng kartu proyeke nang bagian [Karya & Proyek](#work)!`,
+                en: `📚 **Project: LMS Project (Learning Management System)**\n\n` +
+                    `A modern Learning Management System web platform for online classroom management, material distribution, quizzes/assignments, and student progress tracking.\n\n` +
+                    `🔗 **Source Code:** [GitHub: nawafgadi/lms_project](https://github.com/nawafgadi/lms_project)\n` +
+                    `💡 View the project card in the [Work](#work) section!`
+            },
+            suggestions: {
+                id: [
+                    { msg: "Project Kartu Tani", label: "Kartu Tani" },
+                    { msg: "Project CBPR AI", label: "CBPR AI" },
+                    { msg: "Semua project Nawaf apa saja?", label: "Semua Karya" }
+                ],
+                jv: [
+                    { msg: "Proyek Kartu Tani", label: "Kartu Tani" },
+                    { msg: "Proyek CBPR AI", label: "CBPR AI" },
+                    { msg: "Kabeh proyek Nawaf apa bae?", label: "Kabeh Karya" }
+                ],
+                en: [
+                    { msg: "Kartu Tani Project", label: "Kartu Tani" },
+                    { msg: "CBPR AI Project", label: "CBPR AI" },
+                    { msg: "Show all projects", label: "All Projects" }
                 ]
             }
         },
@@ -2343,6 +2587,45 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
             const reply = (bestMatch.response[effectiveLang] || bestMatch.response[lang] || bestMatch.response.id || bestMatch.response.en);
             const suggs = (bestMatch.suggestions && (bestMatch.suggestions[effectiveLang] || bestMatch.suggestions[lang] || bestMatch.suggestions.id || bestMatch.suggestions.en)) || null;
             return { reply, suggestions: suggs, context: bestMatch.context };
+        }
+
+        // Dynamic lookup across all synced GitHub repositories in allProjectsData
+        if (Array.isArray(allProjectsData) && allProjectsData.length > 0 && lower.length >= 3) {
+            const matchedProject = allProjectsData.find(p => {
+                const pName = String(p.name || '').toLowerCase();
+                const pTitle = String(p.title || '').toLowerCase();
+                const pId = String(p.id || '').toLowerCase();
+                return (pName && lower.includes(pName)) || (pTitle && lower.includes(pTitle)) || (pId && lower.includes(pId));
+            });
+
+            if (matchedProject) {
+                const techStr = matchedProject.language || 'Teknologi Modern';
+                const linkStr = matchedProject.liveUrl 
+                    ? `\n🌐 **Live Demo:** [Lihat Demo](${matchedProject.liveUrl})\n🔗 **GitHub:** [Buka Repository](${matchedProject.githubUrl || matchedProject.figmaUrl})`
+                    : `\n🔗 **GitHub:** [Buka Repository](${matchedProject.githubUrl || matchedProject.figmaUrl || '#work'})`;
+
+                if (effectiveLang === 'jv') {
+                    return {
+                        reply: `🚀 **Proyek: ${matchedProject.title || matchedProject.name}**\n\n${matchedProject.description}\n\n💻 **Teknologi:** ${techStr}${linkStr}\n\n💡 Rika teyeng ndeleng kartu proyeke nang bagian [Karya & Proyek](#work)!`,
+                        suggestions: [
+                            { msg: "Daftar kabeh proyek Nawaf", label: "Kabeh Proyek" },
+                            { msg: "Skill teknologi apa bae?", label: "Skill Nawaf" },
+                            { msg: "Kepriwe carane kontak?", label: "Kontak" }
+                        ],
+                        context: 'dynamic_project'
+                    };
+                }
+
+                return {
+                    reply: `🚀 **Project: ${matchedProject.title || matchedProject.name}**\n\n${matchedProject.description}\n\n💻 **Teknologi:** ${techStr}${linkStr}\n\n💡 Anda dapat melihat kartu proyek selengkapnya di bagian [Karya & Proyek](#work)!`,
+                    suggestions: [
+                        { msg: "Daftar semua proyek Nawaf", label: "Semua Proyek" },
+                        { msg: "Skill teknologi Nawaf apa saja?", label: "Skill & Tech" },
+                        { msg: "Bagaimana cara kontak Nawaf?", label: "Kontak" }
+                    ],
+                    context: 'dynamic_project'
+                };
+            }
         }
 
         // Fallback: search in rendered page text

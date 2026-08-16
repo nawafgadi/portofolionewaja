@@ -703,6 +703,30 @@ contact-description {
     font-size: 12px;
     font-weight: 600;
     color: #27ae60;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.work-sync-indicator:hover {
+    background: rgba(46, 204, 113, 0.18);
+    border-color: rgba(46, 204, 113, 0.45);
+    transform: translateY(-1px);
+}
+
+.sync-refresh-icon {
+    font-size: 14px;
+    transition: transform 0.4s ease;
+    opacity: 0.85;
+}
+
+.sync-refresh-icon.spinning {
+    animation: syncSpin 0.75s linear infinite;
+}
+
+@keyframes syncSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .sync-pulse {
