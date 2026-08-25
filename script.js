@@ -394,7 +394,6 @@ const CUSTOM_PROJECT_IMAGES = {
     'APPHP-STORE': 'Luxe mobile.png',
     'idulfitri': 'ucapan idulfitri.png',
     'kasirApp': 'pos.png',
-    'pertanian': 'pertanian.png',
     'admin-tiket': 'admin tkiket.png',
     'e-cashier-figma': 'e-cashier.png',
     'bank-awan-figma': 'bankawan.png',
@@ -437,7 +436,11 @@ const EXCLUDED_PROJECT_NAMES = new Set([
     'ulya12345',
     'nawaf091108',
     'nawaf220283',
-    'https-github.com-nawafgadi-cv-nawaf'
+    'https-github.com-nawafgadi-cv-nawaf',
+    'pertanian',
+    'ulangtahun',
+    'romantis',
+    'webpersonal'
 ]);
 
 const EXCLUDED_PROJECT_TITLES = [
@@ -620,7 +623,7 @@ const BASE_PROJECTS = [
         description: 'Aplikasi Point of Sale (POS) Android berbasis Kotlin dengan integrasi API backend dan manajemen transaksi lengkap.',
         tags: ['Kotlin', 'Android Studio', 'POS', 'REST API'],
         image: 'pos.png',
-        liveUrl: 'https://nawafgadi.github.io/kasirApp/',
+        liveUrl: null,
         githubUrl: 'https://github.com/nawafgadi/kasirApp',
         stars: 0,
         forks: 0,
@@ -702,36 +705,6 @@ const BASE_PROJECTS = [
         updated: '2025-03-29'
     },
     {
-        id: 'ulangtahun',
-        name: 'ulangtahun',
-        title: 'Birthday Celebration Card',
-        category: 'interactive',
-        language: 'CSS & JavaScript',
-        description: 'Halaman ucapan selamat ulang tahun interaktif dilengkapi galeri foto kenangan, efek balon, dan pesan hangat.',
-        tags: ['CSS Animation', 'JavaScript', 'Interactive Web'],
-        image: '',
-        liveUrl: 'https://nawafgadi.github.io/ulangtahun/',
-        githubUrl: 'https://github.com/nawafgadi/ulangtahun',
-        stars: 0,
-        forks: 0,
-        updated: '2025-03-23'
-    },
-    {
-        id: 'romantis',
-        name: 'romantis',
-        title: 'Romantic Interactive Card',
-        category: 'interactive',
-        language: 'HTML & CSS',
-        description: 'Website kartu pesan romantis interaktif dengan animasi efek hati dan sentuhan tipografi estetis.',
-        tags: ['HTML5', 'CSS Animation', 'Interactive Card'],
-        image: '',
-        liveUrl: 'https://nawafgadi.github.io/romantis/',
-        githubUrl: 'https://github.com/nawafgadi/romantis',
-        stars: 0,
-        forks: 0,
-        updated: '2024-12-15'
-    },
-    {
         id: 'promsibaju',
         name: 'promsibaju',
         title: 'Katalog Promosi Baju & Fashion',
@@ -745,21 +718,6 @@ const BASE_PROJECTS = [
         stars: 0,
         forks: 0,
         updated: '2024-08-27'
-    },
-    {
-        id: 'pertanian',
-        name: 'pertanian',
-        title: 'Portal Informasi Pertanian',
-        category: 'web',
-        language: 'HTML & Python',
-        description: 'Portal agrikultur pintar untuk pemantauan komoditas pertanian dan edukasi budidaya tanaman modern.',
-        tags: ['HTML5', 'Agriculture', 'Smart Farming'],
-        image: 'pertanian.png',
-        liveUrl: 'https://nawafgadi.github.io/pertanian/',
-        githubUrl: 'https://github.com/nawafgadi/pertanian',
-        stars: 0,
-        forks: 0,
-        updated: '2025-09-15'
     },
     {
         id: 'AINawaf',
@@ -850,21 +808,6 @@ const BASE_PROJECTS = [
         stars: 0,
         forks: 0,
         updated: '2026-08-07'
-    },
-    {
-        id: 'webpersonal',
-        name: 'webpersonal',
-        title: 'Web Personal Nawaf',
-        category: 'web',
-        language: 'CSS & HTML',
-        description: 'Website profil personal simpel dan elegan.',
-        tags: ['HTML5', 'CSS3', 'Personal Web'],
-        image: '',
-        liveUrl: 'https://nawafgadi.github.io/webpersonal/',
-        githubUrl: 'https://github.com/nawafgadi/webpersonal',
-        stars: 0,
-        forks: 0,
-        updated: '2025-03-07'
     },
     {
         id: 'untuk',
@@ -989,17 +932,13 @@ function formatRepoTitle(repoName) {
         'Astra-Chiller': 'Astra Chiller Cooling Web',
         'keturunan': 'Silsilah Keturunan Keluarga',
         'idulfitri': 'Kartu Ucapan Idul Fitri',
-        'pertanian': 'Portal Informasi Pertanian',
         'AINawaf': 'Nawaf AI Chatbot System',
         'kalender': 'Kalender Interaktif & Agenda',
         'umur': 'Kalkulator Umur & Countdown',
         'mk3': 'Laravel MK3 Application',
         'my-websitenawaf': 'Web Platform Nawaf',
         'PSAJ': 'Sistem Penilaian PSAJ',
-        'webpersonal': 'Web Personal Nawaf',
         'untuk': 'Special Interactive Note',
-        'ulangtahun': 'Birthday Celebration Card',
-        'romantis': 'Romantic Interactive Card',
         'promsibaju': 'Katalog Promosi Baju & Fashion',
         'penjelasanAI': 'Modul Penjelasan & Eksplorasi AI',
         'angkatan33': 'Portal Web Angkatan 33',
