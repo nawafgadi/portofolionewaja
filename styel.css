@@ -2432,3 +2432,684 @@ body.dark-mode .typing-indicator {
     background: #1e293b;
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+/* ==========================================================================
+   CV / RESUME SECTION
+   ========================================================================== */
+
+.cv {
+    background: var(--light);
+    padding: 100px 0 120px;
+}
+
+.cv-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 60px;
+}
+
+/* CV Blocks */
+.cv-block {
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 28px;
+    transition: var(--transition);
+}
+
+.cv-block:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.cv-block-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(199, 168, 75, 0.15);
+}
+
+.cv-block-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.cv-block-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+}
+
+/* Timeline */
+.cv-timeline {
+    position: relative;
+    padding-left: 28px;
+}
+
+.cv-timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent) 0%, rgba(199, 168, 75, 0.15) 100%);
+    border-radius: 2px;
+}
+
+.cv-timeline-item {
+    position: relative;
+    padding-bottom: 28px;
+}
+
+.cv-timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.cv-timeline-dot {
+    position: absolute;
+    left: -25px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--accent);
+    z-index: 1;
+    transition: var(--transition);
+}
+
+.cv-timeline-item:hover .cv-timeline-dot {
+    background: var(--accent);
+    box-shadow: 0 0 0 5px rgba(199, 168, 75, 0.2);
+}
+
+.cv-date {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(199, 168, 75, 0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.cv-item-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.cv-item-subtitle {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 6px;
+}
+
+.cv-item-desc {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--secondary);
+}
+
+/* Skills Grid */
+.cv-skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cv-skill-item {
+    transition: var(--transition);
+}
+
+.cv-skill-item:hover {
+    transform: translateX(4px);
+}
+
+.cv-skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.cv-skill-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.cv-skill-level {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cv-skill-bar {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cv-skill-fill {
+    height: 100%;
+    background: var(--gradient);
+    border-radius: 10px;
+    transition: width 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Profile Card */
+.cv-profile-card {
+    text-align: center;
+    padding: 40px 32px;
+}
+
+.cv-profile-photo {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--accent);
+    box-shadow: 0 8px 30px rgba(199, 168, 75, 0.25);
+    transition: var(--transition);
+}
+
+.cv-profile-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(199, 168, 75, 0.35);
+}
+
+.cv-profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cv-profile-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+.cv-profile-role {
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.cv-profile-details {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cv-detail-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    padding: 8px 14px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.cv-detail-row:hover {
+    background: rgba(199, 168, 75, 0.08);
+}
+
+.cv-detail-row i {
+    color: var(--accent);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+/* Certificate Card */
+.cv-cert-card {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.cv-cert-card:hover {
+    box-shadow: 0 10px 30px rgba(199, 168, 75, 0.15);
+}
+
+.cv-cert-image {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    max-height: 220px;
+}
+
+.cv-cert-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    object-fit: cover;
+}
+
+.cv-cert-image:hover img {
+    transform: scale(1.05);
+}
+
+.cv-cert-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #fff;
+    font-size: 0.85rem;
+}
+
+.cv-cert-overlay i {
+    font-size: 2rem;
+}
+
+.cv-cert-image:hover .cv-cert-overlay {
+    opacity: 1;
+}
+
+.cv-cert-info {
+    padding: 20px;
+}
+
+.cv-cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.cv-cert-badge i {
+    font-size: 0.9rem;
+}
+
+.cv-cert-title {
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+.cv-cert-issuer {
+    font-size: 0.85rem;
+    color: var(--secondary);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.cv-cert-collab {
+    font-size: 0.78rem;
+    color: var(--secondary);
+    opacity: 0.8;
+    margin-bottom: 10px;
+}
+
+.cv-cert-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.cv-cert-modules {
+    padding-top: 14px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cv-cert-modules-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.cv-cert-modules ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.cv-cert-modules li {
+    font-size: 0.73rem;
+    background: rgba(199, 168, 75, 0.08);
+    color: var(--secondary);
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(199, 168, 75, 0.12);
+    font-weight: 500;
+}
+
+/* Lightbox Modal */
+.cv-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cv-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cv-lightbox img {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+.cv-lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.cv-lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* Language Proficiency */
+.cv-lang-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.cv-lang-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.cv-lang-item:hover {
+    background: rgba(199, 168, 75, 0.06);
+}
+
+.cv-lang-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 130px;
+}
+
+.cv-lang-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.cv-lang-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.cv-lang-dot.active {
+    background: var(--accent);
+    box-shadow: 0 2px 8px rgba(199, 168, 75, 0.4);
+}
+
+.cv-lang-level {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Career Goals Card */
+.cv-goal-card {
+    display: flex;
+    gap: 18px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(199, 168, 75, 0.06) 0%, rgba(199, 168, 75, 0.02) 100%);
+    border: 1px solid rgba(199, 168, 75, 0.15);
+    border-radius: 16px;
+    transition: var(--transition);
+}
+
+.cv-goal-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 25px rgba(199, 168, 75, 0.12);
+}
+
+.cv-goal-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.cv-goal-text h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+.cv-goal-text p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--secondary);
+}
+
+/* ==========================================================================
+   CV DARK MODE
+   ========================================================================== */
+
+body.dark-mode .cv {
+    background: #141414;
+}
+
+body.dark-mode .cv-block {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .cv-block:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+body.dark-mode .cv-block-header {
+    border-bottom-color: rgba(212, 175, 55, 0.15);
+}
+
+body.dark-mode .cv-timeline-dot {
+    background: #1a1a1a;
+    border-color: var(--accent);
+}
+
+body.dark-mode .cv-skill-bar {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .cv-detail-row {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+body.dark-mode .cv-detail-row:hover {
+    background: rgba(212, 175, 55, 0.08);
+}
+
+body.dark-mode .cv-cert-card {
+    background: #1e1e1e;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .cv-cert-badge {
+    background: rgba(34, 197, 94, 0.15);
+}
+
+body.dark-mode .cv-cert-modules {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .cv-cert-modules li {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.15);
+}
+
+body.dark-mode .cv-lang-item {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+body.dark-mode .cv-lang-item:hover {
+    background: rgba(212, 175, 55, 0.06);
+}
+
+body.dark-mode .cv-lang-dot {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode .cv-goal-card {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%);
+    border-color: rgba(212, 175, 55, 0.15);
+}
+
+body.dark-mode .cv-goal-card:hover {
+    border-color: var(--accent);
+}
+
+/* ==========================================================================
+   CV RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 968px) {
+    .cv-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .cv-column.cv-right {
+        order: -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .cv {
+        padding: 70px 0 80px;
+    }
+
+    .cv-layout {
+        margin-top: 36px;
+    }
+
+    .cv-block {
+        padding: 24px 20px;
+        border-radius: 16px;
+    }
+
+    .cv-lang-name {
+        min-width: 100px;
+        font-size: 0.82rem;
+    }
+
+    .cv-goal-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .cv-profile-card {
+        padding: 28px 20px;
+    }
+
+    .cv-cert-modules ul {
+        gap: 4px;
+    }
+
+    .cv-cert-modules li {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+}

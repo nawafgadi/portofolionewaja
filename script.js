@@ -2761,3 +2761,85 @@ const PYTHON_API_URL = 'http://localhost:5000/api';
         }
     });
 })();
+
+// ========== CV SECTION: LIGHTBOX & ANIMATIONS ==========
+(function() {
+    // Create lightbox element
+    const lightbox = document.createElement('div');
+    lightbox.className = 'cv-lightbox';
+    lightbox.innerHTML = `
+        <button class="cv-lightbox-close" aria-label="Close"><i class="ri-close-line"></i></button>
+        <img src="" alt="Certificate Preview">
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxClose = lightbox.querySelector('.cv-lightbox-close');
+
+    // Open lightbox when clicking certificate image
+    const certImage = document.querySelector('.cv-cert-image');
+    if (certImage) {
+        certImage.addEventListener('click', function() {
+            const img = this.querySelector('img');
+            if (img) {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
+
+    // Close lightbox
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeLightbox();
+    });
+
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
+    // Skill bar animation on scroll
+    const skillBars = document.querySelectorAll('.cv-skill-fill');
+    if (skillBars.length > 0) {
+        // Store original widths and set to 0
+        const originalWidths = [];
+        skillBars.forEach(function(bar) {
+            originalWidths.push(bar.style.width);
+            bar.style.width = '0%';
+        });
+
+        const skillObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    // Animate all skill bars with staggered delay
+                    skillBars.forEach(function(bar, index) {
+                        setTimeout(function() {
+                            bar.style.width = originalWidths[index];
+                        }, index * 100);
+                    });
+                    skillObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const skillsGrid = document.querySelector('.cv-skills-grid');
+        if (skillsGrid) {
+            skillObserver.observe(skillsGrid);
+        }
+    }
+})();
