@@ -1482,7 +1482,9 @@ window.addEventListener('scroll', () => {
 });
 
 // Python Backend API Configuration
-const PYTHON_API_URL = 'http://localhost:5000/api';
+const PYTHON_API_URL = (window.location.protocol === 'file:')
+    ? 'http://localhost:5000/api'
+    : '/api';
 
 // AI Chat Widget - ERA AI
 (function() {

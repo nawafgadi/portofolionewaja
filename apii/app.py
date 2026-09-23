@@ -8,10 +8,21 @@ import random
 import logging
 import smtplib
 import ssl
+import tempfile
 from email.message import EmailMessage
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all domains
+
+# Chat history storage.
+# On serverless platforms (Vercel, etc.) the filesystem is read-only except the
+# system temp directory, which is ephemeral per instance. Using tempfile keeps
+# local development (Windows/macOS/Linux) and Vercel both working.
+HISTORY_DIR = os.path.join(tempfile.gettempdir(), 'logs')
+os.makedirs(HISTORY_DIR, exist_ok=True)
+
+HISTORY_FILE = os.path.join(HISTORY_DIR, 'chat_history.json')
+MAX_HISTORY = 100
 
 # Setup logging
 logging.basicConfig(
@@ -19,13 +30,6 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-
-# Ensure logs directory exists
-os.makedirs('logs', exist_ok=True)
-
-# Chat history storage (in production, use database)
-HISTORY_FILE = 'logs/chat_history.json'
-MAX_HISTORY = 100
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
