@@ -2702,6 +2702,19 @@ body.dark-mode .typing-indicator {
     background: var(--white);
 }
 
+.cv-cert-card + .cv-cert-card {
+    margin-top: 16px;
+}
+
+#cert-gemini-student .cv-cert-image {
+    max-height: none;
+    background: #f1f5f9;
+}
+
+#cert-gemini-student .cv-cert-image img {
+    object-fit: contain;
+}
+
 .cv-cert-card:hover {
     box-shadow: 0 10px 30px rgba(199, 168, 75, 0.15);
 }

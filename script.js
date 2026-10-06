@@ -495,6 +495,51 @@ function isProjectExcluded(item) {
 // Complete repository dataset with rich metadata (works offline, instant load, live API sync)
 const BASE_PROJECTS = [
     {
+        id: 'SC-AI',
+        name: 'SC-AI',
+        title: 'SC-AI — Frontend',
+        category: 'ai',
+        language: 'Frontend & AI',
+        description: 'Frontend dari project SC-AI — satu project fullstack berpasangan dengan SC-AI-Backend. Antarmuka pengguna untuk layanan berbasis AI.',
+        tags: ['SC-AI', 'Frontend', 'Fullstack', 'AI'],
+        image: '',
+        liveUrl: null,
+        githubUrl: 'https://github.com/KyyTzy09/SC-AI',
+        stars: 0,
+        forks: 0,
+        updated: '2026-10-06'
+    },
+    {
+        id: 'SC-AI-Backend',
+        name: 'SC-AI-Backend',
+        title: 'SC-AI — Backend (API)',
+        category: 'ai',
+        language: 'Backend API & AI',
+        description: 'Backend/API dari project SC-AI — satu project fullstack berpasangan dengan SC-AI (Frontend). Menyediakan layanan data dan logika AI untuk frontend.',
+        tags: ['SC-AI', 'Backend', 'API', 'Fullstack', 'AI'],
+        image: '',
+        liveUrl: null,
+        githubUrl: 'https://github.com/KyyTzy09/SC-AI-Backend',
+        stars: 0,
+        forks: 0,
+        updated: '2026-10-06'
+    },
+    {
+        id: 'SAKTI-AI-CBPR',
+        name: 'SAKTI-AI-CBPR',
+        title: 'SAKTI-AI-CBPR',
+        category: 'ai',
+        language: 'Python & Flask',
+        description: 'Pengembangan lanjutan dari CBPR — sistem rekomendasi produk cerdas berbasis konten (Content-Based) menggunakan NLP, TF-IDF feature extraction, dan Machine Learning.',
+        tags: ['Python', 'Flask', 'Machine Learning', 'NLP', 'Recommendation System', 'SAKTI-AI'],
+        image: '',
+        liveUrl: null,
+        githubUrl: 'https://github.com/KyyTzy09/SAKTI-AI-CBPR',
+        stars: 0,
+        forks: 0,
+        updated: '2026-10-06'
+    },
+    {
         id: 'lms_project',
         name: 'lms_project',
         title: 'LMS Project - Learning Management System',
@@ -2778,17 +2823,19 @@ const PYTHON_API_URL = (window.location.protocol === 'file:')
     const lightboxImg = lightbox.querySelector('img');
     const lightboxClose = lightbox.querySelector('.cv-lightbox-close');
 
-    // Open lightbox when clicking certificate image
-    const certImage = document.querySelector('.cv-cert-image');
-    if (certImage) {
-        certImage.addEventListener('click', function() {
-            const img = this.querySelector('img');
-            if (img) {
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+    // Open lightbox when clicking certificate image (support multiple certificates)
+    const certImages = document.querySelectorAll('.cv-cert-image');
+    if (certImages.length > 0) {
+        certImages.forEach(function(certImage) {
+            certImage.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                if (img) {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
         });
     }
 
